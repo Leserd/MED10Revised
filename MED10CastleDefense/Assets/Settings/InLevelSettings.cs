@@ -15,7 +15,7 @@ public class InLevelSettings : MonoBehaviour {
     {
         // Add function for pause game
 
-
+        
         Settings.SetActive(true);
         
         foreach (var button in Settings.GetComponentsInChildren<Button>())
