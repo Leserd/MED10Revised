@@ -50,6 +50,27 @@ public class StateManager : MonoBehaviour {
         }
     }
 
+    
+    public int MaxLevel
+    {
+        ///TODO needs to be able to check for the max value that can be chosen.
+        get
+        {
+            return _maxLevel;
+        }
+        set
+        {
+            if (value == 1 || value == -1)
+            {
+                _maxLevel += value;
+                if(_maxLevel == 0)
+                {
+                    _maxLevel = 1;
+                }
+                
+            }
+        }
+    }
     public int SelectedLevel
     {
         get

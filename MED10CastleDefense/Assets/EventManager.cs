@@ -18,7 +18,10 @@ public class EventManager : MonoBehaviour {
                 _instance = FindObjectOfType(typeof(EventManager)) as EventManager;
                 if (!_instance)
                 {
-                    Debug.LogError("There is no active EventmanagerScript");
+                    GameObject eventManager = new GameObject("EventManager");
+                    _instance = eventManager.AddComponent<EventManager>();
+                    DontDestroyOnLoad(eventManager);
+                    _instance.Init();
                 }
                 else
                 {
@@ -35,6 +38,7 @@ public class EventManager : MonoBehaviour {
         if (eventDictionary == null)
         {
             eventDictionary = new Dictionary<string, UnityEvent>();
+
         }
     }
 
