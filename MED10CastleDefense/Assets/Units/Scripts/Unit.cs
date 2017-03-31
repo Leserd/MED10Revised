@@ -7,7 +7,6 @@ public class Unit : MonoBehaviour {
     public int health = 10;
     public int maxHealth = 10;
     public int damage = 10;
-    public float damageRadius = 1f;
     public float speed = 3f;
     public SpriteRenderer sprite;
     public E_UnitTypes unitType;
@@ -42,28 +41,24 @@ public class Unit : MonoBehaviour {
             case E_UnitTypes.COIN:
                 maxHealth = CoinStats.Health;
                 damage = CoinStats.Damage;
-                damageRadius = CoinStats.DamageRadius;
                 speed = CoinStats.Speed;
                 imagePath += "Coin";
                 break;
             case E_UnitTypes.PIGGY:
                 maxHealth = PiggyStats.Health;
                 damage = PiggyStats.Damage;
-                damageRadius = PiggyStats.DamageRadius;
                 speed = PiggyStats.Speed;
                 imagePath += "Piggy";
                 break;
             case E_UnitTypes.SAFE:
                 maxHealth = SafeStats.Health;
                 damage = SafeStats.Damage;
-                damageRadius = SafeStats.DamageRadius;
                 speed = SafeStats.Speed;
                 imagePath += "Safe";
                 break;
             default:
                 maxHealth = CoinStats.Health;
                 damage = CoinStats.Damage;
-                damageRadius = CoinStats.DamageRadius;
                 speed = CoinStats.Speed;
                 imagePath += "Coin";
                 Debug.LogWarning("UnitType returned default for " + transform.name);
@@ -109,27 +104,15 @@ public class Unit : MonoBehaviour {
 
 
 
-    private void Attack()
+    private void Attack(GameObject enemy)
     {
         //TODO: Play explosion animation
 
         //TODO: Play explosion sound
 
-        //Create explosion
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, damageRadius);
+        //TODO: Deal damage to an enemy 
+        Debug.Log("Explosion hit " + enemy.name);
 
-        foreach(Collider2D hit in hits)
-        {
-            if(hit.tag == "EnemyBase")
-            {
-                //TODO: Deal damage to enemy base
-
-                Debug.Log("Explosion hit " + hit.transform.name);
-                break;
-            }
-        }
-
-        
 
         Destroy(gameObject);      
     }
@@ -140,7 +123,7 @@ public class Unit : MonoBehaviour {
     {
         if(collision.tag == "EnemyBase")
         {
-            Attack();
+            Attack(collision.gameObject);
         }
     }
 }
