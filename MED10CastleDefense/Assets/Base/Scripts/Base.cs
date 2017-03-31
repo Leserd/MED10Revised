@@ -38,7 +38,15 @@ public class Base : MonoBehaviour {
     private void Death()
     {
         //TODO: Tell eventManager this base died
-        //EventManager.instance.BaseDied(this);
+        if(gameObject.tag == "EnemyBase")
+        {
+            //EventManager.TriggerEvent("PlayerWon");
+        }
+        else if(gameObject.tag == "PlayerBase")
+        {
+            //EventManager.TriggerEvent("PlayerLost");
+
+        }
 
         //Destroy castle (TODO: Instead instantiate a fire on the base to show it is destroyed, while Victory screen is displayed)
         Destroy(gameObject);

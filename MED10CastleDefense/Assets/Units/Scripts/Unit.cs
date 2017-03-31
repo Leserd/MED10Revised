@@ -8,6 +8,7 @@ public class Unit : MonoBehaviour {
     public int maxHealth = 10;
     public int damage = 10;
     public float speed = 3f;
+    public float cooldown = 3f;
     public SpriteRenderer sprite;
     public E_UnitTypes unitType;
     private BoxCollider2D _collider;
@@ -41,24 +42,28 @@ public class Unit : MonoBehaviour {
             case E_UnitTypes.COIN:
                 maxHealth = CoinStats.Health;
                 damage = CoinStats.Damage;
+                cooldown = CoinStats.Cooldown;
                 speed = CoinStats.Speed;
                 imagePath += "Coin";
                 break;
             case E_UnitTypes.PIGGY:
                 maxHealth = PiggyStats.Health;
                 damage = PiggyStats.Damage;
+                cooldown = PiggyStats.Cooldown;
                 speed = PiggyStats.Speed;
                 imagePath += "Piggy";
                 break;
             case E_UnitTypes.SAFE:
                 maxHealth = SafeStats.Health;
                 damage = SafeStats.Damage;
+                cooldown = SafeStats.Cooldown;
                 speed = SafeStats.Speed;
                 imagePath += "Safe";
                 break;
             default:
                 maxHealth = CoinStats.Health;
                 damage = CoinStats.Damage;
+                cooldown = CoinStats.Cooldown;
                 speed = CoinStats.Speed;
                 imagePath += "Coin";
                 Debug.LogWarning("UnitType returned default for " + transform.name);
