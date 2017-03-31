@@ -58,7 +58,7 @@ public class EventManager : MonoBehaviour {
         if (_instance == null) return;
 
         UnityEvent thisEvent = null;
-        if (Instance.eventDictionary.TryGetValue(eventName,out thisEvent)
+        if (Instance.eventDictionary.TryGetValue(eventName,out thisEvent))
         {
             thisEvent.RemoveListener(listener);
         }
@@ -67,7 +67,7 @@ public class EventManager : MonoBehaviour {
     public static void TriggerEvent(string eventName)
     {
         UnityEvent thisEvent = null;
-        if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent)
+        if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
             thisEvent.Invoke();
         }
