@@ -13,16 +13,7 @@ public class OverviewManager : MonoBehaviour {
         EventManager.StartListening("LevelIncrease", Test);
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetMouseButtonDown(1)|| Input.GetMouseButtonDown(0))
-        {
-          //  Test();
-        }
 
-
-    }
     void Test()
     {
         var instance = StateManager.Instance;
