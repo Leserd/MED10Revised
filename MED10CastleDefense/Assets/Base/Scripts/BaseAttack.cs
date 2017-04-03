@@ -21,6 +21,18 @@ public class BaseAttack : MonoBehaviour {
     private void OnEnable()
     {
         //EventManager.instance.StartListening("SpawnUnit", AddTarget);
+        EventManager.SpawnUnit += AddTarget;
+        EventManager.UnitDies += RemoveTarget;
+
+        _availableTargets.Add(GameObject.FindGameObjectWithTag("PlayerBase"));
+    }
+
+
+    private void OnDisable()
+    {
+        //EventManager.instance.StartListening("SpawnUnit", AddTarget);
+        EventManager.SpawnUnit -= AddTarget;
+        EventManager.UnitDies -= RemoveTarget;
     }
 
 
@@ -33,6 +45,24 @@ public class BaseAttack : MonoBehaviour {
         {
             StartAttacking();
         }
+    }
+
+
+
+    public void RemoveTarget(GameObject target)
+    {
+        _availableTargets.Remove(target);
+        
+        if(_availableTargets.Count <= 0)
+        {
+            if (_attackCoroutine != null)
+            {
+                StopCoroutine(_attackCoroutine);
+                
+            }
+            canAttack = false;
+        }
+        
     }
 
 
@@ -67,11 +97,13 @@ public class BaseAttack : MonoBehaviour {
 
     private GameObject GetClosestTarget()
     {
-        GameObject closestTarget = GameObject.FindGameObjectWithTag("PlayerBase");
+        GameObject closestTarget = _availableTargets[0];
 
         foreach(GameObject go in _availableTargets)
         {
-            if(Vector2.Distance(go.transform.position, transform.position) < Vector2.Distance(closestTarget.transform.position, transform.position))
+            if (closestTarget == null || go == null)
+                continue;
+            else if(Vector2.Distance(go.transform.position, transform.position) < Vector2.Distance(closestTarget.transform.position, transform.position))
             {
                 closestTarget = go;
             }

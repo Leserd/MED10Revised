@@ -22,7 +22,9 @@ public class Unit : MonoBehaviour {
         _rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         BaseAttack enemy = GameObject.Find("EnemyBase").GetComponent<BaseAttack>();
-        enemy.AddTarget(gameObject);
+        //enemy.AddTarget(gameObject);
+
+        EventManager.Damage += TakeDamage;
     }
 
 
@@ -89,21 +91,43 @@ public class Unit : MonoBehaviour {
 
 
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(GameObject dealer, List<GameObject> receiver)
     {
-        health -= amount;
-        Debug.Log(transform.name + " took " + amount + " damage. Health left: " + health);
-        if(health <= 0)
+        if (receiver.Contains(gameObject))
         {
-            Death();
+            if(dealer.tag == "EnemyBase")
+            {
+                int amount = dealer.GetComponent<BaseAttack>().damage;
+                health -= amount;
+                Debug.Log(transform.name + " took " + amount + " damage. Health left: " + health);
+                if (health <= 0)
+                {
+                    Death();
+                }
+            }
         }
     }
+
+
+    //public void TakeDamage(int amount)
+    //{
+    //    health -= amount;
+    //    Debug.Log(transform.name + " took " + amount + " damage. Health left: " + health);
+    //    if(health <= 0)
+    //    {
+    //        Death();
+    //    }
+    //}
 
 
 
     private void Death()
     {
         //TODO: Play animation
+
+        EventManager.Instance.UnitDead(gameObject);
+
+        EventManager.Damage -= TakeDamage;
 
         //Destroy gameObject
         Destroy(gameObject);
@@ -119,8 +143,7 @@ public class Unit : MonoBehaviour {
 
         //TODO: Deal damage to an enemy 
         Debug.Log("Explosion hit " + enemy.name);
-
-
+        
         Destroy(gameObject);      
     }
 

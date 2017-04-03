@@ -50,28 +50,32 @@ public class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform == _target)
+        if (collision.transform == _target)
         {
             List<GameObject> targets = new List<GameObject>();
-            if(_type == E_AttackType.SINGLE)
+            if (_type == E_AttackType.SINGLE)
             {
                 targets.Add(collision.gameObject);
             }
-            else if(_type == E_AttackType.SPLASH)
+            else if (_type == E_AttackType.SPLASH)
             {
                 Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _splashRadius);
-                foreach(Collider2D hit in hits)
+                foreach (Collider2D hit in hits)
                 {
-                    targets.Add(hit.gameObject);
+                    if (hit.tag == "PlayerBase" || hit.tag == "Unit")
+                        targets.Add(hit.gameObject);
                 }
             }
 
-            foreach(GameObject target in targets)
-            {
-                //TODO: Send damager dealer and damage taker when triggering event
-                //EventManager.TriggerEvent("DealDamage");
-                print(transform.name + " hit: " + target.name + " for " + _damage + " damage.");
-            }
+            //foreach(GameObject target in targets)
+            //{
+            //    //TODO: Send damager dealer and damage taker when triggering event
+            //    //EventManager.TriggerEvent("DealDamage");
+            //    //print(transform.name + " hit: " + target.name + " for " + _damage + " damage.");
+
+            //}
+            EventManager.Instance.DealDamage(_owner.gameObject, targets);
+
             Destroy(gameObject);
         }
     }

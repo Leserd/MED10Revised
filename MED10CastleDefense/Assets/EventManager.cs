@@ -9,6 +9,44 @@ public class EventManager : MonoBehaviour {
 
     private static EventManager _instance;
 
+    public delegate void D_OneParam(GameObject gameObject);
+    public delegate void D_TwoParam(GameObject gameObject, List<GameObject> gameObject2);
+    public static event D_OneParam SpawnUnit;
+    public static event D_OneParam UnitDies;
+    public static event D_TwoParam Damage;
+
+
+
+    public void DealDamage(GameObject dealer, List<GameObject> receivers)
+    {
+        if(Damage != null)
+        {
+            Damage(dealer, receivers);
+        }
+    }
+
+
+
+    public void Spawn(GameObject unit)
+    {
+        if (SpawnUnit != null)
+        {
+            SpawnUnit(unit);
+        }
+    }
+
+
+
+    public void UnitDead(GameObject unit)
+    {
+        if (UnitDies != null)
+        {
+            UnitDies(unit);
+        }
+    }
+
+
+
     public static EventManager Instance
     {
         get
@@ -30,6 +68,7 @@ public class EventManager : MonoBehaviour {
 
         }
     }
+
     void Init()
     {
         if (eventDictionary == null)
@@ -72,6 +111,4 @@ public class EventManager : MonoBehaviour {
             thisEvent.Invoke();
         }
     }
-
-
 }

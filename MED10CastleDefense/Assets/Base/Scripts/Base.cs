@@ -13,15 +13,26 @@ public class Base : MonoBehaviour {
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        //EventManager.DealDamage += TakeDamage;
+        EventManager.Damage += TakeDamage;
     }
 
 
 
-    public void TakeDamage(GameObject target, int amount)
+    public void TakeDamage(GameObject dealer, List<GameObject> receiver)
     {
-        if(target == gameObject)
+        if (receiver.Contains(gameObject))
         {
+            int amount = 0;
+            if(dealer.tag == "EnemyBase")
+            {
+                amount = dealer.GetComponent<BaseAttack>().damage;
+            }
+            else if(dealer.tag == "Unit")
+            {
+                amount = dealer.GetComponent<Unit>().damage;
+            }
+
+
             health -= amount;
 
             ChangeHealthStateSprite();
@@ -32,6 +43,23 @@ public class Base : MonoBehaviour {
             }
         }
     }
+
+
+
+    //public void TakeDamage(GameObject target, int amount)
+    //{
+    //    if(target == gameObject)
+    //    {
+    //        health -= amount;
+
+    //        ChangeHealthStateSprite();
+
+    //        if (health <= 0)
+    //        {
+    //            Death();
+    //        }
+    //    }
+    //}
 
 
 
@@ -47,6 +75,8 @@ public class Base : MonoBehaviour {
             //EventManager.TriggerEvent("PlayerLost");
 
         }
+
+        EventManager.Damage -= TakeDamage;
 
         //Destroy castle (TODO: Instead instantiate a fire on the base to show it is destroyed, while Victory screen is displayed)
         Destroy(gameObject);
