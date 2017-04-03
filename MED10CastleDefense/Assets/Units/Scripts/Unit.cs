@@ -21,6 +21,8 @@ public class Unit : MonoBehaviour {
         _collider = GetComponent<BoxCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        BaseAttack enemy = GameObject.Find("EnemyBase").GetComponent<BaseAttack>();
+        enemy.AddTarget(gameObject);
     }
 
 
@@ -90,7 +92,7 @@ public class Unit : MonoBehaviour {
     public void TakeDamage(int amount)
     {
         health -= amount;
-
+        Debug.Log(transform.name + " took " + amount + " damage. Health left: " + health);
         if(health <= 0)
         {
             Death();

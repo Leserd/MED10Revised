@@ -8,12 +8,15 @@ public class BaseAttack : MonoBehaviour {
     public float attackSpeed = 1f;
     public float splashRadius = 1f;
     public float attackRange;
+    public float projectileSpeed = 8f;
     public GameObject projectilePrefab;
     public E_AttackType attackType;
     public bool canAttack = false;  //
     private List<GameObject> _availableTargets = new List<GameObject>();
     private GameObject _target;
     private Coroutine _attackCoroutine;
+
+
 
     private void OnEnable()
     {
@@ -25,6 +28,11 @@ public class BaseAttack : MonoBehaviour {
     public void AddTarget(GameObject newTarget)
     {
         _availableTargets.Add(newTarget);
+        canAttack = true;
+        if(_attackCoroutine == null)
+        {
+            StartAttacking();
+        }
     }
 
 
@@ -44,8 +52,13 @@ public class BaseAttack : MonoBehaviour {
         while (canAttack && _availableTargets.Count > 0)
         {
             _target = GetClosestTarget();
+            if (_target == null)
+            {
+                StopCoroutine(_attackCoroutine);
+                break;
+            }
             GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            //projectile.GetComponent<Projectile>().owner = this;
+            projectile.GetComponent<Projectile>().Init(this, _target.transform);
             yield return new WaitForSeconds(attackSpeed);
         }
     }
