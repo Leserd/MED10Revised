@@ -68,11 +68,11 @@ public class Base : MonoBehaviour {
         //TODO: Tell eventManager this base died
         if(gameObject.tag == "EnemyBase")
         {
-            //EventManager.TriggerEvent("PlayerWon");
+            EventManager.TriggerEvent("LevelComplete");
         }
         else if(gameObject.tag == "PlayerBase")
         {
-            //EventManager.TriggerEvent("PlayerLost");
+            EventManager.TriggerEvent("LevelLost");
 
         }
 

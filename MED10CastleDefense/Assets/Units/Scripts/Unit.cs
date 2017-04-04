@@ -25,6 +25,10 @@ public class Unit : MonoBehaviour {
         //enemy.AddTarget(gameObject);
 
         EventManager.Damage += TakeDamage;
+
+        EventManager.StartListening("LevelComplete", Death);
+        EventManager.StartListening("LevelLost", Death);
+
     }
 
 
@@ -93,19 +97,23 @@ public class Unit : MonoBehaviour {
 
     public void TakeDamage(GameObject dealer, List<GameObject> receiver)
     {
-        if (receiver.Contains(gameObject))
+        if(receiver != null  && gameObject != null)
         {
-            if(dealer.tag == "EnemyBase")
+            if (receiver.Contains(gameObject))
             {
-                int amount = dealer.GetComponent<BaseAttack>().damage;
-                health -= amount;
-                Debug.Log(transform.name + " took " + amount + " damage. Health left: " + health);
-                if (health <= 0)
+                if (dealer.tag == "EnemyBase")
                 {
-                    Death();
+                    int amount = dealer.GetComponent<BaseAttack>().damage;
+                    health -= amount;
+                    Debug.Log(transform.name + " took " + amount + " damage. Health left: " + health);
+                    if (health <= 0)
+                    {
+                        Death();
+                    }
                 }
             }
         }
+       
     }
 
 
@@ -130,7 +138,7 @@ public class Unit : MonoBehaviour {
         EventManager.Damage -= TakeDamage;
 
         //Destroy gameObject
-        Destroy(gameObject);
+        Destroy(gameObject, 0.1f);
     }
 
 
@@ -141,10 +149,14 @@ public class Unit : MonoBehaviour {
 
         //TODO: Play explosion sound
 
-        //TODO: Deal damage to an enemy 
-        Debug.Log("Explosion hit " + enemy.name);
-        
-        Destroy(gameObject);      
+        //Deal damage to an enemy 
+        List<GameObject> hit = new List<GameObject>();
+        hit.Add(enemy);
+        EventManager.Instance.DealDamage(gameObject, hit);
+
+        //Destroy gameObject after a bit
+        sprite.enabled = false;
+        Death();    
     }
 
 
