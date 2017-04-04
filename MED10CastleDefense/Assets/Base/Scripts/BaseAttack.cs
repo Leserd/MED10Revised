@@ -15,6 +15,7 @@ public class BaseAttack : MonoBehaviour {
     private List<GameObject> _availableTargets = new List<GameObject>();
     private GameObject _target;
     private Coroutine _attackCoroutine;
+    private Transform _gun;
 
 
 
@@ -24,6 +25,7 @@ public class BaseAttack : MonoBehaviour {
         EventManager.SpawnUnit += AddTarget;
         EventManager.UnitDies += RemoveTarget;
 
+        _gun = transform.GetChild(0);
         _availableTargets.Add(GameObject.FindGameObjectWithTag("PlayerBase"));
     }
 
@@ -88,7 +90,10 @@ public class BaseAttack : MonoBehaviour {
                 StopCoroutine(_attackCoroutine);
                 break;
             }
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            GameObject projectile = Instantiate(projectilePrefab, _gun.position, Quaternion.identity);
+
+            _gun.rotation = Quaternion.LookRotation(Vector3.forward, _target.transform.position - _gun.transform.position);
+
             projectile.GetComponent<Projectile>().Init(this, _target.transform);
             yield return new WaitForSeconds(attackSpeed);
         }
