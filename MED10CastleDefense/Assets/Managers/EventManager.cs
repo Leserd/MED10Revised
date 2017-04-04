@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -56,7 +57,10 @@ public class EventManager : MonoBehaviour {
                 _instance = FindObjectOfType(typeof(EventManager)) as EventManager;
                 if (!_instance)
                 {
-                    Debug.LogError("There is no active EventmanagerScript");
+                    GameObject eventManager = new GameObject("EventManager");
+                    _instance = eventManager.AddComponent<EventManager>();
+                    DontDestroyOnLoad(eventManager);
+                    _instance.Init();
                 }
                 else
                 {
@@ -74,6 +78,7 @@ public class EventManager : MonoBehaviour {
         if (eventDictionary == null)
         {
             eventDictionary = new Dictionary<string, UnityEvent>();
+            gameObject.AddComponent<SceneManagement>();
         }
     }
 
@@ -83,11 +88,13 @@ public class EventManager : MonoBehaviour {
         if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
             thisEvent.AddListener(listener);
+            //thisEvent += listener;
         }
         else
         {
             thisEvent = new UnityEvent();
             thisEvent.AddListener(listener);
+            //thisEvent += listener;
             Instance.eventDictionary.Add(eventName, thisEvent);
         }
     }
@@ -100,6 +107,7 @@ public class EventManager : MonoBehaviour {
         if (Instance.eventDictionary.TryGetValue(eventName,out thisEvent))
         {
             thisEvent.RemoveListener(listener);
+            //thisEvent -= listener;
         }
     }
 
