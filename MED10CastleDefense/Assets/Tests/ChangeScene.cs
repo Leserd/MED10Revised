@@ -8,7 +8,7 @@ public class ChangeScene : MonoBehaviour {
 
     private void Awake()
     {
-        GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene(1));
+        GetComponent<Button>().onClick.AddListener(() => EventManager.TriggerEvent("StartLevel"));
     }
 
 

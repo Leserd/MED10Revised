@@ -19,5 +19,6 @@ public class SelectLevel : MonoBehaviour {
         var instance = StateManager.Instance;
         instance.LevelName = LevelName;
         instance.SelectedLevel = LevelNumber;
+        EventManager.TriggerEvent("SelectedLevel");
     }
 }

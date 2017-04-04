@@ -6,8 +6,25 @@ public static class PiggyStats {
 
     public static int Health = 2;
     public static int Damage = 2;
-    public static float Cooldown = 3f;
-    public static float Speed = 1;
+    public static float Speed = 10f;
+    public static float Cooldown = 10f;
+    public static int UpgradeLevel = 1;
     public static GameObject explosion;
+
+    public static string[] UpgradedValues()
+    {
+        return new string[4] { (Health +3).ToString(), "", (Speed +1).ToString(),"" };
+    }
+    public static void Upgrade()
+    {
+        Health +=3;
+        Speed  +=1;
+        UpgradeLevel++;
+        
+    }
+    public static string[] Values()
+    {
+        return new string[4] { Health.ToString(), Damage.ToString(), Speed.ToString(), Cooldown.ToString() };
+    }
 
 }
