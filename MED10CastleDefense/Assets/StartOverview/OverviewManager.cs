@@ -18,7 +18,7 @@ public class OverviewManager : MonoBehaviour {
     {
         var instance = StateManager.Instance;
         panelTexts[1].text = instance.MaxLevel.ToString();
-        panelTexts[3].text = "null";
+        panelTexts[3].text = instance.Experience.ToString();
         panelTexts[5].text = (instance.MaxLevel - 1).ToString();
     }
 }

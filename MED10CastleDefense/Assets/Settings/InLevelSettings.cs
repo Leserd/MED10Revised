@@ -36,10 +36,12 @@ public class InLevelSettings : MonoBehaviour {
             case "Restart":
                 //Restart level
                 Debug.Log("Restarting level");
+                EventManager.TriggerEvent("RestartLevel");
                 break;
             case "Quit":
                 //quit level
                 Debug.Log("Quitting level");
+                EventManager.TriggerEvent("EndLevel");
                 break;
 
             default:
