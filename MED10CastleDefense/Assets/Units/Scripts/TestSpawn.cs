@@ -28,5 +28,6 @@ public class TestSpawn : MonoBehaviour {
     {
         Unit newUnit = Instantiate(unit, spawnPos.position, Quaternion.identity).GetComponent<Unit>();
         newUnit.AssignStatValues(type);
+        EventManager.Instance.Spawn(newUnit.gameObject);
     }
 }

@@ -10,18 +10,30 @@ public class Base : MonoBehaviour {
     private SpriteRenderer _spriteRenderer;
 
 
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        //EventManager.DealDamage += TakeDamage;
+        EventManager.Damage += TakeDamage;
     }
 
 
 
-    public void TakeDamage(GameObject target, int amount)
+    public void TakeDamage(GameObject dealer, List<GameObject> receiver)
     {
-        if(target == gameObject)
+        if (receiver.Contains(gameObject))
         {
+            int amount = 0;
+            if(dealer.tag == "EnemyBase")
+            {
+                amount = dealer.GetComponent<BaseAttack>().damage;
+            }
+            else if(dealer.tag == "Unit")
+            {
+                amount = dealer.GetComponent<Unit>().damage;
+            }
+
+
             health -= amount;
 
             ChangeHealthStateSprite();
@@ -35,10 +47,37 @@ public class Base : MonoBehaviour {
 
 
 
+    //public void TakeDamage(GameObject target, int amount)
+    //{
+    //    if(target == gameObject)
+    //    {
+    //        health -= amount;
+
+    //        ChangeHealthStateSprite();
+
+    //        if (health <= 0)
+    //        {
+    //            Death();
+    //        }
+    //    }
+    //}
+
+
+
     private void Death()
     {
         //TODO: Tell eventManager this base died
-        //EventManager.instance.BaseDied(this);
+        if(gameObject.tag == "EnemyBase")
+        {
+            EventManager.TriggerEvent("LevelComplete");
+        }
+        else if(gameObject.tag == "PlayerBase")
+        {
+            EventManager.TriggerEvent("LevelLost");
+
+        }
+
+        EventManager.Damage -= TakeDamage;
 
         //Destroy castle (TODO: Instead instantiate a fire on the base to show it is destroyed, while Victory screen is displayed)
         Destroy(gameObject);
@@ -57,6 +96,7 @@ public class Base : MonoBehaviour {
             _spriteRenderer.sprite = baseHealthStates[spriteIndex];
         }
     }
+
 
 
     //TODO: Uncomment this when Bill has been implemented to the game
