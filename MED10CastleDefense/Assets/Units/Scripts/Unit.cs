@@ -87,6 +87,11 @@ public class Unit : MonoBehaviour {
                 damage = CoinStats.Damage;
                 cooldown = CoinStats.Cooldown;
                 speed = CoinStats.Speed;
+
+                if (CoinStats.explosion == null)
+                    CoinStats.explosion = Resources.Load<GameObject>("ExplosionCoins");
+                _explosion = CoinStats.explosion;
+
                 imagePath += "Coin";
                 Debug.LogWarning("UnitType returned default for " + transform.name);
                 break;
@@ -146,6 +151,9 @@ public class Unit : MonoBehaviour {
     private void Death()
     {
         //TODO: Play animation
+
+        //Spawn explosion
+        Instantiate(_explosion, transform.position, Quaternion.identity);
 
         EventManager.Instance.UnitDead(gameObject);
 
