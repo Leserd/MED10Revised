@@ -8,4 +8,6 @@ public static class CoinStats {
     public static int Damage = 1;
     public static float Cooldown = 3f;
     public static float Speed = 2;
+    public static GameObject explosion;
+
 }

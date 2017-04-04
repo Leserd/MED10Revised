@@ -8,4 +8,5 @@ public static class SafeStats {
     public static int Damage = 3;
     public static float Cooldown = 3f;
     public static float Speed = 1;
+    public static GameObject explosion;
 }

@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour {
     private BoxCollider2D _collider;
     private Rigidbody2D _rb;
     private string _resourceImagePath = "Sprites/";
-
+    private GameObject _explosion;
 
     private void Awake()
     {
@@ -51,6 +51,11 @@ public class Unit : MonoBehaviour {
                 damage = CoinStats.Damage;
                 cooldown = CoinStats.Cooldown;
                 speed = CoinStats.Speed;
+
+                if(CoinStats.explosion == null)
+                    CoinStats.explosion = Resources.Load<GameObject>("ExplosionCoins");
+                _explosion = CoinStats.explosion;
+
                 imagePath += "Coin";
                 break;
             case E_UnitTypes.PIGGY:
@@ -58,6 +63,11 @@ public class Unit : MonoBehaviour {
                 damage = PiggyStats.Damage;
                 cooldown = PiggyStats.Cooldown;
                 speed = PiggyStats.Speed;
+
+                if (PiggyStats.explosion == null)
+                    PiggyStats.explosion = Resources.Load<GameObject>("ExplosionBills");
+                _explosion = PiggyStats.explosion;
+
                 imagePath += "Piggy";
                 break;
             case E_UnitTypes.SAFE:
@@ -65,6 +75,11 @@ public class Unit : MonoBehaviour {
                 damage = SafeStats.Damage;
                 cooldown = SafeStats.Cooldown;
                 speed = SafeStats.Speed;
+
+                if (SafeStats.explosion == null)
+                    SafeStats.explosion = Resources.Load<GameObject>("ExplosionBills");
+                _explosion = SafeStats.explosion;
+
                 imagePath += "Safe";
                 break;
             default:
