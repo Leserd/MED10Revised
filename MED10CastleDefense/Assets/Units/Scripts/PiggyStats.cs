@@ -12,12 +12,12 @@ public static class PiggyStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[4] { (Health * UpgradeLevel).ToString(), "", (Speed * UpgradeLevel).ToString(),"" };
+        return new string[4] { (Health +3).ToString(), "", (Speed +1).ToString(),"" };
     }
     public static void Upgrade()
     {
-        Health = Health * UpgradeLevel;
-        Speed = Speed * UpgradeLevel;
+        Health +=3;
+        Speed  +=1;
         UpgradeLevel++;
         
     }

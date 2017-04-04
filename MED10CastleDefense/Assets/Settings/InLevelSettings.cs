@@ -43,6 +43,10 @@ public class InLevelSettings : MonoBehaviour {
                 Debug.Log("Quitting level");
                 EventManager.TriggerEvent("EndLevel");
                 break;
+            case "FakeFinish":
+                Debug.Log("Faked a complete lvl");
+                EventManager.TriggerEvent("LevelComplete"); //EventManager.TriggerEvent("LevelLost");
+                break;
 
             default:
                 Debug.LogWarning("None of the options were chosen");

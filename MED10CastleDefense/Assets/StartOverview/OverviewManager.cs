@@ -10,15 +10,18 @@ public class OverviewManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         panelTexts = GetComponentsInChildren<Text>();
-        EventManager.StartListening("LevelIncrease", Test);
+        EventManager.StartListening("SelectedLevel", SelectedLevel);
+        UpdateTextPanel();
 	
 	}
-
-    void Test()
+    void SelectedLevel()
+    {
+        panelTexts[1].text = StateManager.Instance.SelectedLevel.ToString();
+    }
+    void UpdateTextPanel()
     {
         var instance = StateManager.Instance;
-        panelTexts[1].text = instance.MaxLevel.ToString();
-        panelTexts[3].text = instance.Experience.ToString();
+        panelTexts[3].text = instance.YearlyExpense.ToString();
         panelTexts[5].text = (instance.MaxLevel - 1).ToString();
     }
 }

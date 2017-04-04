@@ -5,9 +5,10 @@ using UnityEngine;
 public class StateManager : MonoBehaviour {
 
     private static int _selectedLevel = 1,
-                        _maxLevel = 1,
+                        _maxLevel = 4,
                         _experience = 0,
-                        _upgradeAvailable = 2,
+                        _upgradeAvailable = 0,
+                        _yearlyExpence = 0,
                         _playerLevel = 1;
 
     private static string _levelName;
@@ -31,6 +32,21 @@ public class StateManager : MonoBehaviour {
             return _instance;
         }
     }
+    public int YearlyExpense
+    {
+        get
+        {
+            return _yearlyExpence;
+        }
+        set
+        {
+            if (_selectedLevel == _maxLevel)
+            {
+                _yearlyExpence += value;
+            }
+        }
+    }
+
     public string LevelName
     {
         get
@@ -40,7 +56,7 @@ public class StateManager : MonoBehaviour {
                 return _levelName;
 
             }
-            return "Could not find a level name";
+            return PretendData.instance.Data[0].BSDataName;
         }
         set
         {
