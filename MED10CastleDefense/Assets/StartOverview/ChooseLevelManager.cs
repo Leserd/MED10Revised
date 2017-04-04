@@ -14,6 +14,7 @@ public class ChooseLevelManager : MonoBehaviour {
         EventManager.StartListening("LevelIncrease", CompletedALevel);
     }
 
+
     private void CompletedALevel()
     {
         var states = StateManager.Instance;

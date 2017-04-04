@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
 
-    private static int _coinUpgradeLevel = 1,
-                        _pigUpgradeLevel = 1,
-                        _boxUpgradeLevel = 1,
-                        _selectedLevel = 1,
+    private static int _selectedLevel = 1,
                         _maxLevel = 1,
                         _experience = 0,
-                        _playerLevel = 0;
+                        _upgradeAvailable = 2,
+                        _playerLevel = 1;
 
     private static string _levelName;
 
@@ -50,7 +48,17 @@ public class StateManager : MonoBehaviour {
         }
     }
 
-    
+    public int UpgradesAvailable
+    {
+        get
+        {
+            return _upgradeAvailable;
+        }
+        set
+        {
+            _upgradeAvailable += value;
+        }
+    }
     public int MaxLevel
     {
         ///TODO needs to be able to check for the max value that can be chosen.
@@ -82,10 +90,28 @@ public class StateManager : MonoBehaviour {
             _selectedLevel = value;
         }
     }
-
-
-
-
+    public int PlayerLevel
+    {
+        get
+        {
+            return _playerLevel;
+        }
+        set
+        {
+            _playerLevel = value;
+        }
+    }
+    public int Experience
+    {
+        get
+        {
+            return _experience;
+        }
+        set
+        {
+            _experience = value;
+        }
+    }
     private void Awake()
     {
         if (_instance == null)

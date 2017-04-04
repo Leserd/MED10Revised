@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -48,11 +49,13 @@ public class EventManager : MonoBehaviour {
         if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {
             thisEvent.AddListener(listener);
+            //thisEvent += listener;
         }
         else
         {
             thisEvent = new UnityEvent();
             thisEvent.AddListener(listener);
+            //thisEvent += listener;
             Instance.eventDictionary.Add(eventName, thisEvent);
         }
     }
@@ -65,6 +68,7 @@ public class EventManager : MonoBehaviour {
         if (Instance.eventDictionary.TryGetValue(eventName,out thisEvent))
         {
             thisEvent.RemoveListener(listener);
+            //thisEvent -= listener;
         }
     }
 
