@@ -15,18 +15,15 @@ public class SceneManagement : MonoBehaviour {
 
     void LevelStart()
     {
-        Debug.Log("Attempt Level start");
         SceneManager.LoadScene("LevelScene");
     }
 
     void RestartLevel()
     {
-        Debug.Log("Attempt restart level");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     void EndLevel()
     {
-        Debug.Log("Attempt end level");
         SceneManager.LoadScene("LevelOverviewScene");
     }
 

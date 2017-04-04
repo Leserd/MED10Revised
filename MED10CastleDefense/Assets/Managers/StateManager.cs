@@ -5,7 +5,7 @@ using UnityEngine;
 public class StateManager : MonoBehaviour {
 
     private static int _selectedLevel = 1,
-                        _maxLevel = 4,
+                        _maxLevel = 1,
                         _experience = 0,
                         _upgradeAvailable = 0,
                         _yearlyExpence = 0,

@@ -16,8 +16,6 @@ public class ChooseLevelManager : MonoBehaviour {
     {
         _levels = GetComponentsInChildren<Button>();
         InteractableLevels();
-
-        Debug.Log("ran awake");
         foreach (var button in _levels)
         {
             if (button.IsInteractable())
@@ -26,7 +24,6 @@ public class ChooseLevelManager : MonoBehaviour {
 
             }
         }
-        EventManager.StartListening("LevelIncrease", CompletedALevel);
         
     }
 
@@ -57,16 +54,5 @@ public class ChooseLevelManager : MonoBehaviour {
             _levels[i].interactable = true;
         }
     }
-
-
-    private void CompletedALevel()
-    {
-
-
-    }
-
-
-
-
 
 }
