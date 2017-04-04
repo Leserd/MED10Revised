@@ -10,6 +10,7 @@ public class Base : MonoBehaviour {
     private SpriteRenderer _spriteRenderer;
 
 
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -95,6 +96,7 @@ public class Base : MonoBehaviour {
             _spriteRenderer.sprite = baseHealthStates[spriteIndex];
         }
     }
+
 
 
     //TODO: Uncomment this when Bill has been implemented to the game

@@ -21,8 +21,7 @@ public class Unit : MonoBehaviour {
         _collider = GetComponent<BoxCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-        BaseAttack enemy = GameObject.Find("EnemyBase").GetComponent<BaseAttack>();
-        //enemy.AddTarget(gameObject);
+       // BaseAttack enemy = GameObject.Find("EnemyBase").GetComponent<BaseAttack>();
 
         EventManager.Damage += TakeDamage;
 
@@ -105,7 +104,7 @@ public class Unit : MonoBehaviour {
                 {
                     int amount = dealer.GetComponent<BaseAttack>().damage;
                     health -= amount;
-                    Debug.Log(transform.name + " took " + amount + " damage. Health left: " + health);
+                    //Debug.Log(transform.name + " took " + amount + " damage. Health left: " + health);
                     if (health <= 0)
                     {
                         Death();
