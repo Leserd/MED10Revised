@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class PretendData : MonoBehaviour {
     public InputData[] Data;
-    public static PretendData instance;
-
-    private void Awake()
+    private  static PretendData _instance;
+    public static PretendData Instance
     {
-        instance = this;
+        get
+        {
+            if (!_instance)
+            {
+                _instance = FindObjectOfType(typeof(PretendData)) as PretendData;
+                if (!_instance)
+                {
+                    var go = Resources.Load("FakeInput") as GameObject;
+                    DontDestroyOnLoad(go);
+                    _instance = go.GetComponent<PretendData>();
+                }
+            }
 
+            return _instance;
+        }
     }
-    
+ 
 }
 [System.Serializable]
 public class InputData

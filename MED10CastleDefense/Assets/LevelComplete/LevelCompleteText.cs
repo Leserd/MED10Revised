@@ -30,15 +30,28 @@ public class LevelCompleteText : MonoBehaviour {
     }
     private void LevelLost()
     {
+        StartCoroutine(WaitSecondsLost(2f));
+    }
+    IEnumerator WaitSecondsLost(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
         StateManager.Instance.UpgradesAvailable = 1;
         UpdateFinishMenu();
+
     }
     private void LevelComplete()
-    { 
+    {
+        StartCoroutine(WaitSeconds(2f));
+
+    }
+
+    IEnumerator WaitSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
         StateManager.Instance.UpgradesAvailable = 2;
         if (StateManager.Instance.MaxLevel == StateManager.Instance.SelectedLevel)
         {
-            StateManager.Instance.YearlyExpense = int.Parse(PretendData.instance.Data[StateManager.Instance.SelectedLevel-1].BSDataAmount);
+            StateManager.Instance.YearlyExpense = int.Parse(PretendData.Instance.Data[StateManager.Instance.SelectedLevel-1].BSDataAmount);
 
             StateManager.Instance.MaxLevel = 1;
         }
