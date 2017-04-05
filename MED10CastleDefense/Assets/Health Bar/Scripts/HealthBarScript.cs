@@ -35,7 +35,7 @@ public class HealthBarScript : MonoBehaviour {
         if (_target)
         {
             _transform.position = Camera.main.WorldToScreenPoint(_target.transform.position);
-            int yOffset = (int)_target.GetComponent<SpriteRenderer>().sprite.rect.height / 2 - 20;
+            int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 - 20;
             _transform.position = new Vector2(_transform.position.x, _transform.position.y + yOffset);
         }
         else
@@ -61,9 +61,10 @@ public class HealthBarScript : MonoBehaviour {
 
         _health = _maxHealth;
 
-        _transform.position = Camera.main.WorldToScreenPoint(_target.transform.position);
-        int yOffset = (int)_target.GetComponent<SpriteRenderer>().sprite.rect.height / 2 - 20;
-        _transform.position = new Vector2(_transform.position.x, _transform.position.y + yOffset);
+        //Change width of health bars
+        int barWidth = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.width * _target.transform.localScale.x);
+        barForeground.rectTransform.sizeDelta = new Vector2(barWidth, barForeground.rectTransform.sizeDelta.y);
+        barBackground.rectTransform.sizeDelta = new Vector2(barWidth, barBackground.rectTransform.sizeDelta.y);
 
     }
 
