@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PiggyStats {
+public static class PigStats {
 
     public static int Health = 2;
     public static int Damage = 2;

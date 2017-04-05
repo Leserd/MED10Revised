@@ -1,0 +1,86 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SpawnButton : MonoBehaviour {
+    public GameObject unit;
+    public Transform spawnLoc;
+    public Image cooldownImg;
+    private Button _btn;
+    private Coroutine _cdCoroutine;
+
+	void Awake () {
+        _btn = GetComponent<Button>();
+
+        _btn.onClick.AddListener(() => SpawnPress(transform.name));
+
+        if (spawnLoc == null)
+            spawnLoc = GameObject.Find("UnitSpawnLoc").transform;
+
+        if (cooldownImg == null)
+            cooldownImg = GetComponentInChildren<Image>();
+	}
+
+
+
+    private void SpawnPress(string type)
+    {
+        float cdTime = 0;
+        switch (type)
+        {
+            case "Coin":
+                cdTime = CoinStats.Cooldown;
+                break;
+            case "Pig":
+                cdTime = PigStats.Cooldown;
+                break;
+            case "Safe":
+                cdTime = SafeStats.Cooldown;
+                break;
+            default:
+                Debug.LogWarning("Something went wrong with spawn");
+                break;
+        }
+
+        _cdCoroutine = StartCoroutine(StartCooldown(cdTime));
+
+        Unit newUnit = Instantiate(unit, spawnLoc.position, Quaternion.identity).GetComponent<Unit>();
+        newUnit.AssignStatValues(type);
+        EventManager.Instance.Spawn(newUnit.gameObject);
+
+
+    }
+
+
+
+    private IEnumerator StartCooldown(float cdTime)
+    {
+        _btn.interactable = false;
+
+        float startTime = Time.time;
+        float endTime = startTime + cdTime;
+
+        while(Time.time < endTime)
+        {
+            float elapsedTime = Time.time - startTime;
+            cooldownImg.fillAmount = 1 - (elapsedTime / cdTime);
+            yield return new WaitForFixedUpdate();
+
+        }
+
+        cooldownImg.fillAmount = 0;
+        _btn.interactable = true;
+        _cdCoroutine = null;
+
+    }
+
+
+    public void SpawnUnit(string type)
+    {
+        Unit newUnit = Instantiate(unit, spawnLoc.position, Quaternion.identity).GetComponent<Unit>();
+        newUnit.AssignStatValues(type);
+        EventManager.Instance.Spawn(newUnit.gameObject);
+    }
+
+}

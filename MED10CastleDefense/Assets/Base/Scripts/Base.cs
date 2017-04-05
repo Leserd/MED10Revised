@@ -36,7 +36,8 @@ public class Base : MonoBehaviour {
                 amount = dealer.GetComponent<Unit>().damage;
             }
 
-
+            amount = (int)((float)maxHealth / 100f * (float)amount);
+            print(amount);
             health -= amount;
 
             ChangeHealthStateSprite();
@@ -83,7 +84,7 @@ public class Base : MonoBehaviour {
         EventManager.Damage -= TakeDamage;
 
         //Destroy castle (TODO: Instead instantiate a fire on the base to show it is destroyed, while Victory screen is displayed)
-        Destroy(gameObject);
+        //Destroy(gameObject);
 
 
     }

@@ -61,15 +61,15 @@ public class Unit : MonoBehaviour
 
                 imagePath += "Coin";
                 break;
-            case E_UnitTypes.PIGGY:
-                maxHealth = PiggyStats.Health;
-                damage = PiggyStats.Damage;
-                cooldown = PiggyStats.Cooldown;
-                speed = PiggyStats.Speed;
+            case E_UnitTypes.PIG:
+                maxHealth = PigStats.Health;
+                damage = PigStats.Damage;
+                cooldown = PigStats.Cooldown;
+                speed = PigStats.Speed;
 
-                if (PiggyStats.explosion == null)
-                    PiggyStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
-                _explosion = PiggyStats.explosion;
+                if (PigStats.explosion == null)
+                    PigStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
+                _explosion = PigStats.explosion;
 
                 imagePath += "Piggy";
                 break;
@@ -134,14 +134,14 @@ public class Unit : MonoBehaviour
 
                 break;
             case "Pig":
-                maxHealth = PiggyStats.Health;
-                damage = PiggyStats.Damage;
-                cooldown = PiggyStats.Cooldown;
-                speed = PiggyStats.Speed;
+                maxHealth = PigStats.Health;
+                damage = PigStats.Damage;
+                cooldown = PigStats.Cooldown;
+                speed = PigStats.Speed;
 
-                if (PiggyStats.explosion == null)
-                    PiggyStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
-                _explosion = PiggyStats.explosion;
+                if (PigStats.explosion == null)
+                    PigStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
+                _explosion = PigStats.explosion;
 
                 break;
             case "Safe":
@@ -267,6 +267,6 @@ public class Unit : MonoBehaviour
 public enum E_UnitTypes
 {
     COIN,
-    PIGGY,
+    PIG,
     SAFE
 }

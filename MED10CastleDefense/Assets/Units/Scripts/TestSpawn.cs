@@ -15,7 +15,7 @@ public class TestSpawn : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SpawnUnit(E_UnitTypes.PIGGY);
+            SpawnUnit(E_UnitTypes.PIG);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {

@@ -54,10 +54,10 @@ public class UpgradeManager : MonoBehaviour {
         Array.Copy(_values, 12, UpgradeValues, 0, 4);
         for (int i = 0; i < 4; i++)
         {
-            values[i].text = PiggyStats.Values()[i];
-            if (PiggyStats.UpgradedValues()[i] != "")
+            values[i].text = PigStats.Values()[i];
+            if (PigStats.UpgradedValues()[i] != "")
             {
-                UpgradeValues[i].text = "+" + PiggyStats.UpgradedValues()[i];
+                UpgradeValues[i].text = "+" + PigStats.UpgradedValues()[i];
 
             }
             else
@@ -103,7 +103,7 @@ public class UpgradeManager : MonoBehaviour {
     {
         if (StateManager.Instance.UpgradesAvailable != 0)
         {
-            PiggyStats.Upgrade();
+            PigStats.Upgrade();
             StateManager.Instance.UpgradesAvailable = -1;
             EventManager.TriggerEvent("Upgrade");
             UpdatePiggyValues();
