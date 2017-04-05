@@ -22,6 +22,7 @@ public class EventManager : MonoBehaviour {
     {
         if(Damage != null)
         {
+            print("DealDamage called on " + dealer.name);
             Damage(dealer, receivers);
         }
     }

@@ -34,10 +34,9 @@ public class Base : MonoBehaviour {
             else if(dealer.tag == "Unit")
             {
                 amount = dealer.GetComponent<Unit>().damage;
+                amount = Mathf.CeilToInt((float)maxHealth / 100f * (float)amount);
             }
 
-            amount = (int)((float)maxHealth / 100f * (float)amount);
-            print(amount);
             health -= amount;
 
             ChangeHealthStateSprite();

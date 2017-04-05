@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarScript : MonoBehaviour {
+public class HealthBarScript : MonoBehaviour
+{
 
     private GameObject _target;
     private Image barForeground;    //The health bar to change size of when dealt damage
@@ -24,7 +25,7 @@ public class HealthBarScript : MonoBehaviour {
         EventManager.Damage += UpdateHealth;
 
         _transform = GetComponent<RectTransform>();
-        
+
         _transform.SetParent(GameObject.Find("HealthBarCanvas").transform);
     }
 
@@ -50,7 +51,7 @@ public class HealthBarScript : MonoBehaviour {
     {
         _target = target;
 
-        if(_target.GetComponent<Base>())
+        if (_target.GetComponent<Base>())
         {
             _maxHealth = _target.GetComponent<Base>().maxHealth;
         }
@@ -76,13 +77,16 @@ public class HealthBarScript : MonoBehaviour {
         {
             if (receivers.Contains(_target))
             {
-                
+
                 int amount = 0;
 
                 if (dealer.tag == "EnemyBase")
                     amount = dealer.GetComponent<BaseAttack>().damage;
                 else if (dealer.tag == "Unit")
+                {
                     amount = dealer.GetComponent<Unit>().damage;
+                    amount = Mathf.CeilToInt((float)_maxHealth / 100f * (float)amount);
+                }
 
                 _health -= amount;
                 float fill = (float)_health / (float)_maxHealth;
