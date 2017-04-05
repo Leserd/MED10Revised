@@ -1,11 +1,11 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
-guid: 1174923e1d0f1a14d9be0f4605190ae2
-timeCreated: 1491313029
-=======
 guid: c3f1c5b99dc56d64395bec654574cc16
 timeCreated: 1490947996
->>>>>>> origin/develop
+=======
+guid: 1174923e1d0f1a14d9be0f4605190ae2
+timeCreated: 1491313029
+>>>>>>> origin/feature/BaseAttack
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
