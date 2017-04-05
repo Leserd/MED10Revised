@@ -23,6 +23,26 @@ public class SpawnButton : MonoBehaviour {
 	}
 
 
+    //This is purely to test faster
+    private void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SpawnPress("Coin");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SpawnPress("Pig");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SpawnPress("Safe");
+        }
+    }
+
 
     private void SpawnPress(string type)
     {
@@ -74,13 +94,4 @@ public class SpawnButton : MonoBehaviour {
         _cdCoroutine = null;
 
     }
-
-
-    public void SpawnUnit(string type)
-    {
-        Unit newUnit = Instantiate(unit, spawnLoc.position, Quaternion.identity).GetComponent<Unit>();
-        newUnit.AssignStatValues(type);
-        EventManager.Instance.Spawn(newUnit.gameObject);
-    }
-
 }
