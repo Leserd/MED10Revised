@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class SpawnButtons : MonoBehaviour {
     [SerializeField]
     private GameObject unit;
-
+    public Transform spawnLoc;
 
 	// Use this for initialization
 	void Awake () {
         foreach (var button in GetComponentsInChildren<Button>())
         {
-            button.onClick.AddListener(() => SpawnPress(button.name));
+            button.onClick.AddListener(() => SpawnUnit(button.name));
         }
 		
 	}
@@ -49,6 +49,13 @@ public class SpawnButtons : MonoBehaviour {
                 Debug.LogWarning("Something went wrong with spawn");
                 break;
         }
+    }
+
+    private void SpawnUnit(string type)
+    {
+        Unit newUnit = Instantiate(unit, spawnLoc.position, Quaternion.identity).GetComponent<Unit>();
+        newUnit.AssignStatValues(type);
+        EventManager.Instance.Spawn(newUnit.gameObject);
     }
 
 }

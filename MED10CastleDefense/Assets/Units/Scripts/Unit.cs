@@ -116,6 +116,75 @@ public class Unit : MonoBehaviour
     }
 
 
+    public void AssignStatValues(string type)
+    {
+        string imagePath = _resourceImagePath + type;
+
+        switch (type)
+        {
+            case "Coin":
+                maxHealth = CoinStats.Health;
+                damage = CoinStats.Damage;
+                cooldown = CoinStats.Cooldown;
+                speed = CoinStats.Speed;
+
+                if (CoinStats.explosion == null)
+                    CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
+                _explosion = CoinStats.explosion;
+
+                break;
+            case "Pig":
+                maxHealth = PiggyStats.Health;
+                damage = PiggyStats.Damage;
+                cooldown = PiggyStats.Cooldown;
+                speed = PiggyStats.Speed;
+
+                if (PiggyStats.explosion == null)
+                    PiggyStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
+                _explosion = PiggyStats.explosion;
+
+                break;
+            case "Safe":
+                maxHealth = SafeStats.Health;
+                damage = SafeStats.Damage;
+                cooldown = SafeStats.Cooldown;
+                speed = SafeStats.Speed;
+
+                if (SafeStats.explosion == null)
+                    SafeStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
+                _explosion = SafeStats.explosion;
+
+                break;
+            default:
+                maxHealth = CoinStats.Health;
+                damage = CoinStats.Damage;
+                cooldown = CoinStats.Cooldown;
+                speed = CoinStats.Speed;
+
+                if (CoinStats.explosion == null)
+                    CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
+                _explosion = CoinStats.explosion;
+
+                Debug.LogWarning("UnitType returned default for " + transform.name);
+                break;
+        }
+
+        health = maxHealth;
+        transform.name = type;
+
+        if (Resources.Load<Sprite>(imagePath) != null)
+        {
+            sprite.sprite = Resources.Load<Sprite>(imagePath);
+        }
+        else
+        {
+            Debug.LogWarning(transform.name + " could not find image at path: " + imagePath);
+            sprite.sprite = Resources.Load<Sprite>(_resourceImagePath + "Coin");
+        }
+
+    }
+
+
 
     public void TakeDamage(GameObject dealer, List<GameObject> receiver)
     {
@@ -156,7 +225,7 @@ public class Unit : MonoBehaviour
         //TODO: Play animation
 
         //Spawn explosion
-        Instantiate(_explosion, transform.position, Quaternion.identity);
+        Instantiate(_explosion, transform.position, Quaternion.Euler(-90, 0, 0));
 
         EventManager.Instance.UnitDead(gameObject);
 
