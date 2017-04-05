@@ -21,6 +21,9 @@ public class BaseAttack : MonoBehaviour {
 
     private void OnEnable()
     {
+        EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
+
+
         //EventManager.instance.StartListening("SpawnUnit", AddTarget);
         EventManager.SpawnUnit += AddTarget;
         EventManager.UnitDies += RemoveTarget;
@@ -84,6 +87,7 @@ public class BaseAttack : MonoBehaviour {
     {
         while (canAttack && _availableTargets.Count > 0)
         {
+            yield return new WaitForSeconds(attackSpeed);
             _target = GetClosestTarget();
             if (_target == null)
             {
@@ -95,7 +99,7 @@ public class BaseAttack : MonoBehaviour {
             _gun.rotation = Quaternion.LookRotation(Vector3.forward, _target.transform.position - _gun.transform.position);
 
             projectile.GetComponent<Projectile>().Init(this, _target.transform);
-            yield return new WaitForSeconds(attackSpeed);
+            
         }
     }
 
