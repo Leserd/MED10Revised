@@ -35,7 +35,11 @@ public class LevelCompleteText : MonoBehaviour {
     IEnumerator WaitSecondsLost(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        StateManager.Instance.UpgradesAvailable = 1;
+        if (StateManager.Instance.MaxLevel == StateManager.Instance.SelectedLevel)
+        {
+            StateManager.Instance.UpgradesAvailable = 1;
+
+        }
         UpdateFinishMenu();
 
     }
@@ -48,12 +52,17 @@ public class LevelCompleteText : MonoBehaviour {
     IEnumerator WaitSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        StateManager.Instance.UpgradesAvailable = 2;
+
         if (StateManager.Instance.MaxLevel == StateManager.Instance.SelectedLevel)
         {
             StateManager.Instance.YearlyExpense = int.Parse(PretendData.Instance.Data[StateManager.Instance.SelectedLevel-1].BSDataAmount);
-
+            StateManager.Instance.UpgradesAvailable = 2;
             StateManager.Instance.MaxLevel = 1;
+        }
+        else
+        {
+            StateManager.Instance.UpgradesAvailable = 1;
+
         }
 
         UpdateFinishMenu();
@@ -65,8 +74,10 @@ public class LevelCompleteText : MonoBehaviour {
         var textFields = GetComponentsInChildren<Text>();
         // exp, level, upgrades 
         var instance = StateManager.Instance;
-        textFields[0].text = "Upgrades available: " + instance.UpgradesAvailable.ToString(); ;
-        GetComponentsInChildren<Button>()[3].onClick.AddListener(() => EventManager.TriggerEvent("EndLevel"));
+        textFields[0].text = "Upgrades available: " + instance.UpgradesAvailable.ToString();
+        GetComponentsInChildren<Button>()[3].onClick.AddListener(() => EventManager.TriggerEvent("RestartLevel"));
+
+        GetComponentsInChildren<Button>()[4].onClick.AddListener(() => EventManager.TriggerEvent("EndLevel"));
 
     }
 }
