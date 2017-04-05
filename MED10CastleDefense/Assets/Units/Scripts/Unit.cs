@@ -53,7 +53,7 @@ public class Unit : MonoBehaviour {
                 speed = CoinStats.Speed;
 
                 if(CoinStats.explosion == null)
-                    CoinStats.explosion = Resources.Load<GameObject>("ExplosionCoins");
+                    CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
                 _explosion = CoinStats.explosion;
 
                 imagePath += "Coin";
@@ -65,7 +65,7 @@ public class Unit : MonoBehaviour {
                 speed = PiggyStats.Speed;
 
                 if (PiggyStats.explosion == null)
-                    PiggyStats.explosion = Resources.Load<GameObject>("ExplosionBills");
+                    PiggyStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
                 _explosion = PiggyStats.explosion;
 
                 imagePath += "Piggy";
@@ -77,7 +77,7 @@ public class Unit : MonoBehaviour {
                 speed = SafeStats.Speed;
 
                 if (SafeStats.explosion == null)
-                    SafeStats.explosion = Resources.Load<GameObject>("ExplosionBills");
+                    SafeStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
                 _explosion = SafeStats.explosion;
 
                 imagePath += "Safe";
@@ -89,7 +89,7 @@ public class Unit : MonoBehaviour {
                 speed = CoinStats.Speed;
 
                 if (CoinStats.explosion == null)
-                    CoinStats.explosion = Resources.Load<GameObject>("ExplosionCoins");
+                    CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
                 _explosion = CoinStats.explosion;
 
                 imagePath += "Coin";
