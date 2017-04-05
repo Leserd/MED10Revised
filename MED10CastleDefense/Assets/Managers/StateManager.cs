@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
 
-    private static int _selectedLevel = 1,
+    private static int _selectedLevel = 0,
                         _maxLevel = 1,
                         _experience = 0,
                         _upgradeAvailable = 0,
@@ -56,7 +56,7 @@ public class StateManager : MonoBehaviour {
                 return _levelName;
 
             }
-            return PretendData.instance.Data[0].BSDataName;
+            return PretendData.Instance.Data[0].BSDataName;
         }
         set
         {
@@ -90,6 +90,10 @@ public class StateManager : MonoBehaviour {
                 if(_maxLevel == 0)
                 {
                     _maxLevel = 1;
+                }
+                if (_maxLevel > PretendData.Instance.Data.Length)
+                {
+                    _maxLevel = PretendData.Instance.Data.Length;
                 }
                 
             }

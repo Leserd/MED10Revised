@@ -9,7 +9,8 @@ public class ChooseLevelManager : MonoBehaviour {
     private Button[] _levels;
 
     [SerializeField]
-    private GameObject SelectedLevelIcon;
+    private GameObject SelectedLevelIcon, BillObject;
+    
 
     
     private void Awake()
@@ -24,6 +25,11 @@ public class ChooseLevelManager : MonoBehaviour {
 
             }
         }
+        if (StateManager.Instance.SelectedLevel != 0)
+        {
+            SelectedLevelIcon.transform.parent = _levels[StateManager.Instance.SelectedLevel-1].transform;
+            SelectedLevelIcon.transform.localPosition = Vector3.zero;
+        }
         
     }
 
@@ -32,7 +38,7 @@ public class ChooseLevelManager : MonoBehaviour {
         int number;
         int.TryParse(NameButton.Substring(NameButton.Length - 1, 1),out  number);
 
-        var data = PretendData.instance.Data[number-1];
+        var data = PretendData.Instance.Data[number-1];
         var instance = StateManager.Instance;
         instance.LevelName = data.BSDataName;
         instance.SelectedLevel = number;
@@ -52,6 +58,9 @@ public class ChooseLevelManager : MonoBehaviour {
         for (int i = 0; i < StateManager.Instance.MaxLevel; i++)
         {
             _levels[i].interactable = true;
+            var bill = Instantiate(BillObject, _levels[i].transform, false).GetComponentsInChildren<Text>();
+            bill[0].text = PretendData.Instance.Data[i].BSDataName;
+            bill[1].text = PretendData.Instance.Data[i].BSDataAmount;
         }
     }
 
