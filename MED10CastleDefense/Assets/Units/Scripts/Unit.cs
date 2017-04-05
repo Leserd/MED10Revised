@@ -71,7 +71,7 @@ public class Unit : MonoBehaviour
                     PigStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
                 _explosion = PigStats.explosion;
 
-                imagePath += "Piggy";
+                imagePath += "Pig";
                 break;
             case E_UnitTypes.SAFE:
                 maxHealth = SafeStats.Health;

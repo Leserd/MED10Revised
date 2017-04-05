@@ -27,17 +27,17 @@ public class SpawnButton : MonoBehaviour {
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && transform.name == "Coin")
         {
             SpawnPress("Coin");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.name == "Pig")
         {
             SpawnPress("Pig");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && transform.name == "Safe")
         {
             SpawnPress("Safe");
         }

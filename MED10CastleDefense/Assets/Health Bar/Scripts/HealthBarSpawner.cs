@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBarSpawner : MonoBehaviour {
-
-    public static GameObject healthBarPrefab;
+    public GameObject healthBarPrefab;
 
     private void Start()
     {
