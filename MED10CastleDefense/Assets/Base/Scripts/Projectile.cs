@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour {
     private Transform _target;
     private Coroutine _moveCoroutine;
     private float _projectileSpeed = 8f;
+    public ParticleSystem particle;         //on impact
 
     public void Init(BaseAttack owner, Transform target)
     {
@@ -67,13 +68,9 @@ public class Projectile : MonoBehaviour {
                 }
             }
 
-            //foreach(GameObject target in targets)
-            //{
-            //    //TODO: Send damager dealer and damage taker when triggering event
-            //    //EventManager.TriggerEvent("DealDamage");
-            //    //print(transform.name + " hit: " + target.name + " for " + _damage + " damage.");
-
-            //}
+            if (particle)
+                Instantiate(particle, transform.position, particle.transform.rotation).Play();
+            
             EventManager.Instance.DealDamage(_owner.gameObject, targets);
 
             Destroy(gameObject);

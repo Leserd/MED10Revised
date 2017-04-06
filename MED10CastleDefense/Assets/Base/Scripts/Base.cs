@@ -8,17 +8,27 @@ public class Base : MonoBehaviour {
     public int maxHealth;
     public Sprite[] baseHealthStates;
     private SpriteRenderer _spriteRenderer;
-
-
+    private ParticleSystem _particle;
+    private int _curSpriteIndex;
 
     private void Start()
     {
         EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
 
+        _curSpriteIndex = baseHealthStates.Length - 1;
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _particle = transform.GetChild(2).GetComponent<ParticleSystem>();
+        if (_particle == null)
+            Debug.LogWarning("No dust particle system was found in " + transform.name + "'s GetChild(2)");
+
         EventManager.Damage += TakeDamage;
+
+        SetMaxHealth();
+        SetName();
     }
+
 
 
 
@@ -81,18 +91,12 @@ public class Base : MonoBehaviour {
         else if(gameObject.tag == "PlayerBase")
         {
             EventManager.TriggerEvent("LevelLost");
-            //TODO: King must fall down into the ruins of his castle
+            transform.GetChild(1).GetComponent<Rigidbody2D>().simulated = true;
+            //TODO: Animate the king falling
         }
 
         EventManager.Damage -= TakeDamage;
-
-        //Destroy castle (TODO: Instead instantiate a fire on the base to show it is destroyed, while Victory screen is displayed)
-        //Destroy(gameObject);
     }
-
-
-
-
 
 
 
@@ -101,37 +105,47 @@ public class Base : MonoBehaviour {
     {
         if(baseHealthStates.Length > 0)
         {
+
             int spriteIndex = Mathf.CeilToInt((float)health / (float)maxHealth * (baseHealthStates.Length-1));
+            if(spriteIndex != _curSpriteIndex)
+            {
+                _curSpriteIndex = spriteIndex;
+                if (_particle != null)
+                    _particle.Play();
+            }
             _spriteRenderer.sprite = baseHealthStates[spriteIndex];
         }
     }
 
 
 
-    //TODO: Uncomment this when Bill has been implemented to the game
-    //public void AssignBill(Bill bill)
-    //{
-    //    _name = bill.name;
-    //    transform.name = _name;
-
-    //    _maxHealth = bill.price;
-    //    _health = maxHealth;
-    //}
-
-
-
-    public void SetName(string name)
+    public void SetName()
     {
-        baseName = name;
-        transform.name = baseName;
+        if(gameObject.tag == "EnemyBase")
+        {
+            baseName = PretendData.Instance.Data[StateManager.Instance.SelectedLevel].BSDataName;
+            transform.name = baseName;
+        }
+        else if(gameObject.tag == "PlayerBase")
+        {
+            baseName = "You";
+            transform.name = baseName;
+        }
     }
 
 
 
-    public void SetMaxHealth(int amount)
+    public void SetMaxHealth()
     {
-        maxHealth = amount;
-        health = amount;
+        if (gameObject.tag == "EnemyBase")
+        {
+            maxHealth = int.Parse(PretendData.Instance.Data[StateManager.Instance.SelectedLevel].BSDataAmount);
+            health = maxHealth;
+        }
+        else if (gameObject.tag == "PlayerBase")
+        {
+            maxHealth = 10 + StateManager.Instance.YearlyExpense;
+            health = maxHealth;
+        }
     }
-
 }

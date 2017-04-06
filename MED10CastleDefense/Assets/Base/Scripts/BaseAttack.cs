@@ -16,8 +16,8 @@ public class BaseAttack : MonoBehaviour {
     private GameObject _target;
     private Coroutine _attackCoroutine;
     private Transform _gun;
-
-
+    public GameObject fireParticleEffect;
+    private ParticleSystem _particle;
 
     private void Start()
     {
@@ -31,6 +31,7 @@ public class BaseAttack : MonoBehaviour {
         EventManager.StartListening("LevelLost", StopAttacking);
 
         _gun = transform.GetChild(0);
+        _particle = _gun.GetChild(0).GetComponent<ParticleSystem>();
         _availableTargets.Add(GameObject.FindGameObjectWithTag("PlayerBase"));
     }
 
@@ -113,6 +114,10 @@ public class BaseAttack : MonoBehaviour {
             GameObject projectile = Instantiate(projectilePrefab, _gun.position, Quaternion.identity);
 
             _gun.rotation = Quaternion.LookRotation(Vector3.forward, _target.transform.position - _gun.transform.position);
+
+            if (_particle != null)
+                _particle.Play();
+                //Instantiate(fireParticleEffect, _gun.transform.position + _gun.up, _gun.rotation);
 
             projectile.GetComponent<Projectile>().Init(this, _target.transform);
             

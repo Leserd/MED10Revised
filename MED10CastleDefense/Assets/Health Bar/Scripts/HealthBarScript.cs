@@ -11,6 +11,7 @@ public class HealthBarScript : MonoBehaviour
     private Image barBackground;    //The background of the health bar
     private int _health, _maxHealth;
     private RectTransform _transform;
+    private bool _ready = false;    //has target been set?
 
     private void Awake()
     {
@@ -33,15 +34,18 @@ public class HealthBarScript : MonoBehaviour
 
     private void Update()
     {
-        if (_target)
+        if (_ready)
         {
-            _transform.position = Camera.main.WorldToScreenPoint(_target.transform.position);
-            int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 + 10;
-            _transform.position = new Vector2(_transform.position.x, _transform.position.y + yOffset);
-        }
-        else
-        {
-            Destroy(gameObject);
+            if (_target)
+            {
+                _transform.position = Camera.main.WorldToScreenPoint(_target.transform.position);
+                int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 + 10;
+                _transform.position = new Vector2(_transform.position.x, _transform.position.y + yOffset);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -66,7 +70,7 @@ public class HealthBarScript : MonoBehaviour
         int barWidth = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.width * _target.transform.localScale.x);
         barForeground.rectTransform.sizeDelta = new Vector2(barWidth, barForeground.rectTransform.sizeDelta.y);
         barBackground.rectTransform.sizeDelta = new Vector2(barWidth, barBackground.rectTransform.sizeDelta.y);
-
+        _ready = true;
     }
 
 
@@ -89,7 +93,9 @@ public class HealthBarScript : MonoBehaviour
                 }
 
                 _health -= amount;
+                
                 float fill = (float)_health / (float)_maxHealth;
+                //print("HP: " + _health + ", dmg: " + amount + ", fill: " + fill);
                 barForeground.fillAmount = fill;
             }
         }
