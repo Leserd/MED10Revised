@@ -28,6 +28,9 @@ public class HealthBarScript : MonoBehaviour
         _transform = GetComponent<RectTransform>();
 
         _transform.SetParent(GameObject.Find("HealthBarCanvas").transform);
+
+        EventManager.StartListening("LevelComplete", RemoveHealthBar);
+        EventManager.StartListening("LevelLost", RemoveHealthBar);
     }
 
 
@@ -102,10 +105,16 @@ public class HealthBarScript : MonoBehaviour
     }
 
 
+    public void RemoveHealthBar()
+    {
+        Destroy(this);
+    }
+
 
     private void OnDestroy()
     {
         EventManager.Damage -= UpdateHealth;
-
+        EventManager.StopListening("LevelComplete", RemoveHealthBar);
+        EventManager.StopListening("LevelLost", RemoveHealthBar);
     }
 }
