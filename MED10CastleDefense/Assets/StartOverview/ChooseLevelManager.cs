@@ -29,8 +29,10 @@ public class ChooseLevelManager : MonoBehaviour {
         {
             SelectedLevelIcon.transform.parent = _levels[StateManager.Instance.SelectedLevel-1].transform;
             SelectedLevelIcon.transform.localPosition = Vector3.zero;
+            SelectedLevelIcon.transform.localPosition = new Vector3(0f, 100f, 0f);
+
         }
-        
+
     }
 
     private void ButtonPress(string NameButton)
@@ -44,7 +46,7 @@ public class ChooseLevelManager : MonoBehaviour {
         instance.SelectedLevel = number;
         EventManager.TriggerEvent("SelectedLevel");
         SelectedLevelIcon.transform.parent = _levels[number - 1].transform;
-        SelectedLevelIcon.transform.localPosition = Vector3.zero;
+        SelectedLevelIcon.transform.localPosition = new Vector3(0f,100f,0f);
 
         
     }
@@ -59,7 +61,12 @@ public class ChooseLevelManager : MonoBehaviour {
         for (int i = 0; i < MaxLevel; i++)
         {
             _levels[i].interactable = true;
-            var bill = Instantiate(BillObject, _levels[i].transform, false).GetComponentsInChildren<Text>();
+            var billImage = Instantiate(BillObject, _levels[i].transform, false);
+            if (i %2 ==1)
+            {
+                billImage.transform.localPosition += new Vector3(0f, 100f, 0f);
+            }
+            var bill = billImage.GetComponentsInChildren<Text>();
             bill[0].text = PretendData.Instance.Data[i].BSDataName;
             bill[1].text = PretendData.Instance.Data[i].BSDataAmount;
         }
