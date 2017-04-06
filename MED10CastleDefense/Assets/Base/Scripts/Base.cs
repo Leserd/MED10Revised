@@ -13,6 +13,9 @@ public class Base : MonoBehaviour {
 
     private void Awake()
     {
+        EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
+
+
         _spriteRenderer = GetComponent<SpriteRenderer>();
         EventManager.Damage += TakeDamage;
     }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
+public class Unit : MonoBehaviour
+{
 
     public int health = 10;
     public int maxHealth = 10;
@@ -21,7 +22,9 @@ public class Unit : MonoBehaviour {
         _collider = GetComponent<BoxCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-       // BaseAttack enemy = GameObject.Find("EnemyBase").GetComponent<BaseAttack>();
+
+        EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
+
 
         EventManager.Damage += TakeDamage;
 
@@ -52,7 +55,7 @@ public class Unit : MonoBehaviour {
                 cooldown = CoinStats.Cooldown;
                 speed = CoinStats.Speed;
 
-                if(CoinStats.explosion == null)
+                if (CoinStats.explosion == null)
                     CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
                 _explosion = CoinStats.explosion;
 
@@ -113,10 +116,79 @@ public class Unit : MonoBehaviour {
     }
 
 
+    public void AssignStatValues(string type)
+    {
+        string imagePath = _resourceImagePath + type;
+
+        switch (type)
+        {
+            case "Coin":
+                maxHealth = CoinStats.Health;
+                damage = CoinStats.Damage;
+                cooldown = CoinStats.Cooldown;
+                speed = CoinStats.Speed;
+
+                if (CoinStats.explosion == null)
+                    CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
+                _explosion = CoinStats.explosion;
+
+                break;
+            case "Pig":
+                maxHealth = PiggyStats.Health;
+                damage = PiggyStats.Damage;
+                cooldown = PiggyStats.Cooldown;
+                speed = PiggyStats.Speed;
+
+                if (PiggyStats.explosion == null)
+                    PiggyStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
+                _explosion = PiggyStats.explosion;
+
+                break;
+            case "Safe":
+                maxHealth = SafeStats.Health;
+                damage = SafeStats.Damage;
+                cooldown = SafeStats.Cooldown;
+                speed = SafeStats.Speed;
+
+                if (SafeStats.explosion == null)
+                    SafeStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
+                _explosion = SafeStats.explosion;
+
+                break;
+            default:
+                maxHealth = CoinStats.Health;
+                damage = CoinStats.Damage;
+                cooldown = CoinStats.Cooldown;
+                speed = CoinStats.Speed;
+
+                if (CoinStats.explosion == null)
+                    CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
+                _explosion = CoinStats.explosion;
+
+                Debug.LogWarning("UnitType returned default for " + transform.name);
+                break;
+        }
+
+        health = maxHealth;
+        transform.name = type;
+
+        if (Resources.Load<Sprite>(imagePath) != null)
+        {
+            sprite.sprite = Resources.Load<Sprite>(imagePath);
+        }
+        else
+        {
+            Debug.LogWarning(transform.name + " could not find image at path: " + imagePath);
+            sprite.sprite = Resources.Load<Sprite>(_resourceImagePath + "Coin");
+        }
+
+    }
+
+
 
     public void TakeDamage(GameObject dealer, List<GameObject> receiver)
     {
-        if(receiver != null  && gameObject != null)
+        if (receiver != null && gameObject != null)
         {
             if (receiver.Contains(gameObject))
             {
@@ -132,7 +204,7 @@ public class Unit : MonoBehaviour {
                 }
             }
         }
-       
+
     }
 
 
@@ -153,7 +225,7 @@ public class Unit : MonoBehaviour {
         //TODO: Play animation
 
         //Spawn explosion
-        Instantiate(_explosion, transform.position, Quaternion.identity);
+        Instantiate(_explosion, transform.position, Quaternion.Euler(-90, 0, 0));
 
         EventManager.Instance.UnitDead(gameObject);
 
@@ -178,14 +250,14 @@ public class Unit : MonoBehaviour {
 
         //Destroy gameObject after a bit
         sprite.enabled = false;
-        Death();    
+        Death();
     }
 
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "EnemyBase")
+        if (collision.tag == "EnemyBase")
         {
             Attack(collision.gameObject);
         }
