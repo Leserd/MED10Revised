@@ -16,12 +16,15 @@ public class Unit : MonoBehaviour
     private Rigidbody2D _rb;
     private string _resourceImagePath = "Sprites/";
     private GameObject _explosion;
+    private Animator _animator;
+    public RuntimeAnimatorController[] _controllers;
 
     private void Awake()
     {
         _collider = GetComponent<BoxCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
 
         EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
 
@@ -54,6 +57,7 @@ public class Unit : MonoBehaviour
                 damage = CoinStats.Damage;
                 cooldown = CoinStats.Cooldown;
                 speed = CoinStats.Speed;
+                _animator.runtimeAnimatorController = _controllers[1];
 
                 if (CoinStats.explosion == null)
                     CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
@@ -66,6 +70,7 @@ public class Unit : MonoBehaviour
                 damage = PigStats.Damage;
                 cooldown = PigStats.Cooldown;
                 speed = PigStats.Speed;
+                _animator.runtimeAnimatorController = _controllers[1];
 
                 if (PigStats.explosion == null)
                     PigStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
@@ -78,6 +83,7 @@ public class Unit : MonoBehaviour
                 damage = SafeStats.Damage;
                 cooldown = SafeStats.Cooldown;
                 speed = SafeStats.Speed;
+                _animator.runtimeAnimatorController = _controllers[2];
 
                 if (SafeStats.explosion == null)
                     SafeStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");

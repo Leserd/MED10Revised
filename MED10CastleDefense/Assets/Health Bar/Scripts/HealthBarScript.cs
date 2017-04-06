@@ -107,7 +107,7 @@ public class HealthBarScript : MonoBehaviour
 
     public void RemoveHealthBar()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 
 
