@@ -10,7 +10,9 @@ public class SpawnButton : MonoBehaviour {
     private Button _btn;
     private Coroutine _cdCoroutine;
 
-	void Awake () {
+
+
+	void Start () {
         _btn = GetComponent<Button>();
 
         _btn.onClick.AddListener(() => SpawnPress(transform.name));
@@ -20,6 +22,9 @@ public class SpawnButton : MonoBehaviour {
 
         if (cooldownImg == null)
             cooldownImg = GetComponentInChildren<Image>();
+
+        EventManager.StartListening("LevelComplete", DisableButton);
+        EventManager.StartListening("LevelLost", DisableButton);
 	}
 
 
@@ -94,4 +99,13 @@ public class SpawnButton : MonoBehaviour {
         _cdCoroutine = null;
 
     }
+
+
+
+    public void DisableButton()
+    {
+        _btn.interactable = false;
+        cooldownImg.fillAmount = 0;
+    }
+
 }

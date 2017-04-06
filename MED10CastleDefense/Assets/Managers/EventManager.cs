@@ -17,6 +17,14 @@ public class EventManager : MonoBehaviour {
     public static event D_TwoParam Damage;
 
 
+    private void OnLevelWasLoaded(int level)
+    {
+        SpawnUnit = null;
+        UnitDies = null;
+        Damage = null;
+    }
+
+
 
     public void DealDamage(GameObject dealer, List<GameObject> receivers)
     {

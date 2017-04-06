@@ -15,7 +15,7 @@ public class SceneManagement : MonoBehaviour {
 
     void LevelStart()
     {
-        SceneManager.LoadScene("LevelScene");
+        SceneManager.LoadScene("Level");
     }
 
     void RestartLevel()

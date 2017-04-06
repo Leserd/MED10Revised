@@ -11,7 +11,7 @@ public class Base : MonoBehaviour {
 
 
 
-    private void Awake()
+    private void Start()
     {
         EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
 
@@ -73,20 +73,26 @@ public class Base : MonoBehaviour {
         if(gameObject.tag == "EnemyBase")
         {
             EventManager.TriggerEvent("LevelComplete");
+            GetComponent<BaseAttack>().enabled = false;
+            transform.GetChild(0).gameObject.SetActive(false);
+            //TODO: Instantiate white flag and play surrender animation
+            transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
         }
         else if(gameObject.tag == "PlayerBase")
         {
             EventManager.TriggerEvent("LevelLost");
-
+            //TODO: King must fall down into the ruins of his castle
         }
 
         EventManager.Damage -= TakeDamage;
 
         //Destroy castle (TODO: Instead instantiate a fire on the base to show it is destroyed, while Victory screen is displayed)
         //Destroy(gameObject);
-
-
     }
+
+
+
+
 
 
 
