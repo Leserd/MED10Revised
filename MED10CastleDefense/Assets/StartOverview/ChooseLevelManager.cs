@@ -52,10 +52,11 @@ public class ChooseLevelManager : MonoBehaviour {
 
     private void InteractableLevels()
     {
-        var MaxLevel = StateManager.Instance.MaxLevel;
-        if (StateManager.Instance.MaxLevel >= _levels.Length) StateManager.Instance.MaxLevel = _levels.Length;
+        var MaxLevel = StateManager.Instance.LevelsAvailable;
 
-        for (int i = 0; i < StateManager.Instance.MaxLevel; i++)
+        if (MaxLevel >= _levels.Length) MaxLevel = _levels.Length;
+
+        for (int i = 0; i < MaxLevel; i++)
         {
             _levels[i].interactable = true;
             var bill = Instantiate(BillObject, _levels[i].transform, false).GetComponentsInChildren<Text>();

@@ -35,7 +35,7 @@ public class LevelCompleteText : MonoBehaviour {
     IEnumerator WaitSecondsLost(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        if (StateManager.Instance.MaxLevel == StateManager.Instance.SelectedLevel)
+        if (StateManager.Instance.LevelsAvailable == StateManager.Instance.SelectedLevel)
         {
             StateManager.Instance.UpgradesAvailable = 1;
 
@@ -53,15 +53,27 @@ public class LevelCompleteText : MonoBehaviour {
     {
         yield return new WaitForSeconds(seconds);
 
-        if (StateManager.Instance.MaxLevel == StateManager.Instance.SelectedLevel)
+        if (StateManager.Instance.LevelsAvailable == StateManager.Instance.SelectedLevel)
         {
-            StateManager.Instance.YearlyExpense = int.Parse(PretendData.Instance.Data[StateManager.Instance.SelectedLevel-1].BSDataAmount);
-            StateManager.Instance.UpgradesAvailable = 2;
-            StateManager.Instance.MaxLevel = 1;
+            if (StateManager.Instance.LevelsAvailable <= PretendData.Instance.Data.Length)
+            {
+                StateManager.Instance.YearlyExpense = int.Parse(PretendData.Instance.Data[StateManager.Instance.SelectedLevel - 1].BSDataAmount);
+                StateManager.Instance.UpgradesAvailable = 2;
+                StateManager.Instance.LevelsAvailable = 1;
+                StateManager.Instance.NewLevelComplete = true;
+            }
+            else
+            {
+                StateManager.Instance.UpgradesAvailable = 1;
+                StateManager.Instance.NewLevelComplete = false;
+
+            }
         }
         else
         {
             StateManager.Instance.UpgradesAvailable = 1;
+            StateManager.Instance.NewLevelComplete = false;
+
 
         }
 
