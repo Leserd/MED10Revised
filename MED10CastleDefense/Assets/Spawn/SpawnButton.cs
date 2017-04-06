@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpawnButton : MonoBehaviour {
+public class SpawnButton : MonoBehaviour
+{
     public GameObject unit;
     public Transform spawnLoc;
     public Image cooldownImg;
     private Button _btn;
     private Coroutine _cdCoroutine;
+    private bool _canSpawn = false;
 
 
-
-	void Start () {
+    void Start()
+    {
         _btn = GetComponent<Button>();
 
         _btn.onClick.AddListener(() => SpawnPress(transform.name));
@@ -23,9 +25,11 @@ public class SpawnButton : MonoBehaviour {
         if (cooldownImg == null)
             cooldownImg = GetComponentInChildren<Image>();
 
+        _canSpawn = true;
+
         EventManager.StartListening("LevelComplete", DisableButton);
         EventManager.StartListening("LevelLost", DisableButton);
-	}
+    }
 
 
     //This is purely to test faster
@@ -51,30 +55,34 @@ public class SpawnButton : MonoBehaviour {
 
     private void SpawnPress(string type)
     {
-        float cdTime = 0;
-        switch (type)
+        if (_canSpawn)
         {
-            case "Coin":
-                cdTime = CoinStats.Cooldown;
-                break;
-            case "Pig":
-                cdTime = PigStats.Cooldown;
-                break;
-            case "Safe":
-                cdTime = SafeStats.Cooldown;
-                break;
-            default:
-                Debug.LogWarning("Something went wrong with spawn");
-                break;
+            float cdTime = 0;
+            switch (type)
+            {
+                case "Coin":
+                    cdTime = CoinStats.Cooldown;
+                    break;
+                case "Pig":
+                    cdTime = PigStats.Cooldown;
+                    break;
+                case "Safe":
+                    cdTime = SafeStats.Cooldown;
+                    break;
+                default:
+                    Debug.LogWarning("Something went wrong with spawn");
+                    break;
+            }
+
+            if (_cdCoroutine != null)
+                StopCoroutine(_cdCoroutine);
+
+            _cdCoroutine = StartCoroutine(StartCooldown(cdTime));
+
+            Unit newUnit = Instantiate(unit, spawnLoc.position, Quaternion.identity).GetComponent<Unit>();
+            newUnit.AssignStatValues(type);
+            EventManager.Instance.Spawn(newUnit.gameObject);
         }
-
-        _cdCoroutine = StartCoroutine(StartCooldown(cdTime));
-
-        Unit newUnit = Instantiate(unit, spawnLoc.position, Quaternion.identity).GetComponent<Unit>();
-        newUnit.AssignStatValues(type);
-        EventManager.Instance.Spawn(newUnit.gameObject);
-
-
     }
 
 
@@ -86,7 +94,7 @@ public class SpawnButton : MonoBehaviour {
         float startTime = Time.time;
         float endTime = startTime + cdTime;
 
-        while(Time.time < endTime)
+        while (Time.time < endTime)
         {
             float elapsedTime = Time.time - startTime;
             cooldownImg.fillAmount = 1 - (elapsedTime / cdTime);
@@ -105,7 +113,11 @@ public class SpawnButton : MonoBehaviour {
     public void DisableButton()
     {
         _btn.interactable = false;
+        if (_cdCoroutine != null)
+            StopCoroutine(_cdCoroutine);
         cooldownImg.fillAmount = 0;
+
+        _canSpawn = false;
     }
 
 }

@@ -110,9 +110,16 @@ public class Base : MonoBehaviour {
             if(spriteIndex != _curSpriteIndex)
             {
                 _curSpriteIndex = spriteIndex;
+                if (spriteIndex < 0)
+                {
+                    spriteIndex = 0;
+                    _curSpriteIndex = 0;
+                }
+
                 if (_particle != null)
                     _particle.Play();
             }
+            
             _spriteRenderer.sprite = baseHealthStates[spriteIndex];
         }
     }

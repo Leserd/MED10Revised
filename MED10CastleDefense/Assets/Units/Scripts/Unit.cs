@@ -68,7 +68,7 @@ public class Unit : MonoBehaviour
                 speed = PigStats.Speed;
 
                 if (PigStats.explosion == null)
-                    PigStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
+                    PigStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
                 _explosion = PigStats.explosion;
 
                 imagePath += "Pig";
