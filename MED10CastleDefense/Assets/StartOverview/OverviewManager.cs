@@ -22,6 +22,6 @@ public class OverviewManager : MonoBehaviour {
     {
         var instance = StateManager.Instance;
         panelTexts[3].text = instance.YearlyExpense.ToString();
-        panelTexts[5].text = (instance.MaxLevel - 1).ToString();
+        panelTexts[5].text = (instance.LevelsAvailable - 1).ToString();
     }
 }

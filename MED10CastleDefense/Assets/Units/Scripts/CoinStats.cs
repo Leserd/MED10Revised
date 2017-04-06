@@ -13,7 +13,7 @@ public static class CoinStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[4] { "", (Damage +1).ToString(), (Speed +0.5f).ToString(), (Cooldown -.1f).ToString() };
+        return new string[3] { "", (Speed +0.5f).ToString(), (Cooldown -.1f).ToString() };
     }
     public static void Upgrade()
     {
@@ -25,6 +25,6 @@ public static class CoinStats {
     }
     public static string[] Values()
     {
-        return new string[4] { Health.ToString(), Damage.ToString(), Speed.ToString(), Cooldown.ToString() };
+        return new string[3] { Health.ToString(), Speed.ToString(), Cooldown.ToString() };
     }
 }

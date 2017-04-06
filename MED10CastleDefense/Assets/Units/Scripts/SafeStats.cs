@@ -13,7 +13,7 @@ public static class SafeStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[4] { "", (Damage +2).ToString(), "", (Cooldown *0.9f).ToString() };
+        return new string[3] { "", "", (Cooldown *0.9f).ToString() };
     }
     public static void Upgrade()
     {
@@ -23,7 +23,7 @@ public static class SafeStats {
     }
     public static string[] Values()
     {
-        return new string[4] { Health.ToString(), Damage.ToString(), Speed.ToString(), Cooldown.ToString() };
+        return new string[3] { Health.ToString(), Speed.ToString(), Cooldown.ToString() };
     }
 
 }

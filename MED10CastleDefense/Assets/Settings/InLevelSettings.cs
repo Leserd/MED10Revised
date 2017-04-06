@@ -15,7 +15,7 @@ public class InLevelSettings : MonoBehaviour {
     {
         // Add function for pause game
 
-        
+        Time.timeScale = 0f;
         Settings.SetActive(true);
         
         foreach (var button in Settings.GetComponentsInChildren<Button>())
@@ -30,18 +30,23 @@ public class InLevelSettings : MonoBehaviour {
         switch (buttonNum)
         {
             case "Resume":
+                Time.timeScale = 1f;
                 //resume game
                 Settings.SetActive(false);
                 break;
             case "Restart":
                 //Restart level
+                Time.timeScale = 1f;
                 EventManager.TriggerEvent("RestartLevel");
                 break;
             case "Quit":
                 //quit level
+                Time.timeScale = 1f;
+                StateManager.Instance.NewLevelComplete = false;
                 EventManager.TriggerEvent("EndLevel");
                 break;
             case "FakeFinish":
+                Time.timeScale = 1f;
                 Debug.Log("Faked a complete lvl");
                 EventManager.TriggerEvent("LevelComplete"); //EventManager.TriggerEvent("LevelLost");
                 break;

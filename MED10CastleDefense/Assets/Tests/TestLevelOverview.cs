@@ -14,13 +14,13 @@ public class TestLevelOverview : MonoBehaviour, IPointerClickHandler {
         if (data.pointerId == -1)
         {
             Debug.Log("left click");
-            instance.MaxLevel =1;
+            instance.LevelsAvailable =1;
             EventManager.TriggerEvent("LevelIncrease");
         }
         if (data.pointerId == -2)
         {
             Debug.Log("Right Click");
-            instance.MaxLevel = -1;
+            instance.LevelsAvailable = -1;
         }
     }
 

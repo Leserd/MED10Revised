@@ -13,7 +13,7 @@ public static class PiggyStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[4] { (Health +3).ToString(), "", (Speed +1).ToString(),"" };
+        return new string[3] { (Health +3).ToString(), (Speed +1).ToString(),"" };
     }
     public static void Upgrade()
     {
@@ -24,7 +24,7 @@ public static class PiggyStats {
     }
     public static string[] Values()
     {
-        return new string[4] { Health.ToString(), Damage.ToString(), Speed.ToString(), Cooldown.ToString() };
+        return new string[3] { Health.ToString(), Speed.ToString(), Cooldown.ToString() };
     }
 
 }

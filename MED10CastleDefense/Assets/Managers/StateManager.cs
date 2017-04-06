@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
 
-    private static int _selectedLevel = 0,
+    private static int _selectedLevel = 1,
                         _maxLevel = 1,
                         _experience = 0,
                         _upgradeAvailable = 0,
                         _yearlyExpence = 0,
                         _playerLevel = 1;
+
+    private static bool _completedNewLevel = false;
 
     private static string _levelName;
 
@@ -32,21 +34,18 @@ public class StateManager : MonoBehaviour {
             return _instance;
         }
     }
-    public int YearlyExpense
+
+    public bool NewLevelComplete
     {
         get
         {
-            return _yearlyExpence;
+            return _completedNewLevel;
         }
         set
         {
-            if (_selectedLevel == _maxLevel)
-            {
-                _yearlyExpence += value;
-            }
+            _completedNewLevel = value;
         }
     }
-
     public string LevelName
     {
         get
@@ -63,7 +62,20 @@ public class StateManager : MonoBehaviour {
             _levelName = value;
         }
     }
-
+    public int YearlyExpense
+    {
+        get
+        {
+            return _yearlyExpence;
+        }
+        set
+        {
+            if (_selectedLevel == _maxLevel)
+            {
+                _yearlyExpence += value;
+            }
+        }
+    }
     public int UpgradesAvailable
     {
         get
@@ -75,7 +87,7 @@ public class StateManager : MonoBehaviour {
             _upgradeAvailable += value;
         }
     }
-    public int MaxLevel
+    public int LevelsAvailable
     {
         ///TODO needs to be able to check for the max value that can be chosen.
         get
@@ -93,7 +105,7 @@ public class StateManager : MonoBehaviour {
                 }
                 if (_maxLevel > PretendData.Instance.Data.Length)
                 {
-                    _maxLevel = PretendData.Instance.Data.Length;
+                   // _maxLevel = PretendData.Instance.Data.Length;
                 }
                 
             }
