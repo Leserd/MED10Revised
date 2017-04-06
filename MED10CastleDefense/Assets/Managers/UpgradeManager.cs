@@ -27,11 +27,11 @@ public class UpgradeManager : MonoBehaviour {
     }
     private void UpdateCoinValues()
     {
-        Text[] values = new Text[4];
-        Array.Copy(_values, 0, values, 0, 4);
-        Text[] UpgradeValues = new Text[4];
-        Array.Copy(_values, 4, UpgradeValues, 0, 4);
-        for (int i = 0; i < 4; i++)
+        Text[] values = new Text[3];
+        Array.Copy(_values, 0, values, 0, 3);
+        Text[] UpgradeValues = new Text[3];
+        Array.Copy(_values, 3, UpgradeValues, 0, 3);
+        for (int i = 0; i < 3; i++)
         {
             values[i].text = CoinStats.Values()[i];
             if (CoinStats.UpgradedValues()[i] != "")
@@ -48,11 +48,11 @@ public class UpgradeManager : MonoBehaviour {
 
     private void UpdatePiggyValues()
     {
-        Text[] values = new Text[4];
-        Array.Copy(_values, 8, values, 0, 4);
-        Text[] UpgradeValues = new Text[4];
-        Array.Copy(_values, 12, UpgradeValues, 0, 4);
-        for (int i = 0; i < 4; i++)
+        Text[] values = new Text[3];
+        Array.Copy(_values, 6, values, 0, 3);
+        Text[] UpgradeValues = new Text[3];
+        Array.Copy(_values, 9, UpgradeValues, 0, 3);
+        for (int i = 0; i < 3; i++)
         {
             values[i].text = PigStats.Values()[i];
             if (PigStats.UpgradedValues()[i] != "")
@@ -69,11 +69,11 @@ public class UpgradeManager : MonoBehaviour {
 
     private void UpdateSafeValues()
     {
-        Text[] values = new Text[4];
-        Array.Copy(_values, 16, values, 0, 4);
-        Text[] UpgradeValues = new Text[4];
-        Array.Copy(_values, 20, UpgradeValues, 0, 4);
-        for (int i = 0; i < 4; i++)
+        Text[] values = new Text[3];
+        Array.Copy(_values, 12, values, 0, 3);
+        Text[] UpgradeValues = new Text[3];
+        Array.Copy(_values, 15, UpgradeValues, 0, 3);
+        for (int i = 0; i < 3; i++)
         {
             values[i].text = SafeStats.Values()[i];
             if (SafeStats.UpgradedValues()[i] != "")
@@ -96,8 +96,18 @@ public class UpgradeManager : MonoBehaviour {
             StateManager.Instance.UpgradesAvailable = -1;
             EventManager.TriggerEvent("Upgrade");
             UpdateCoinValues();
+            if (StateManager.Instance.UpgradesAvailable == 0) NoUpgrades();
+
         }
         return;
+    }
+
+    void NoUpgrades()
+    {
+        foreach (var button in _buttons)
+        {
+            button.interactable = false;
+        }
     }
     private void OnUpgradePiggy()
     {
@@ -107,6 +117,8 @@ public class UpgradeManager : MonoBehaviour {
             StateManager.Instance.UpgradesAvailable = -1;
             EventManager.TriggerEvent("Upgrade");
             UpdatePiggyValues();
+            if (StateManager.Instance.UpgradesAvailable == 0) NoUpgrades();
+
         }
         return;
     }
@@ -118,6 +130,8 @@ public class UpgradeManager : MonoBehaviour {
             StateManager.Instance.UpgradesAvailable = -1;
             EventManager.TriggerEvent("Upgrade");
             UpdateSafeValues();
+            if (StateManager.Instance.UpgradesAvailable == 0) NoUpgrades();
+
         }
         return;
     }
