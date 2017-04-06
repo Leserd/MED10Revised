@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LevelCompleteText : MonoBehaviour {
     [SerializeField]
     private GameObject FinishMenu;
+    private float _timeSinceStart, _timeEnded;
 
 
     private void Awake()
@@ -13,7 +14,14 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StartListening("LevelComplete", LevelComplete);
         EventManager.StartListening("Upgrade", Upgraded);
         EventManager.StartListening("LevelLost", LevelLost);
+        EventManager.SpawnUnit += StartTime;
     }
+
+    private void StartTime(GameObject useless)
+    {
+        _timeSinceStart = Time.fixedTime;
+    }
+
 
     private void OnDestroy()
     {
@@ -30,6 +38,8 @@ public class LevelCompleteText : MonoBehaviour {
     }
     private void LevelLost()
     {
+        _timeEnded = Time.fixedTime;
+
         StartCoroutine(WaitSecondsLost(2f));
     }
     IEnumerator WaitSecondsLost(float seconds)
@@ -45,6 +55,8 @@ public class LevelCompleteText : MonoBehaviour {
     }
     private void LevelComplete()
     {
+        _timeEnded = Time.fixedTime;
+
         StartCoroutine(WaitSeconds(2f));
 
     }
@@ -87,6 +99,7 @@ public class LevelCompleteText : MonoBehaviour {
         // exp, level, upgrades 
         var instance = StateManager.Instance;
         textFields[0].text = "Upgrades available: " + instance.UpgradesAvailable.ToString();
+        textFields[1].text = "Time taken: " + (_timeEnded - _timeSinceStart);
         GetComponentsInChildren<Button>()[3].onClick.AddListener(() => EventManager.TriggerEvent("RestartLevel"));
 
         GetComponentsInChildren<Button>()[4].onClick.AddListener(() => EventManager.TriggerEvent("EndLevel"));
