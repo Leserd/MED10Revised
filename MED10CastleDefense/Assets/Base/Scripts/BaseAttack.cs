@@ -44,7 +44,7 @@ public class BaseAttack : MonoBehaviour {
 
     public void UpdateStats()
     {
-        int lvl = StateManager.Instance.SelectedLevel;
+        int lvl = StateManager.Instance.SelectedLevel - 1;
         damage += lvl * upgDamage;
         attackSpeed -= lvl * upgAttackSpeed;
     }
