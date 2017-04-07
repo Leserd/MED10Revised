@@ -83,9 +83,11 @@ public class HealthBarScript : MonoBehaviour
         barForeground.rectTransform.sizeDelta = new Vector2(barWidth, barForeground.rectTransform.sizeDelta.y);
         barBackground.rectTransform.sizeDelta = new Vector2(barWidth, barBackground.rectTransform.sizeDelta.y);
         _ready = true;
+
         PlaceHealthBar();
+
         barForeground.enabled = true;
-        barForeground.enabled = true;
+        barBackground.enabled = true;
     }
 
 

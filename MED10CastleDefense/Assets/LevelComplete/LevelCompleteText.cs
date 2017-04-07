@@ -31,12 +31,12 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StopListening("Upgrade", Upgraded);
         EventManager.StopListening("LevelLost", LevelLost);
         EventManager.SpawnUnit -= StartTime;
-        Debug.Log("OnDestroy LevelCompleteText.cs");
+        //Debug.Log("OnDestroy LevelCompleteText.cs");
     }
 
     private void StarSystem()
     {
-        Debug.Log("Ran StarSystem");
+        //Debug.Log("Ran StarSystem");
         var image = GetComponentsInChildren<Image>()[6];
         var timeDiff = _timeEnded - _timeSinceStart;
         if (timeDiff <= 30f)

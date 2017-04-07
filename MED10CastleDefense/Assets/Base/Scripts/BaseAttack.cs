@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class BaseAttack : MonoBehaviour {
 
-    public int damage = 2;
-    public float attackSpeed = 1f;
+    public int damage = 1;
+    public int upgDamage = 1;
+    public float attackSpeed = 2f;
+    public float upgAttackSpeed = 0.15f;
     public float splashRadius = 1f;
     public float attackRange;
-    public float projectileSpeed = 8f;
+    public float projectileSpeed = 12f;
     public GameObject projectilePrefab;
     public E_AttackType attackType;
-    public bool canAttack = false;  //
+    public bool canAttack = false;  
     private List<GameObject> _availableTargets = new List<GameObject>();
     private GameObject _target;
     private Coroutine _attackCoroutine;
@@ -29,10 +31,22 @@ public class BaseAttack : MonoBehaviour {
         EventManager.UnitDies += RemoveTarget;
         EventManager.StartListening("LevelComplete", StopAttacking);
         EventManager.StartListening("LevelLost", StopAttacking);
+        EventManager.StartListening("SpawnFirstUnit", StartAttacking);
 
         _gun = transform.GetChild(0);
         _particle = _gun.GetChild(0).GetComponent<ParticleSystem>();
         _availableTargets.Add(GameObject.FindGameObjectWithTag("PlayerBase"));
+
+        UpdateStats();
+    }
+
+
+
+    public void UpdateStats()
+    {
+        int lvl = StateManager.Instance.SelectedLevel;
+        damage += lvl * upgDamage;
+        attackSpeed -= lvl * upgAttackSpeed;
     }
 
 
