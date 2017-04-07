@@ -42,7 +42,7 @@ public class HealthBarScript : MonoBehaviour
             if (_target)
             {
                 _transform.position = Camera.main.WorldToScreenPoint(_target.transform.position);
-                int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 + 10;
+                int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 + 30;
                 _transform.position = new Vector2(_transform.position.x, _transform.position.y + yOffset);
             }
             else

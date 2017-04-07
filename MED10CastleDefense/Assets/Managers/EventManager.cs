@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class EventManager : MonoBehaviour {
 
@@ -17,7 +18,8 @@ public class EventManager : MonoBehaviour {
     public static event D_TwoParam Damage;
 
 
-    private void OnLevelWasLoaded(int level)
+    //Called from SceneManagement when scene is loaded or restarted
+    public static void ResetEvents()
     {
         SpawnUnit = null;
         UnitDies = null;
