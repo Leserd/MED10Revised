@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    private float _damage;
     private float _splashRadius;
     private E_AttackType _type;
     private BaseAttack _owner;
     private Transform _target;
     private Coroutine _moveCoroutine;
     private float _projectileSpeed = 8f;
+    public ParticleSystem particle;         //on impact
 
     public void Init(BaseAttack owner, Transform target)
     {
         _owner = owner;
         _target = target;
-        _damage = owner.damage;
         _type = owner.attackType;
         _splashRadius = owner.splashRadius;
         _projectileSpeed = owner.projectileSpeed;
@@ -67,13 +66,9 @@ public class Projectile : MonoBehaviour {
                 }
             }
 
-            //foreach(GameObject target in targets)
-            //{
-            //    //TODO: Send damager dealer and damage taker when triggering event
-            //    //EventManager.TriggerEvent("DealDamage");
-            //    //print(transform.name + " hit: " + target.name + " for " + _damage + " damage.");
-
-            //}
+            if (particle)
+                Instantiate(particle, transform.position, particle.transform.rotation).Play();
+            
             EventManager.Instance.DealDamage(_owner.gameObject, targets);
 
             Destroy(gameObject);

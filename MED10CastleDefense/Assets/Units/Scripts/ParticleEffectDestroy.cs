@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionDestroy : MonoBehaviour {
+public class ParticleEffectDestroy : MonoBehaviour {
 
     private void Start()
     {

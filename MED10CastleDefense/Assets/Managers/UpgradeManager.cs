@@ -29,7 +29,7 @@ public class UpgradeManager : MonoBehaviour {
 
                 break;
             case 2:
-                if (PiggyStats.UpgradeLevel ==1)
+                if (PigStats.UpgradeLevel ==1)
                 {
                     _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
                     _buttons[1].onClick.AddListener(() => _buttons[1].image.color = Color.white);
@@ -94,10 +94,10 @@ public class UpgradeManager : MonoBehaviour {
         Array.Copy(_values, 9, UpgradeValues, 0, 3);
         for (int i = 0; i < 3; i++)
         {
-            values[i].text = FormatValues(PiggyStats.Values()[i]);
-            if (PiggyStats.UpgradedValues()[i] != "")
+            values[i].text = FormatValues(PigStats.Values()[i]);
+            if (PigStats.UpgradedValues()[i] != "")
             {
-                UpgradeValues[i].text = PiggyStats.UpgradedValues()[i];
+                UpgradeValues[i].text = PigStats.UpgradedValues()[i];
 
             }
             else
@@ -153,7 +153,7 @@ public class UpgradeManager : MonoBehaviour {
     {
         if (StateManager.Instance.UpgradesAvailable != 0)
         {
-            PiggyStats.Upgrade();
+            PigStats.Upgrade();
             StateManager.Instance.UpgradesAvailable = -1;
             EventManager.TriggerEvent("Upgrade");
             UpdatePiggyValues();

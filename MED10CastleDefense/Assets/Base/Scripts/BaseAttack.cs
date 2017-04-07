@@ -16,10 +16,10 @@ public class BaseAttack : MonoBehaviour {
     private GameObject _target;
     private Coroutine _attackCoroutine;
     private Transform _gun;
+    public GameObject fireParticleEffect;
+    private ParticleSystem _particle;
 
-
-
-    private void OnEnable()
+    private void Start()
     {
         EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
 
@@ -27,8 +27,11 @@ public class BaseAttack : MonoBehaviour {
         //EventManager.instance.StartListening("SpawnUnit", AddTarget);
         EventManager.SpawnUnit += AddTarget;
         EventManager.UnitDies += RemoveTarget;
+        EventManager.StartListening("LevelComplete", StopAttacking);
+        EventManager.StartListening("LevelLost", StopAttacking);
 
         _gun = transform.GetChild(0);
+        _particle = _gun.GetChild(0).GetComponent<ParticleSystem>();
         _availableTargets.Add(GameObject.FindGameObjectWithTag("PlayerBase"));
     }
 
@@ -39,6 +42,13 @@ public class BaseAttack : MonoBehaviour {
         //EventManager.instance.StartListening("SpawnUnit", AddTarget);
         EventManager.SpawnUnit -= AddTarget;
         EventManager.UnitDies -= RemoveTarget;
+    }
+
+
+
+    private void OnDestroy()
+    {
+        StopAttacking();
     }
 
 
@@ -61,12 +71,7 @@ public class BaseAttack : MonoBehaviour {
         
         if(_availableTargets.Count <= 0)
         {
-            if (_attackCoroutine != null)
-            {
-                StopCoroutine(_attackCoroutine);
-                
-            }
-            canAttack = false;
+            StopAttacking();
         }
         
     }
@@ -79,6 +84,18 @@ public class BaseAttack : MonoBehaviour {
         {
             _attackCoroutine = StartCoroutine(Attack());
         }
+    }
+
+
+
+    public void StopAttacking()
+    {
+        if (_attackCoroutine != null)
+        {
+            StopCoroutine(_attackCoroutine);
+        }
+        _attackCoroutine = null;
+        canAttack = false;
     }
 
 
@@ -97,6 +114,10 @@ public class BaseAttack : MonoBehaviour {
             GameObject projectile = Instantiate(projectilePrefab, _gun.position, Quaternion.identity);
 
             _gun.rotation = Quaternion.LookRotation(Vector3.forward, _target.transform.position - _gun.transform.position);
+
+            if (_particle != null)
+                _particle.Play();
+                //Instantiate(fireParticleEffect, _gun.transform.position + _gun.up, _gun.rotation);
 
             projectile.GetComponent<Projectile>().Init(this, _target.transform);
             

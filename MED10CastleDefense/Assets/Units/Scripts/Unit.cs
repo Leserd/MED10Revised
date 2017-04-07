@@ -12,16 +12,17 @@ public class Unit : MonoBehaviour
     public float cooldown = 3f;
     public SpriteRenderer sprite;
     public E_UnitTypes unitType;
-    private BoxCollider2D _collider;
     private Rigidbody2D _rb;
     private string _resourceImagePath = "Sprites/";
     private GameObject _explosion;
+    private Animator _animator;
+    public RuntimeAnimatorController[] _controllers;
 
     private void Awake()
     {
-        _collider = GetComponent<BoxCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
 
         EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
 
@@ -42,80 +43,6 @@ public class Unit : MonoBehaviour
 
 
 
-    public void AssignStatValues(E_UnitTypes type)
-    {
-        unitType = type;
-        string imagePath = _resourceImagePath;
-
-        switch (type)
-        {
-            case E_UnitTypes.COIN:
-                maxHealth = CoinStats.Health;
-                damage = CoinStats.Damage;
-                cooldown = CoinStats.Cooldown;
-                speed = CoinStats.Speed;
-
-                if (CoinStats.explosion == null)
-                    CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
-                _explosion = CoinStats.explosion;
-
-                imagePath += "Coin";
-                break;
-            case E_UnitTypes.PIGGY:
-                maxHealth = PiggyStats.Health;
-                damage = PiggyStats.Damage;
-                cooldown = PiggyStats.Cooldown;
-                speed = PiggyStats.Speed;
-
-                if (PiggyStats.explosion == null)
-                    PiggyStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
-                _explosion = PiggyStats.explosion;
-
-                imagePath += "Piggy";
-                break;
-            case E_UnitTypes.SAFE:
-                maxHealth = SafeStats.Health;
-                damage = SafeStats.Damage;
-                cooldown = SafeStats.Cooldown;
-                speed = SafeStats.Speed;
-
-                if (SafeStats.explosion == null)
-                    SafeStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
-                _explosion = SafeStats.explosion;
-
-                imagePath += "Safe";
-                break;
-            default:
-                maxHealth = CoinStats.Health;
-                damage = CoinStats.Damage;
-                cooldown = CoinStats.Cooldown;
-                speed = CoinStats.Speed;
-
-                if (CoinStats.explosion == null)
-                    CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
-                _explosion = CoinStats.explosion;
-
-                imagePath += "Coin";
-                Debug.LogWarning("UnitType returned default for " + transform.name);
-                break;
-        }
-
-        health = maxHealth;
-        transform.name = type.ToString();
-
-        if (Resources.Load<Sprite>(imagePath) != null)
-        {
-            sprite.sprite = Resources.Load<Sprite>(imagePath);
-        }
-        else
-        {
-            Debug.LogWarning(transform.name + " could not find image at path: " + imagePath);
-            sprite.sprite = Resources.Load<Sprite>(_resourceImagePath + "Default");
-        }
-
-    }
-
-
     public void AssignStatValues(string type)
     {
         string imagePath = _resourceImagePath + type;
@@ -127,6 +54,7 @@ public class Unit : MonoBehaviour
                 damage = CoinStats.Damage;
                 cooldown = CoinStats.Cooldown;
                 speed = CoinStats.Speed;
+                _animator.runtimeAnimatorController = _controllers[0];
 
                 if (CoinStats.explosion == null)
                     CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
@@ -134,14 +62,15 @@ public class Unit : MonoBehaviour
 
                 break;
             case "Pig":
-                maxHealth = PiggyStats.Health;
-                damage = PiggyStats.Damage;
-                cooldown = PiggyStats.Cooldown;
-                speed = PiggyStats.Speed;
+                maxHealth = PigStats.Health;
+                damage = PigStats.Damage;
+                cooldown = PigStats.Cooldown;
+                speed = PigStats.Speed;
+                _animator.runtimeAnimatorController = _controllers[1];
 
-                if (PiggyStats.explosion == null)
-                    PiggyStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
-                _explosion = PiggyStats.explosion;
+                if (PigStats.explosion == null)
+                    PigStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
+                _explosion = PigStats.explosion;
 
                 break;
             case "Safe":
@@ -149,6 +78,7 @@ public class Unit : MonoBehaviour
                 damage = SafeStats.Damage;
                 cooldown = SafeStats.Cooldown;
                 speed = SafeStats.Speed;
+                _animator.runtimeAnimatorController = _controllers[2];
 
                 if (SafeStats.explosion == null)
                     SafeStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionBills");
@@ -160,6 +90,7 @@ public class Unit : MonoBehaviour
                 damage = CoinStats.Damage;
                 cooldown = CoinStats.Cooldown;
                 speed = CoinStats.Speed;
+                _animator.runtimeAnimatorController = _controllers[0];
 
                 if (CoinStats.explosion == null)
                     CoinStats.explosion = Resources.Load<GameObject>("Prefabs/ExplosionCoins");
@@ -262,11 +193,14 @@ public class Unit : MonoBehaviour
             Attack(collision.gameObject);
         }
     }
+
+
+
 }
 
 public enum E_UnitTypes
 {
     COIN,
-    PIGGY,
+    PIG,
     SAFE
 }

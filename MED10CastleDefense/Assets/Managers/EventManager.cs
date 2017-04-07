@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class EventManager : MonoBehaviour {
 
@@ -17,11 +18,21 @@ public class EventManager : MonoBehaviour {
     public static event D_TwoParam Damage;
 
 
+    //Called from SceneManagement when scene is loaded or restarted
+    public static void ResetEvents()
+    {
+        SpawnUnit = null;
+        UnitDies = null;
+        Damage = null;
+    }
+
+
 
     public void DealDamage(GameObject dealer, List<GameObject> receivers)
     {
         if(Damage != null)
         {
+            //print("DealDamage called on " + dealer.name);
             Damage(dealer, receivers);
         }
     }

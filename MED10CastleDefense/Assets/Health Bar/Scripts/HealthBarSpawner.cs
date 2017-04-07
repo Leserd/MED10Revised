@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBarSpawner : MonoBehaviour {
-
-    public static GameObject healthBarPrefab;
+    public GameObject healthBarPrefab;
+    private HealthBarScript bar;
 
     private void Start()
     {
@@ -12,8 +12,15 @@ public class HealthBarSpawner : MonoBehaviour {
         {
             healthBarPrefab = Resources.Load<GameObject>("Prefabs/HealthBar");
         }
+        
+        StartCoroutine(SetHealth());
 
-        HealthBarScript bar = Instantiate(healthBarPrefab).GetComponent<HealthBarScript>();
+    }
+
+    IEnumerator SetHealth()
+    {
+        yield return new WaitForSeconds(0.1f);
+        bar = Instantiate(healthBarPrefab).GetComponent<HealthBarScript>();
         bar.SetTarget(gameObject);
         Destroy(this);
     }

@@ -15,15 +15,17 @@ public class SceneManagement : MonoBehaviour {
 
     void LevelStart()
     {
-        SceneManager.LoadScene("LevelScene");
+        SceneManager.LoadScene("Level");
     }
 
     void RestartLevel()
     {
+        EventManager.ResetEvents();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     void EndLevel()
     {
+        EventManager.ResetEvents();
         SceneManager.LoadScene("LevelOverviewScene");
     }
 
