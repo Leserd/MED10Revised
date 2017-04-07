@@ -18,10 +18,12 @@ public class HealthBarScript : MonoBehaviour
         barBackground = transform.GetChild(0).GetComponent<Image>();
         if (barBackground == null)
             Debug.LogError("No background found for health bar!");
+        barBackground.enabled = false;
 
         barForeground = transform.GetChild(1).GetComponent<Image>();
         if (barForeground == null)
             Debug.LogError("No foreground found for health bar!");
+        barForeground.enabled = false;
 
         EventManager.Damage += UpdateHealth;
 
@@ -41,15 +43,22 @@ public class HealthBarScript : MonoBehaviour
         {
             if (_target)
             {
-                _transform.position = Camera.main.WorldToScreenPoint(_target.transform.position);
-                int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 + 30;
-                _transform.position = new Vector2(_transform.position.x, _transform.position.y + yOffset);
+                PlaceHealthBar();
             }
             else
             {
                 Destroy(gameObject);
             }
         }
+    }
+
+
+
+    private void PlaceHealthBar()
+    {
+        _transform.position = Camera.main.WorldToScreenPoint(_target.transform.position);
+        int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 + 30;
+        _transform.position = new Vector2(_transform.position.x, _transform.position.y + yOffset);
     }
 
 
@@ -74,6 +83,9 @@ public class HealthBarScript : MonoBehaviour
         barForeground.rectTransform.sizeDelta = new Vector2(barWidth, barForeground.rectTransform.sizeDelta.y);
         barBackground.rectTransform.sizeDelta = new Vector2(barWidth, barBackground.rectTransform.sizeDelta.y);
         _ready = true;
+        PlaceHealthBar();
+        barForeground.enabled = true;
+        barForeground.enabled = true;
     }
 
 
