@@ -15,7 +15,9 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StartListening("LevelComplete", LevelComplete);
         EventManager.StartListening("Upgrade", Upgraded);
         EventManager.StartListening("LevelLost", LevelLost);
-        EventManager.SpawnUnit += StartTime;
+        EventManager.SpawnFirstUnit += StartTime;
+
+
         _wonGame = false;
     }
 
@@ -30,7 +32,7 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StopListening("LevelComplete", LevelComplete);
         EventManager.StopListening("Upgrade", Upgraded);
         EventManager.StopListening("LevelLost", LevelLost);
-        EventManager.SpawnUnit -= StartTime;
+        EventManager.SpawnFirstUnit -= StartTime;
         Debug.Log("OnDestroy LevelCompleteText.cs");
     }
 
