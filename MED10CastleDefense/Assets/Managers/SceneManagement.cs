@@ -20,10 +20,12 @@ public class SceneManagement : MonoBehaviour {
 
     void RestartLevel()
     {
+        EventManager.ResetEvents();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     void EndLevel()
     {
+        EventManager.ResetEvents();
         SceneManager.LoadScene("LevelOverviewScene");
     }
 

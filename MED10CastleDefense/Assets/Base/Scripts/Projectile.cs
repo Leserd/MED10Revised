@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    private float _damage;
     private float _splashRadius;
     private E_AttackType _type;
     private BaseAttack _owner;
@@ -17,7 +16,6 @@ public class Projectile : MonoBehaviour {
     {
         _owner = owner;
         _target = target;
-        _damage = owner.damage;
         _type = owner.attackType;
         _splashRadius = owner.splashRadius;
         _projectileSpeed = owner.projectileSpeed;

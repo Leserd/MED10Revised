@@ -130,7 +130,7 @@ public class Base : MonoBehaviour {
     {
         if(gameObject.tag == "EnemyBase")
         {
-            baseName = PretendData.Instance.Data[StateManager.Instance.SelectedLevel].BSDataName;
+            baseName = PretendData.Instance.Data[StateManager.Instance.SelectedLevel - 1].BSDataName;
             transform.name = baseName;
         }
         else if(gameObject.tag == "PlayerBase")
@@ -146,7 +146,7 @@ public class Base : MonoBehaviour {
     {
         if (gameObject.tag == "EnemyBase")
         {
-            maxHealth = int.Parse(PretendData.Instance.Data[StateManager.Instance.SelectedLevel].BSDataAmount);
+            maxHealth = int.Parse(PretendData.Instance.Data[StateManager.Instance.SelectedLevel - 1].BSDataAmount);
             health = maxHealth;
         }
         else if (gameObject.tag == "PlayerBase")
