@@ -29,7 +29,7 @@ public class ChooseLevelManager : MonoBehaviour {
         {
             SelectedLevelIcon.transform.parent = _levels[StateManager.Instance.SelectedLevel-1].transform;
             SelectedLevelIcon.transform.localPosition = Vector3.zero;
-            SelectedLevelIcon.transform.localPosition = new Vector3(0f, 100f, 0f);
+            SelectedLevelIcon.transform.localPosition = new Vector3(5f, 114f, 0f);
 
         }
 
@@ -46,7 +46,7 @@ public class ChooseLevelManager : MonoBehaviour {
         instance.SelectedLevel = number;
         EventManager.TriggerEvent("SelectedLevel");
         SelectedLevelIcon.transform.parent = _levels[number - 1].transform;
-        SelectedLevelIcon.transform.localPosition = new Vector3(0f,100f,0f);
+        SelectedLevelIcon.transform.localPosition = new Vector3(5f,114f,0f);
 
         
     }

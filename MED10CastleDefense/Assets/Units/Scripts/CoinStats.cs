@@ -13,7 +13,7 @@ public static class CoinStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[3] { "", (Speed +0.5f).ToString(), (Cooldown -.1f).ToString() };
+        return new string[3] { "", "+.5","-0.1"  };
     }
     public static void Upgrade()
     {

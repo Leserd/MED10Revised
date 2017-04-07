@@ -17,7 +17,43 @@ public class UpgradeManager : MonoBehaviour {
         _buttons[0].onClick.AddListener(() => OnUpgradeCoin());
         _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
         _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+
+
+        switch (StateManager.Instance.LevelsAvailable)
+        {
+            case 1:
+                _buttons[1].interactable = false;
+                _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
+                _buttons[2].interactable = false;
+                _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+
+                break;
+            case 2:
+                if (PigStats.UpgradeLevel ==1)
+                {
+                    _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
+                    _buttons[1].onClick.AddListener(() => _buttons[1].image.color = Color.white);
+                }
+ 
+                _buttons[2].interactable = false;
+                _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+
+
+                break;
+            case 3:
+                if (SafeStats.UpgradeLevel == 1)
+                {
+                    _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+                    _buttons[2].onClick.AddListener(() => _buttons[2].image.color = Color.white);
+                }
+
+                break;
+
+            default:
+                break;
+        }
     }
+
 
     private void UpdateValues()
     {
@@ -27,23 +63,27 @@ public class UpgradeManager : MonoBehaviour {
     }
     private void UpdateCoinValues()
     {
+
         Text[] values = new Text[3];
         Array.Copy(_values, 0, values, 0, 3);
         Text[] UpgradeValues = new Text[3];
         Array.Copy(_values, 3, UpgradeValues, 0, 3);
         for (int i = 0; i < 3; i++)
         {
-            values[i].text = CoinStats.Values()[i];
+            values[i].text = FormatValues(CoinStats.Values()[i]);
             if (CoinStats.UpgradedValues()[i] != "")
             {
-                UpgradeValues[i].text = "+" + CoinStats.UpgradedValues()[i];
-
+                UpgradeValues[i].text =CoinStats.UpgradedValues()[i] ;
             }
             else
             {
                 UpgradeValues[i].text = "";
             }
         }
+    }
+    private string FormatValues(string upgradeValue)
+    {
+        return float.Parse(upgradeValue).ToString("F1");
     }
 
     private void UpdatePiggyValues()
@@ -54,10 +94,10 @@ public class UpgradeManager : MonoBehaviour {
         Array.Copy(_values, 9, UpgradeValues, 0, 3);
         for (int i = 0; i < 3; i++)
         {
-            values[i].text = PigStats.Values()[i];
+            values[i].text = FormatValues(PigStats.Values()[i]);
             if (PigStats.UpgradedValues()[i] != "")
             {
-                UpgradeValues[i].text = "+" + PigStats.UpgradedValues()[i];
+                UpgradeValues[i].text = PigStats.UpgradedValues()[i];
 
             }
             else
@@ -75,10 +115,10 @@ public class UpgradeManager : MonoBehaviour {
         Array.Copy(_values, 15, UpgradeValues, 0, 3);
         for (int i = 0; i < 3; i++)
         {
-            values[i].text = SafeStats.Values()[i];
+            values[i].text = FormatValues(SafeStats.Values()[i]);
             if (SafeStats.UpgradedValues()[i] != "")
             {
-                UpgradeValues[i].text = "+" + SafeStats.UpgradedValues()[i];
+                UpgradeValues[i].text = SafeStats.UpgradedValues()[i];
 
             }
             else
