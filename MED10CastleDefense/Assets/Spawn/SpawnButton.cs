@@ -11,7 +11,7 @@ public class SpawnButton : MonoBehaviour
     private Button _btn;
     private Coroutine _cdCoroutine;
     private bool _canSpawn = false;
-
+    private static bool _firstSpawn = true;
 
     void Start()
     {
@@ -29,6 +29,7 @@ public class SpawnButton : MonoBehaviour
 
         EventManager.StartListening("LevelComplete", DisableButton);
         EventManager.StartListening("LevelLost", DisableButton);
+
     }
 
 
@@ -76,6 +77,14 @@ public class SpawnButton : MonoBehaviour
 
             if (_cdCoroutine != null)
                 StopCoroutine(_cdCoroutine);
+
+            if (_firstSpawn)
+            {
+                _firstSpawn = false;
+                EventManager.TriggerEvent("SpawnFirstUnit");
+            }
+           
+
 
             _cdCoroutine = StartCoroutine(StartCooldown(cdTime));
 

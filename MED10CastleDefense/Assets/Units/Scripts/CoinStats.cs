@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class CoinStats {
 
-    public static int Health = 1;
-    public static int Damage = 1;
+    public static int Health = 2;
+    public static int Damage = 5;
     public static float Speed = 4;
     public static float Cooldown = 2f;
     public static int UpgradeLevel = 1;
@@ -18,7 +18,7 @@ public static class CoinStats {
     public static void Upgrade()
     {
         //speed cooldown damage
-        Damage += 1; //Mathf.RoundToInt((Damage * (UpgradeLevel*0.5f)));
+        Damage += 0; //Mathf.RoundToInt((Damage * (UpgradeLevel*0.5f)));
         Cooldown -= 0.1f; //Cooldown * UpgradeLevel;
         Speed += 0.5f; //Speed * UpgradeLevel;
         UpgradeLevel++;
