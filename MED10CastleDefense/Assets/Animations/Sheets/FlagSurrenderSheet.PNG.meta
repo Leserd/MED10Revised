@@ -1,0 +1,764 @@
+fileFormatVersion: 2
+guid: 69178d105482aa246afacb8fde822fe9
+timeCreated: 1491485452
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: FlagSurrenderSheet_0
+    21300002: FlagSurrenderSheet_1
+    21300004: FlagSurrenderSheet_2
+    21300006: FlagSurrenderSheet_3
+    21300008: FlagSurrenderSheet_4
+    21300010: FlagSurrenderSheet_5
+    21300012: FlagSurrenderSheet_6
+    21300014: FlagSurrenderSheet_7
+    21300016: FlagSurrenderSheet_8
+    21300018: FlagSurrenderSheet_9
+    21300020: FlagSurrenderSheet_10
+    21300022: FlagSurrenderSheet_11
+    21300024: FlagSurrenderSheet_12
+    21300026: FlagSurrenderSheet_13
+    21300028: FlagSurrenderSheet_14
+    21300030: FlagSurrenderSheet_15
+    21300032: FlagSurrenderSheet_16
+    21300034: FlagSurrenderSheet_17
+    21300036: FlagSurrenderSheet_18
+    21300038: FlagSurrenderSheet_19
+    21300040: FlagSurrenderSheet_20
+    21300042: FlagSurrenderSheet_21
+    21300044: FlagSurrenderSheet_22
+    21300046: FlagSurrenderSheet_23
+    21300048: FlagSurrenderSheet_24
+    21300050: FlagSurrenderSheet_25
+    21300052: FlagSurrenderSheet_26
+    21300054: FlagSurrenderSheet_27
+    21300056: FlagSurrenderSheet_28
+    21300058: FlagSurrenderSheet_29
+    21300060: FlagSurrenderSheet_30
+    21300062: FlagSurrenderSheet_31
+    21300064: FlagSurrenderSheet_32
+    21300066: FlagSurrenderSheet_33
+    21300068: FlagSurrenderSheet_34
+    21300070: FlagSurrenderSheet_35
+    21300072: FlagSurrenderSheet_36
+    21300074: FlagSurrenderSheet_37
+    21300076: FlagSurrenderSheet_38
+    21300078: FlagSurrenderSheet_39
+    21300080: FlagSurrenderSheet_40
+    21300082: FlagSurrenderSheet_41
+    21300084: FlagSurrenderSheet_42
+    21300086: FlagSurrenderSheet_43
+    21300088: FlagSurrenderSheet_44
+    21300090: FlagSurrenderSheet_45
+    21300092: FlagSurrenderSheet_46
+    21300094: FlagSurrenderSheet_47
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 973
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_1
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 973
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_2
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 973
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_3
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 973
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_4
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 973
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_5
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 973
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 834
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_7
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 834
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_8
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 834
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_9
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 834
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_10
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 834
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_11
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 834
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 695
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_13
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 695
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_14
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 695
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_15
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 695
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_16
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 695
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_17
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 695
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 556
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_19
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 556
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_20
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 556
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_21
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 556
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_22
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 556
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_23
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 556
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 417
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_25
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 417
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_26
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 417
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_27
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 417
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_28
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 417
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_29
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 417
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 278
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_31
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 278
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_32
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 278
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_33
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 278
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_34
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 278
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_35
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 278
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 139
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_37
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 139
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_38
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 139
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_39
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 139
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_40
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 139
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_41
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 139
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_43
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 0
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_44
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 0
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_45
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 0
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_46
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 0
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlagSurrenderSheet_47
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 0
+        width: 139
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 9b44df3c8f5052a40aa411601079c379
+timeCreated: 1491556231
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: AR JULIAN
+  fontNames:
+  - AR JULIAN
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

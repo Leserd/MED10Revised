@@ -39,7 +39,7 @@ public class KingAnimation : MonoBehaviour {
         if (receivers.Contains(_ownBase))
         {
             int rand = Random.Range((int)1, (int)3);
-            _animator.Play("TakeDamage" + rand.ToString());
+            _animator.Play(takeDamageState + rand.ToString());
         }
     }
 
@@ -47,21 +47,21 @@ public class KingAnimation : MonoBehaviour {
 
     public void Victory()
     {
-        _animator.Play("Victory");
+        _animator.Play(victoryState);
     }
 
 
 
     public void Loss()
     {
-        _animator.Play("Fall");
+        _animator.Play(fallState);
     }
 
 
 
     public void Idle()
     {
-        _animator.Play("Idle");
+        _animator.Play(idleState);
     }
 
 
@@ -70,20 +70,20 @@ public class KingAnimation : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             int rand = Random.Range((int)1, (int)3);
-            _animator.Play("TakeDamage"+rand.ToString());
+            _animator.Play(takeDamageState + rand.ToString());
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            _animator.Play("Fall");
+            _animator.Play(fallState);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            _animator.Play("Idle");
+            _animator.Play(idleState);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            _animator.Play("Victory");
+            _animator.Play(victoryState);
         }
 
     }
