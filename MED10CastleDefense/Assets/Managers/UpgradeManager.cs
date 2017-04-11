@@ -15,8 +15,6 @@ public class UpgradeManager : MonoBehaviour {
         _buttons = GetComponentsInChildren<Button>();
         UpdateValues();
         _buttons[0].onClick.AddListener(() => OnUpgradeCoin());
-        _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
-        _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
 
 
         switch (StateManager.Instance.LevelsAvailable)
@@ -29,29 +27,47 @@ public class UpgradeManager : MonoBehaviour {
 
                 break;
             case 2:
-                if (PigStats.UpgradeLevel ==1)
-                {
-                    _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
-                    _buttons[1].onClick.AddListener(() => _buttons[1].image.color = Color.white);
-                }
- 
                 _buttons[2].interactable = false;
                 _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+                if (!PigStats.Unlocked)
+                {
+                    _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
+                    _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1]));
+                    PigStats.Unlocked = true;
 
+                    Debug.Log("damn");
+                    break;
+                }
+                _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
 
                 break;
             case 3:
                 if (SafeStats.UpgradeLevel == 1)
                 {
                     _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
-                    _buttons[2].onClick.AddListener(() => _buttons[2].image.color = Color.white);
+                    _buttons[2].onClick.AddListener(() => UpgradeFirstTime(_buttons[2]));
+                    SafeStats.Unlocked = true;
+
+                    break;
                 }
+                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+
 
                 break;
 
             default:
+                _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
+                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+
                 break;
         }
+    }
+    
+    void UpgradeFirstTime(Button button)
+    {
+        button.image.color = Color.white;
+        StateManager.Instance.UpgradesAvailable = -1;
+        EventManager.TriggerEvent("Upgrade");
     }
 
 
