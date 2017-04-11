@@ -151,7 +151,7 @@ public class Base : MonoBehaviour {
         }
         else if (gameObject.tag == "PlayerBase")
         {
-            maxHealth = 10 + StateManager.Instance.YearlyExpense;
+            maxHealth = 10 + 6* StateManager.Instance.SelectedLevel - 1;
             health = maxHealth;
         }
     }

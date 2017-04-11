@@ -5,7 +5,7 @@ using UnityEngine;
 public static class PigStats {
 
     public static int Health = 3;
-    public static int Damage = 10;
+    public static int Damage = 15;
     public static float Speed = 2;
     public static float Cooldown = 10f;
     public static int UpgradeLevel = 1;

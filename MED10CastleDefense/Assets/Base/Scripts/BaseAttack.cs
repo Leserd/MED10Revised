@@ -6,8 +6,10 @@ public class BaseAttack : MonoBehaviour {
 
     public int damage = 1;
     public int upgDamage = 1;
+    public int maxDamage = 4;
     public float attackSpeed = 2f;
     public float upgAttackSpeed = 0.15f;
+    public float maxAttackSpeed = 0.65f;
     public float splashRadius = 1f;
     public float attackRange;
     public float projectileSpeed = 12f;
@@ -45,8 +47,12 @@ public class BaseAttack : MonoBehaviour {
     public void UpdateStats()
     {
         int lvl = StateManager.Instance.SelectedLevel - 1;
-        damage += lvl * upgDamage;
-        attackSpeed -= lvl * upgAttackSpeed;
+        if(damage < maxDamage)
+            damage += lvl * upgDamage;
+        if(attackSpeed - lvl*upgAttackSpeed > maxAttackSpeed)
+        {
+            attackSpeed -= lvl * upgAttackSpeed;
+        }
     }
 
 
