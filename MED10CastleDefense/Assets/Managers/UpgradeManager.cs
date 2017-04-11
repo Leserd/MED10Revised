@@ -15,8 +15,6 @@ public class UpgradeManager : MonoBehaviour {
         _buttons = GetComponentsInChildren<Button>();
         UpdateValues();
         _buttons[0].onClick.AddListener(() => OnUpgradeCoin());
-
-
         switch (StateManager.Instance.LevelsAvailable)
         {
             case 1:
@@ -31,43 +29,87 @@ public class UpgradeManager : MonoBehaviour {
                 _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
                 if (!PigStats.Unlocked)
                 {
-                    _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
-                    _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1]));
-                    PigStats.Unlocked = true;
-
-                    Debug.Log("damn");
+                    PigLocked();
                     break;
                 }
                 _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
 
                 break;
-            case 3:
-                if (SafeStats.UpgradeLevel == 1)
-                {
-                    _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
-                    _buttons[2].onClick.AddListener(() => UpgradeFirstTime(_buttons[2]));
-                    SafeStats.Unlocked = true;
-
-                    break;
-                }
-                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
-
-
-                break;
-
             default:
-                _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
-                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+                Debug.Log("fuck this");
+                if (!PigStats.Unlocked)
+                {
+                    PigLocked();
+                    if (!SafeStats.Unlocked)
+                    {
+                        SafeLocked();
+                    }
+                        break;
+                }
 
+                if (!SafeStats.Unlocked)
+                {
+                    SafeLocked();
+                    break;
+                }
+                _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
+
+                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
                 break;
+
+
         }
+
+
+    }
+    void PigLocked()
+    {
+        _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
+        _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1], "piggy"));
+    }
+    void SafeLocked()
+    {
+        _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+        _buttons[2].onClick.AddListener(() => UpgradeFirstTime(_buttons[2], "safe"));
     }
     
-    void UpgradeFirstTime(Button button)
+    void UpgradeFirstTime(Button button, string type)
     {
-        button.image.color = Color.white;
-        StateManager.Instance.UpgradesAvailable = -1;
-        EventManager.TriggerEvent("Upgrade");
+        if (type == "piggy")
+        {
+            if (StateManager.Instance.UpgradesAvailable > 0)
+            {
+                PigStats.Unlocked = true;
+
+                button.image.color = Color.white;
+
+                StateManager.Instance.UpgradesAvailable = -1;
+                EventManager.TriggerEvent("Upgrade");
+                UpdateValues();
+                button.onClick.RemoveAllListeners();
+                _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
+            }
+            return;
+        }
+        if (type == "safe")
+        {
+            if (StateManager.Instance.UpgradesAvailable > 0)
+            {
+                SafeStats.Unlocked = true;
+
+                button.image.color = Color.white;
+
+                StateManager.Instance.UpgradesAvailable = -1;
+                EventManager.TriggerEvent("Upgrade");
+                UpdateValues();
+                button.onClick.RemoveAllListeners();
+                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+            }
+            return;
+        }
+
+
+
     }
 
 
@@ -76,7 +118,9 @@ public class UpgradeManager : MonoBehaviour {
         UpdatePiggyValues();
         UpdateCoinValues();
         UpdateSafeValues();
+        
     }
+
     private void UpdateCoinValues()
     {
 
