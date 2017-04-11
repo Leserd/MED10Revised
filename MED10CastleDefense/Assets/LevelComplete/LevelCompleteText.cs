@@ -6,8 +6,11 @@ using UnityEngine.UI;
 public class LevelCompleteText : MonoBehaviour {
     [SerializeField]
     private GameObject FinishMenu;
+
+    [SerializeField]
+    private Sprite WonImage;
     private float _timeSinceStart, _timeEnded;
-    private bool _wonGame;
+    private bool _wonGame,_pressedFinish;
 
 
     private void Awake()
@@ -17,6 +20,35 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StartListening("LevelLost", LevelLost);
         EventManager.StartListening("SpawnFirstUnit", StartTime);
         _wonGame = false;
+    }
+    void FirstTimePress()
+    {
+        _pressedFinish = true; 
+        StartCoroutine(SlideRightIn(Time.time));
+        GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
+
+    }
+
+    IEnumerator SlideRightIn(float startTime)
+    {
+        Vector3 start = FinishMenu.transform.localPosition;
+        Vector3 end = Vector3.zero;
+        while (_pressedFinish)
+        {
+            yield return new WaitForFixedUpdate();
+            var timeSinceStart = Time.time - startTime;
+            var percentageComplete = timeSinceStart / 1f;
+
+            FinishMenu.transform.localPosition = Vector3.Lerp(start, end, percentageComplete);
+
+            if (percentageComplete >= 1f)
+            {
+                _pressedFinish = false;
+                break;
+            }
+
+
+        }
     }
 
     private void StartTime()
@@ -36,7 +68,7 @@ public class LevelCompleteText : MonoBehaviour {
 
     private void StarSystem()
     {
-        //Debug.Log("Ran StarSystem");
+        GetComponentsInChildren<Image>()[0].sprite = WonImage;
         var image = GetComponentsInChildren<Image>()[6];
         var timeDiff = _timeEnded - _timeSinceStart;
         if (timeDiff <= 30f)
@@ -59,7 +91,7 @@ public class LevelCompleteText : MonoBehaviour {
     }
     private void Upgraded()
     {
-        GetComponentsInChildren<Text>()[0].text = "Upgrades available: " + StateManager.Instance.UpgradesAvailable.ToString();
+        GetComponentsInChildren<Text>()[0].text = StateManager.Instance.UpgradesAvailable.ToString();
     }
     private void LevelLost()
     {
@@ -120,17 +152,21 @@ public class LevelCompleteText : MonoBehaviour {
     {
         //show end level screen
         FinishMenu.SetActive(true);
+        GetComponentsInChildren<Button>()[0].onClick.AddListener(() => FirstTimePress());
+
+
         //show stars if game won
-        if(_wonGame)StarSystem();
+        if (_wonGame)StarSystem();
+        else GetComponentsInChildren<Image>()[6].gameObject.SetActive(false);
         //update text fields on end level screen
         var textFields = GetComponentsInChildren<Text>();
         var instance = StateManager.Instance;
-        textFields[0].text = "Upgrades available: " + instance.UpgradesAvailable.ToString();
-        textFields[1].text = "Time taken: " + (_timeEnded - _timeSinceStart);
+        textFields[0].text = instance.UpgradesAvailable.ToString();
+        //textFields[1].text = "Time taken: " + (_timeEnded - _timeSinceStart);
 
         //have scene change based on selection
-        GetComponentsInChildren<Button>()[3].onClick.AddListener(() => EventManager.TriggerEvent("RestartLevel"));
-        GetComponentsInChildren<Button>()[4].onClick.AddListener(() => EventManager.TriggerEvent("EndLevel"));
+        GetComponentsInChildren<Button>()[4].onClick.AddListener(() => EventManager.TriggerEvent("RestartLevel"));
+        GetComponentsInChildren<Button>()[5].onClick.AddListener(() => EventManager.TriggerEvent("EndLevel"));
 
     }
 }
