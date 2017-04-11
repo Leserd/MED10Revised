@@ -20,13 +20,10 @@ public class LevelCompleteText : MonoBehaviour {
 
         _wonGame = false;
     }
-
     private void StartTime()
     {
         _timeSinceStart = Time.fixedTime;
     }
-
-
     private void OnDestroy()
     {
         EventManager.StopListening("LevelComplete", LevelComplete);
