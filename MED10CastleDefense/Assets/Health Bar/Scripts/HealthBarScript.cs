@@ -5,29 +5,37 @@ using UnityEngine.UI;
 
 public class HealthBarScript : MonoBehaviour
 {
+    public GameObject healthObject;   //The parent of health icon and text - disabled if not a base
 
     private GameObject _target;
-    private Image barForeground;    //The health bar to change size of when dealt damage
-    private Image barBackground;    //The background of the health bar
+    private Image _barForeground;    //The health bar to change size of when dealt damage
+    private Image _barBackground;    //The background of the health bar
+    private Text _healthText;           
     private int _health, _maxHealth;
     private RectTransform _transform;
     private bool _ready = false;    //has target been set?
 
     private void Awake()
     {
-        barBackground = transform.GetChild(0).GetComponent<Image>();
-        if (barBackground == null)
+        _barBackground = transform.GetChild(0).GetComponent<Image>();
+        if (_barBackground == null)
             Debug.LogError("No background found for health bar!");
-        barBackground.enabled = false;
+        _barBackground.enabled = false;
 
-        barForeground = transform.GetChild(1).GetComponent<Image>();
-        if (barForeground == null)
+        _barForeground = transform.GetChild(1).GetComponent<Image>();
+        if (_barForeground == null)
             Debug.LogError("No foreground found for health bar!");
-        barForeground.enabled = false;
+        _barForeground.enabled = false;
 
         EventManager.Damage += UpdateHealth;
 
         _transform = GetComponent<RectTransform>();
+
+        if (healthObject)
+        {
+            _healthText = healthObject.transform.GetChild(1).GetComponent<Text>();
+            healthObject.SetActive(false);
+        }
 
         _transform.SetParent(GameObject.Find("HealthBarCanvas").transform);
 
@@ -80,14 +88,20 @@ public class HealthBarScript : MonoBehaviour
 
         //Change width of health bars
         int barWidth = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.width * _target.transform.localScale.x);
-        barForeground.rectTransform.sizeDelta = new Vector2(barWidth, barForeground.rectTransform.sizeDelta.y);
-        barBackground.rectTransform.sizeDelta = new Vector2(barWidth, barBackground.rectTransform.sizeDelta.y);
+        _barForeground.rectTransform.sizeDelta = new Vector2(barWidth, _barForeground.rectTransform.sizeDelta.y);
+        _barBackground.rectTransform.sizeDelta = new Vector2(barWidth, _barBackground.rectTransform.sizeDelta.y);
         _ready = true;
+
+        if (_target.tag == "EnemyBase")
+        {
+            _healthText.text = _health.ToString() + " / " + _maxHealth.ToString();
+            healthObject.SetActive(true);
+        }
 
         PlaceHealthBar();
 
-        barForeground.enabled = true;
-        barBackground.enabled = true;
+        _barForeground.enabled = true;
+        _barBackground.enabled = true;
     }
 
 
@@ -102,7 +116,11 @@ public class HealthBarScript : MonoBehaviour
                 int amount = 0;
 
                 if (dealer.tag == "EnemyBase")
+                {
                     amount = dealer.GetComponent<BaseAttack>().damage;
+                    
+                }
+                    
                 else if (dealer.tag == "Unit")
                 {
                     amount = dealer.GetComponent<Unit>().damage;
@@ -111,9 +129,15 @@ public class HealthBarScript : MonoBehaviour
 
                 _health -= amount;
                 
+                if(_target.tag == "EnemyBase")
+                {
+                    _healthText.text = _health.ToString() + " / " + _maxHealth.ToString();
+                    healthObject.SetActive(true);
+                }
+
                 float fill = (float)_health / (float)_maxHealth;
                 //print("HP: " + _health + ", dmg: " + amount + ", fill: " + fill);
-                barForeground.fillAmount = fill;
+                _barForeground.fillAmount = fill;
             }
         }
     }
