@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class SafeStats {
 
-    public static int Health = 3;
-    public static int Damage = 3;
+    public static int Health = 1;
+    public static int Damage = 20;
     public static float Speed = 3;
     public static float Cooldown = 20f;
     public static int UpgradeLevel = 0;

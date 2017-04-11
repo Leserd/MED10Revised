@@ -15,13 +15,13 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StartListening("LevelComplete", LevelComplete);
         EventManager.StartListening("Upgrade", Upgraded);
         EventManager.StartListening("LevelLost", LevelLost);
-        //.SpawnFirstUnit += StartTime;
+        EventManager.StartListening("SpawnFirstUnit", StartTime);
 
 
         _wonGame = false;
     }
 
-    private void StartTime(GameObject useless)
+    private void StartTime()
     {
         _timeSinceStart = Time.fixedTime;
     }
@@ -32,8 +32,7 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StopListening("LevelComplete", LevelComplete);
         EventManager.StopListening("Upgrade", Upgraded);
         EventManager.StopListening("LevelLost", LevelLost);
-        //EventManager.SpawnFirstUnit -= StartTime;
-        Debug.Log("OnDestroy LevelCompleteText.cs");
+        EventManager.StopListening("SpawnFirstUnit", StartTime);
     }
 
     private void StarSystem()
