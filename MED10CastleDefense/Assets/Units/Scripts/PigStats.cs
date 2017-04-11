@@ -14,7 +14,7 @@ public static class PigStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[3] { " +3", "+1","" };
+        return new string[3] { "(+3)", "(+1)","" };
     }
     public static void Upgrade()
     {
