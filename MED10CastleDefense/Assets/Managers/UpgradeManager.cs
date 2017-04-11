@@ -29,31 +29,31 @@ public class UpgradeManager : MonoBehaviour {
                 _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
                 if (!PigStats.Unlocked)
                 {
-                    _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
-                    _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1],"piggy"));
-                    PigStats.Unlocked = true;
+                    PigLocked();
                     break;
                 }
                 _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
 
                 break;
             default:
+                Debug.Log("fuck this");
                 if (!PigStats.Unlocked)
                 {
-                    _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
-                    _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1],"piggy"));
-                    PigStats.Unlocked = true;
+                    PigLocked();
+                    if (!SafeStats.Unlocked)
+                    {
+                        SafeLocked();
+                    }
+                        break;
+                }
+
+                if (!SafeStats.Unlocked)
+                {
+                    SafeLocked();
                     break;
                 }
                 _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
 
-                if (!SafeStats.Unlocked)
-                {
-                    _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
-                    _buttons[2].onClick.AddListener(() => UpgradeFirstTime(_buttons[2],"safe"));
-                    SafeStats.Unlocked = true;
-                    break;
-                }
                 _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
                 break;
 
@@ -62,6 +62,16 @@ public class UpgradeManager : MonoBehaviour {
 
 
     }
+    void PigLocked()
+    {
+        _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
+        _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1], "piggy"));
+    }
+    void SafeLocked()
+    {
+        _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+        _buttons[2].onClick.AddListener(() => UpgradeFirstTime(_buttons[2], "safe"));
+    }
     
     void UpgradeFirstTime(Button button, string type)
     {
@@ -69,6 +79,8 @@ public class UpgradeManager : MonoBehaviour {
         {
             if (StateManager.Instance.UpgradesAvailable > 0)
             {
+                PigStats.Unlocked = true;
+
                 button.image.color = Color.white;
 
                 StateManager.Instance.UpgradesAvailable = -1;
@@ -83,6 +95,8 @@ public class UpgradeManager : MonoBehaviour {
         {
             if (StateManager.Instance.UpgradesAvailable > 0)
             {
+                SafeStats.Unlocked = true;
+
                 button.image.color = Color.white;
 
                 StateManager.Instance.UpgradesAvailable = -1;

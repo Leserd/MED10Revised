@@ -10,6 +10,8 @@ public class ChooseLevelManager : MonoBehaviour {
 
     [SerializeField]
     private GameObject SelectedLevelIcon, BillObject;
+    [SerializeField]
+    private Sprite FinishedLevel;
     
 
     
@@ -60,6 +62,11 @@ public class ChooseLevelManager : MonoBehaviour {
 
         for (int i = 0; i < MaxLevel; i++)
         {
+            if (i+1 != MaxLevel)
+            {
+                _levels[i].image.sprite = FinishedLevel;
+
+            }
             _levels[i].interactable = true;
             var billImage = Instantiate(BillObject, _levels[i].transform, false);
             if (i %2 ==1)
