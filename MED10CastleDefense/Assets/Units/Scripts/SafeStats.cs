@@ -8,8 +8,9 @@ public static class SafeStats {
     public static int Damage = 20;
     public static float Speed = 3;
     public static float Cooldown = 20f;
-    public static int UpgradeLevel = 1;
+    public static int UpgradeLevel = 0;
     public static GameObject explosion;
+    private static bool _isActivated = false;
 
     public static string[] UpgradedValues()
     {
@@ -24,6 +25,19 @@ public static class SafeStats {
     public static string[] Values()
     {
         return new string[3] { Health.ToString(), Speed.ToString(), Cooldown.ToString() };
+    }
+
+    public static bool Unlocked
+    {
+        get
+        {
+            return _isActivated;
+        }
+        set
+        {
+            _isActivated = value;
+            UpgradeLevel++;
+        }
     }
 
 }
