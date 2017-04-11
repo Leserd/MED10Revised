@@ -30,6 +30,17 @@ public class SpawnButton : MonoBehaviour
         EventManager.StartListening("LevelComplete", DisableButton);
         EventManager.StartListening("LevelLost", DisableButton);
 
+        if(gameObject.name == "Pig")
+        {
+            if (!PigStats.Unlocked)
+                _btn.interactable = false;
+        }
+        if (gameObject.name == "Safe")
+        {
+            if (!SafeStats.Unlocked)
+                _btn.interactable = false;
+        }
+
     }
 
 
