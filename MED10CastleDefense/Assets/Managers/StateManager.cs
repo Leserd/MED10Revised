@@ -84,7 +84,10 @@ public class StateManager : MonoBehaviour {
         }
         set
         {
-            _upgradeAvailable += value;
+
+                _upgradeAvailable += value;
+
+
         }
     }
     public int LevelsAvailable
