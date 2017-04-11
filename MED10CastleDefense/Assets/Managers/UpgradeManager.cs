@@ -29,12 +29,13 @@ public class UpgradeManager : MonoBehaviour {
             case 2:
                 _buttons[2].interactable = false;
                 _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
-                if (PigStats.UpgradeLevel ==1)
+                if (!PigStats.Unlocked)
                 {
                     _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
                     _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1]));
+                    PigStats.Unlocked = true;
 
-
+                    Debug.Log("damn");
                     break;
                 }
                 _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
@@ -45,6 +46,7 @@ public class UpgradeManager : MonoBehaviour {
                 {
                     _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
                     _buttons[2].onClick.AddListener(() => UpgradeFirstTime(_buttons[2]));
+                    SafeStats.Unlocked = true;
 
                     break;
                 }
@@ -60,6 +62,7 @@ public class UpgradeManager : MonoBehaviour {
                 break;
         }
     }
+    
     void UpgradeFirstTime(Button button)
     {
         button.image.color = Color.white;
