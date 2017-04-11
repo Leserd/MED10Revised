@@ -1,33 +1,21 @@
 fileFormatVersion: 2
-guid: 08cd81dcd8ace49419da6cdc32b57ab5
-timeCreated: 1491908382
+guid: adb1ea510aa85a048bca40e0dea49c6f
+timeCreated: 1491909877
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CoinSheet2_0
-    21300002: CoinSheet2_1
-    21300004: CoinSheet2_2
-    21300006: CoinSheet2_3
-    21300008: CoinSheet2_4
-    21300010: CoinSheet2_5
-    21300012: CoinSheet2_6
-    21300014: CoinSheet2_7
-    21300016: CoinSheet2_8
-    21300018: CoinSheet2_9
-    21300020: CoinSheet2_10
-    21300022: CoinSheet2_11
-    21300024: CoinSheet2_12
-    21300026: CoinSheet2_13
-    21300028: CoinSheet2_14
-    21300030: CoinSheet2_15
-    21300032: CoinSheet2_16
-    21300034: CoinSheet2_17
-    21300036: CoinSheet2_18
-    21300038: CoinSheet2_19
-    21300040: CoinSheet2_20
-    21300042: CoinSheet2_21
-    21300044: CoinSheet2_22
-    21300046: CoinSheet2_23
+    21300000: Canon2_0
+    21300002: Canon2_1
+    21300004: Canon2_2
+    21300006: Canon2_3
+    21300008: Canon2_4
+    21300010: Canon2_5
+    21300012: Canon2_6
+    21300014: Canon2_7
+    21300016: Canon2_8
+    21300018: Canon2_9
+    21300020: Canon2_10
+    21300022: Canon2_11
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -110,312 +98,156 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CoinSheet2_0
+      name: Canon2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 600
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_1
+      name: Canon2_1
       rect:
         serializedVersion: 2
         x: 200
         y: 600
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_2
+      name: Canon2_2
       rect:
         serializedVersion: 2
         x: 400
         y: 600
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_3
+      name: Canon2_3
       rect:
         serializedVersion: 2
         x: 600
         y: 600
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_4
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 600
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_5
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 600
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_6
+      name: Canon2_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
+        y: 300
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_7
+      name: Canon2_5
       rect:
         serializedVersion: 2
         x: 200
-        y: 400
+        y: 300
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_8
+      name: Canon2_6
       rect:
         serializedVersion: 2
         x: 400
-        y: 400
+        y: 300
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_9
+      name: Canon2_7
       rect:
         serializedVersion: 2
         x: 600
-        y: 400
+        y: 300
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_10
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_11
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 400
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_13
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_14
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_15
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_16
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_17
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 200
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_18
+      name: Canon2_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_19
+      name: Canon2_9
       rect:
         serializedVersion: 2
         x: 200
         y: 0
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_20
+      name: Canon2_10
       rect:
         serializedVersion: 2
         x: 400
         y: 0
         width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CoinSheet2_21
+      name: Canon2_11
       rect:
         serializedVersion: 2
         x: 600
         y: 0
         width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_22
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 0
-        width: 200
-        height: 200
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CoinSheet2_23
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 200
-        height: 200
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
