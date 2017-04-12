@@ -74,7 +74,7 @@ public class HintManager : MonoBehaviour {
 
     public void CreateHint(int num, Vector3 position)
     {
-        Hint hint = new Hint(num, position);
+        Hint hint = new Hint(num, Vector3.zero);
         AddActiveHint(hint);
     }
 

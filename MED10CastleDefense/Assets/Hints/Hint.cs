@@ -57,9 +57,9 @@ public class Hint {
         Debug.Log("Destroying hint #" + _hintNumber);
 
         //Hvis hintet skal vise ny hint når det lukkes, gør det her:
-        if (_hintNumber == 1 || _hintNumber == 2 || _hintNumber == 4)
+        if (_hintNumber == 0 || _hintNumber == 1 || _hintNumber == 3 || _hintNumber == 4 || _hintNumber == 5)
         {
-            Vector3 pos =  new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0);
+            Vector3 pos =  Vector3.zero;
             HintManager.Instance.CreateHint(_hintNumber+1, pos);
         }
 
@@ -83,8 +83,8 @@ public class Hint {
             if (_sprite)
             {
                 _hintObj.GetComponent<Image>().sprite = _sprite;
-                var recttrans = _hintObj.transform as RectTransform;
-                recttrans.sizeDelta = new Vector2(_sprite.textureRect.width, _sprite.textureRect.height);
+                //var recttrans = _hintObj.transform as RectTransform;
+                //recttrans.sizeDelta = new Vector2(_sprite.textureRect.width, _sprite.textureRect.height);
             }
             else
                 return;
