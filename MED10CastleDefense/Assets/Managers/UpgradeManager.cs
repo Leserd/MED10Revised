@@ -8,9 +8,13 @@ public class UpgradeManager : MonoBehaviour {
 
     private Text[] _values;
     private Button[] _buttons;
+    private Sprite _safeLocked, _pigLocked, _pigUpgrade, _safeUpgrade;
+
+ 
 
     private void OnEnable()
     {
+
         _values = GetComponentsInChildren<Text>();
         _buttons = GetComponentsInChildren<Button>();
         UpdateValues();
@@ -20,14 +24,18 @@ public class UpgradeManager : MonoBehaviour {
             case 1:
                 _buttons[1].interactable = false;
                 _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
+                _buttons[1].image.sprite = _pigLocked;
                 _buttons[2].interactable = false;
                 _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+                _buttons[2].image.sprite = _safeLocked;
 
                 break;
             case 2:
 
                 _buttons[2].interactable = false;
                 _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+                _buttons[2].image.sprite = _safeLocked;
+
                 if (!PigStats.Unlocked)
                 {
                     PigLocked();
@@ -65,6 +73,11 @@ public class UpgradeManager : MonoBehaviour {
     void PigLocked()
     {
         _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
+        var go = new GameObject("plusPig");
+        go.transform.SetParent( _buttons[1].transform);
+        var image = go.AddComponent<Image>();
+        image.sprite= Resources.Load<Sprite>("PLUS");
+
         _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1], "piggy"));
 
     }
