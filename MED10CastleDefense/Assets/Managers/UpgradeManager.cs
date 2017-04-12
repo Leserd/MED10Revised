@@ -7,14 +7,11 @@ using System;
 public class UpgradeManager : MonoBehaviour {
 
     private Text[] _values;
-    private Button[] _buttons;
-    private Sprite _safeLocked, _pigLocked, _pigUpgrade, _safeUpgrade;
-
+    private Button[] _buttons;  
  
 
     private void OnEnable()
     {
-
         _values = GetComponentsInChildren<Text>();
         _buttons = GetComponentsInChildren<Button>();
         UpdateValues();
@@ -22,19 +19,12 @@ public class UpgradeManager : MonoBehaviour {
         switch (StateManager.Instance.LevelsAvailable)
         {
             case 1:
-                _buttons[1].interactable = false;
-                _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
-                _buttons[1].image.sprite = _pigLocked;
-                _buttons[2].interactable = false;
-                _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
-                _buttons[2].image.sprite = _safeLocked;
+                _buttons[1].GetComponent<SpriteManager>().Locked();
+                _buttons[2].GetComponent<SpriteManager>().Locked();
 
                 break;
             case 2:
-
-                _buttons[2].interactable = false;
-                _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
-                _buttons[2].image.sprite = _safeLocked;
+                _buttons[2].GetComponent<SpriteManager>().Locked();
 
                 if (!PigStats.Unlocked)
                 {
@@ -52,17 +42,25 @@ public class UpgradeManager : MonoBehaviour {
                     {
                         SafeLocked();
                     }
+                    else
+                    {
+                        _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+
+                    }
                     break;
                 }
 
                 if (!SafeStats.Unlocked)
                 {
                     SafeLocked();
+                    _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
+
                     break;
                 }
+                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+
                 _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
 
-                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
                 break;
 
 
@@ -72,18 +70,14 @@ public class UpgradeManager : MonoBehaviour {
     }
     void PigLocked()
     {
-        _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
-        var go = new GameObject("plusPig");
-        go.transform.SetParent( _buttons[1].transform);
-        var image = go.AddComponent<Image>();
-        image.sprite= Resources.Load<Sprite>("PLUS");
-
+        _buttons[1].GetComponent<SpriteManager>().Unlock();        
         _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1], "piggy"));
 
     }
     void SafeLocked()
     {
-        _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+
+        _buttons[2].GetComponent<SpriteManager>().Unlock();
         _buttons[2].onClick.AddListener(() => UpgradeFirstTime(_buttons[2], "safe"));
     }
     
@@ -94,14 +88,15 @@ public class UpgradeManager : MonoBehaviour {
             if (StateManager.Instance.UpgradesAvailable > 0)
             {
                 PigStats.Unlocked = true;
-
-                button.image.color = Color.white;
+                button.GetComponent<SpriteManager>().Upgrade();
 
                 StateManager.Instance.UpgradesAvailable = -1;
                 EventManager.TriggerEvent("Upgrade");
                 UpdateValues();
                 button.onClick.RemoveAllListeners();
                 _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
+                if (StateManager.Instance.UpgradesAvailable == 0) NoUpgrades();
+
             }
             return;
         }
@@ -110,14 +105,15 @@ public class UpgradeManager : MonoBehaviour {
             if (StateManager.Instance.UpgradesAvailable > 0)
             {
                 SafeStats.Unlocked = true;
-
-                button.image.color = Color.white;
+                button.GetComponent<SpriteManager>().Upgrade();
 
                 StateManager.Instance.UpgradesAvailable = -1;
                 EventManager.TriggerEvent("Upgrade");
                 UpdateValues();
                 button.onClick.RemoveAllListeners();
                 _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+                if (StateManager.Instance.UpgradesAvailable == 0) NoUpgrades();
+
             }
             return;
         }
@@ -229,9 +225,22 @@ public class UpgradeManager : MonoBehaviour {
 
     void NoUpgrades()
     {
-        foreach (var button in _buttons)
+        _buttons[0].GetComponent<SpriteManager>().NonInteractable();
+        if (!SafeStats.Unlocked)
         {
-            button.interactable = false;
+            _buttons[2].GetComponent<SpriteManager>().Locked();
+        }
+        else
+        {
+            _buttons[2].GetComponent<SpriteManager>().NonInteractable();
+        }
+        if (!PigStats.Unlocked)
+        {
+            _buttons[1].GetComponent<SpriteManager>().Locked();
+        }
+        else
+        {
+            _buttons[1].GetComponent<SpriteManager>().NonInteractable();
         }
     }
     private void OnUpgradePiggy()
