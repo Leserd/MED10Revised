@@ -8,9 +8,7 @@ public class StateManager : MonoBehaviour {
                         _maxLevel = 1,
                         _experience = 0,
                         _upgradeAvailable = 0,
-                        _yearlyExpence = 0,
-                        _playerLevel = 1;
-
+                        _yearlyExpence = 0;
     private static bool _completedNewLevel = false;
 
     private static string _levelName;
@@ -125,17 +123,7 @@ public class StateManager : MonoBehaviour {
             _selectedLevel = value;
         }
     }
-    public int PlayerLevel
-    {
-        get
-        {
-            return _playerLevel;
-        }
-        set
-        {
-            _playerLevel = value;
-        }
-    }
+
     public int Experience
     {
         get
