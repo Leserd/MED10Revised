@@ -25,6 +25,7 @@ public class UpgradeManager : MonoBehaviour {
 
                 break;
             case 2:
+
                 _buttons[2].interactable = false;
                 _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
                 if (!PigStats.Unlocked)
@@ -36,7 +37,6 @@ public class UpgradeManager : MonoBehaviour {
 
                 break;
             default:
-                Debug.Log("fuck this");
                 if (!PigStats.Unlocked)
                 {
                     PigLocked();
@@ -66,6 +66,7 @@ public class UpgradeManager : MonoBehaviour {
     {
         _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
         _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1], "piggy"));
+
     }
     void SafeLocked()
     {
@@ -148,44 +149,55 @@ public class UpgradeManager : MonoBehaviour {
 
     private void UpdatePiggyValues()
     {
-        Text[] values = new Text[3];
-        Array.Copy(_values, 6, values, 0, 3);
-        Text[] UpgradeValues = new Text[3];
-        Array.Copy(_values, 9, UpgradeValues, 0, 3);
-        for (int i = 0; i < 3; i++)
-        {
-            values[i].text = FormatValues(PigStats.Values()[i]);
-            if (PigStats.UpgradedValues()[i] != "")
+
+            Text[] values = new Text[3];
+            Array.Copy(_values, 6, values, 0, 3);
+            Text[] UpgradeValues = new Text[3];
+            Array.Copy(_values, 9, UpgradeValues, 0, 3);
+            for (int i = 0; i < 3; i++)
             {
-                UpgradeValues[i].text = PigStats.UpgradedValues()[i];
+                values[i].text = FormatValues(PigStats.Values()[i]);
+            if (PigStats.Unlocked)
+            {
+                if (PigStats.UpgradedValues()[i] != "")
+                {
+                    UpgradeValues[i].text = PigStats.UpgradedValues()[i];
+
+                }
+                else
+                {
+                    UpgradeValues[i].text = "";
+                }
 
             }
-            else
-            {
-                UpgradeValues[i].text = "";
-            }
         }
+
     }
 
     private void UpdateSafeValues()
     {
-        Text[] values = new Text[3];
-        Array.Copy(_values, 12, values, 0, 3);
-        Text[] UpgradeValues = new Text[3];
-        Array.Copy(_values, 15, UpgradeValues, 0, 3);
-        for (int i = 0; i < 3; i++)
-        {
-            values[i].text = FormatValues(SafeStats.Values()[i]);
-            if (SafeStats.UpgradedValues()[i] != "")
-            {
-                UpgradeValues[i].text = SafeStats.UpgradedValues()[i];
 
-            }
-            else
+            Text[] values = new Text[3];
+            Array.Copy(_values, 12, values, 0, 3);
+            Text[] UpgradeValues = new Text[3];
+            Array.Copy(_values, 15, UpgradeValues, 0, 3);
+            for (int i = 0; i < 3; i++)
             {
-                UpgradeValues[i].text = "";
+                values[i].text = FormatValues(SafeStats.Values()[i]);
+            if (SafeStats.Unlocked)
+            {
+                if (SafeStats.UpgradedValues()[i] != "")
+                {
+                    UpgradeValues[i].text = SafeStats.UpgradedValues()[i];
+
+                }
+                else
+                {
+                    UpgradeValues[i].text = "";
+                }
             }
         }
+
     }
 
     private void OnUpgradeCoin()

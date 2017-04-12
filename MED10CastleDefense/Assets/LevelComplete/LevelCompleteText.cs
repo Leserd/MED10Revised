@@ -10,7 +10,7 @@ public class LevelCompleteText : MonoBehaviour {
     [SerializeField]
     private Sprite WonImage;
     private float _timeSinceStart, _timeEnded;
-    private bool _wonGame, _pressedFinish, _levelCompleteRollDown = true;
+    private bool _pressedFinish, _levelCompleteRollDown = true;
 
 
     private void Awake()
@@ -19,7 +19,6 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StartListening("Upgrade", Upgraded);
         EventManager.StartListening("LevelLost", LevelLost);
         EventManager.StartListening("SpawnFirstUnit", StartTime);
-        _wonGame = false;
     }
     void FirstTimePress()
     {
@@ -44,6 +43,8 @@ public class LevelCompleteText : MonoBehaviour {
             if (percentageComplete >= 1f)
             {
                 _pressedFinish = false;
+
+
                 break;
             }
 
@@ -73,22 +74,69 @@ public class LevelCompleteText : MonoBehaviour {
         var timeDiff = _timeEnded - _timeSinceStart;
         if (timeDiff <= 30f)
         {
-            image.sprite = Stars.A_Stars(3);
+            StartCoroutine(stars(3, image));
+            //image.sprite = Stars.A_Stars(3);
             return;
         }
         if (timeDiff <=60)
         {
-            image.sprite = Stars.A_Stars(2);
+            StartCoroutine(stars(2, image));
+            //image.sprite = Stars.A_Stars(2);
             return;
         }
         if (timeDiff <= 90)
         {
             image.sprite = Stars.A_Stars(1);
+            GetComponentsInChildren<ParticleSystem>()[0].Play();
             return;
         }
         image.sprite = Stars.A_Stars(0);
 
     }
+    IEnumerator stars(int starsNum, Image starImage)
+    {
+        var particles = GetComponentsInChildren<ParticleSystem>();
+        if (starsNum == 2)
+        {
+            starImage.sprite = Stars.A_Stars(1);
+            particles[0].Play();
+            while (particles[0].isEmitting)
+            {
+                yield return new WaitForFixedUpdate();
+                if (!particles[0].isEmitting)
+                {
+                    starImage.sprite = Stars.A_Stars(2);
+                    particles[1].Play();
+                    break;
+                }
+            }
+        }
+        else
+        {
+            starImage.sprite = Stars.A_Stars(1);
+            particles[0].Play();
+            while (particles[0].isEmitting)
+            {
+                yield return new WaitForFixedUpdate();
+                if (!particles[0].isEmitting)
+                {
+                    starImage.sprite = Stars.A_Stars(2);
+                    particles[1].Play();
+                    while (particles[1].isEmitting)
+                    {
+                        yield return new WaitForFixedUpdate();
+                        if (!particles[1].isEmitting)
+                        {
+                            starImage.sprite = Stars.A_Stars(3);
+                            particles[2].Play();
+                            break;
+                        }
+                        }
+                }
+            }
+        }
+    }
+
     private void Upgraded()
     {
         GetComponentsInChildren<Text>()[0].text = StateManager.Instance.UpgradesAvailable.ToString();
@@ -123,6 +171,8 @@ public class LevelCompleteText : MonoBehaviour {
             if (percentageComplete >= 1f)
             {
                 _levelCompleteRollDown = false;
+                GetComponentsInChildren<Button>()[0].onClick.AddListener(() => FirstTimePress());
+
                 break;
             }
 
@@ -140,13 +190,18 @@ public class LevelCompleteText : MonoBehaviour {
         {
             yield return new WaitForFixedUpdate();
             var timeSinceStart = Time.time - starttime;
-            var percentageComplete = timeSinceStart / 1f;
+            var percentageComplete = timeSinceStart / 1.5f;
 
             FinishMenu.transform.localPosition = Vector3.Lerp(start, end, percentageComplete);
 
             if (percentageComplete >= 1f)
             {
                 _levelCompleteRollDown = false;
+                GetComponentsInChildren<Button>()[0].onClick.AddListener(() => FirstTimePress());
+
+                //show stars if game won
+
+                StarSystem();
                 break;
             }
 
@@ -160,7 +215,6 @@ public class LevelCompleteText : MonoBehaviour {
     private void LevelComplete()
     {
         _timeEnded = Time.fixedTime;
-        _wonGame = true;
 
 
         if (StateManager.Instance.LevelsAvailable == StateManager.Instance.SelectedLevel)
@@ -196,11 +250,8 @@ public class LevelCompleteText : MonoBehaviour {
     private void UpdateFinishMenu()
     {
         //show end level screen
-        GetComponentsInChildren<Button>()[0].onClick.AddListener(() => FirstTimePress());
 
 
-        //show stars if game won
-        if (_wonGame)StarSystem();
         
         //update text fields on end level screen
         var textFields = GetComponentsInChildren<Text>();
