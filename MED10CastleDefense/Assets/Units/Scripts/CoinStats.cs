@@ -13,7 +13,7 @@ public static class CoinStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[3] { "", "+.5","-0.1"  };
+        return new string[3] { "", "(+.5)","(-0.1)"  };
     }
     public static void Upgrade()
     {

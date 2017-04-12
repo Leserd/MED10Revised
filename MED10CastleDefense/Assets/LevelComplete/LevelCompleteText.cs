@@ -10,7 +10,7 @@ public class LevelCompleteText : MonoBehaviour {
     [SerializeField]
     private Sprite WonImage;
     private float _timeSinceStart, _timeEnded;
-    private bool _wonGame,_pressedFinish;
+    private bool _wonGame, _pressedFinish, _levelCompleteRollDown = true;
 
 
     private void Awake()
@@ -51,6 +51,7 @@ public class LevelCompleteText : MonoBehaviour {
         }
     }
 
+
     private void StartTime()
     {
         _timeSinceStart = Time.fixedTime;
@@ -68,7 +69,6 @@ public class LevelCompleteText : MonoBehaviour {
 
     private void StarSystem()
     {
-        GetComponentsInChildren<Image>()[0].sprite = WonImage;
         var image = GetComponentsInChildren<Image>()[6];
         var timeDiff = _timeEnded - _timeSinceStart;
         if (timeDiff <= 30f)
@@ -96,12 +96,8 @@ public class LevelCompleteText : MonoBehaviour {
     private void LevelLost()
     {
         _timeEnded = Time.fixedTime;
-
-        StartCoroutine(WaitSecondsLost(2f));
-    }
-    IEnumerator WaitSecondsLost(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
+        FinishMenu.SetActive(true);
+        GetComponentsInChildren<Image>()[6].gameObject.SetActive(false);
         if (StateManager.Instance.LevelsAvailable == StateManager.Instance.SelectedLevel)
         {
             StateManager.Instance.UpgradesAvailable = 1;
@@ -109,10 +105,63 @@ public class LevelCompleteText : MonoBehaviour {
         }
         UpdateFinishMenu();
 
+        StartCoroutine(WaitSecondsLost(Time.time));
     }
-    IEnumerator WaitSeconds(float seconds)
+    IEnumerator WaitSecondsLost(float starttime)
     {
-        yield return new WaitForSeconds(seconds);
+
+        Vector3 start = FinishMenu.transform.localPosition;
+        Vector3 end = new Vector3(0f, 1083f, 0f);
+        while (_levelCompleteRollDown)
+        {
+            yield return new WaitForFixedUpdate();
+            var timeSinceStart = Time.time - starttime;
+            var percentageComplete = timeSinceStart / 1f;
+
+            FinishMenu.transform.localPosition = Vector3.Lerp(start, end, percentageComplete);
+
+            if (percentageComplete >= 1f)
+            {
+                _levelCompleteRollDown = false;
+                break;
+            }
+
+
+        }
+
+
+    }
+    IEnumerator WaitSeconds(float starttime)
+    {
+
+        Vector3 start = FinishMenu.transform.localPosition;
+        Vector3 end = new Vector3 (0f, 1083f,0f);
+        while (_levelCompleteRollDown)
+        {
+            yield return new WaitForFixedUpdate();
+            var timeSinceStart = Time.time - starttime;
+            var percentageComplete = timeSinceStart / 1f;
+
+            FinishMenu.transform.localPosition = Vector3.Lerp(start, end, percentageComplete);
+
+            if (percentageComplete >= 1f)
+            {
+                _levelCompleteRollDown = false;
+                break;
+            }
+
+
+        }
+
+
+
+    }
+
+    private void LevelComplete()
+    {
+        _timeEnded = Time.fixedTime;
+        _wonGame = true;
+
 
         if (StateManager.Instance.LevelsAvailable == StateManager.Instance.SelectedLevel)
         {
@@ -137,27 +186,22 @@ public class LevelCompleteText : MonoBehaviour {
 
 
         }
+        FinishMenu.SetActive(true);
+        GetComponentsInChildren<Image>()[0].sprite = WonImage;
         UpdateFinishMenu();
 
-    }
-
-    private void LevelComplete()
-    {
-        _timeEnded = Time.fixedTime;
-        _wonGame = true;
-        StartCoroutine(WaitSeconds(2f));
+        StartCoroutine(WaitSeconds(Time.time));
 
     }
     private void UpdateFinishMenu()
     {
         //show end level screen
-        FinishMenu.SetActive(true);
         GetComponentsInChildren<Button>()[0].onClick.AddListener(() => FirstTimePress());
 
 
         //show stars if game won
         if (_wonGame)StarSystem();
-        else GetComponentsInChildren<Image>()[6].gameObject.SetActive(false);
+        
         //update text fields on end level screen
         var textFields = GetComponentsInChildren<Text>();
         var instance = StateManager.Instance;
