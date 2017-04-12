@@ -12,6 +12,7 @@ public class ChooseLevelManager : MonoBehaviour {
     private GameObject SelectedLevelIcon, BillObject;
     [SerializeField]
     private Sprite FinishedLevel;
+    private static bool _showIntroHint = true;
     
 
     
@@ -34,6 +35,14 @@ public class ChooseLevelManager : MonoBehaviour {
             SelectedLevelIcon.transform.localPosition = new Vector3(5f, 114f, 0f);
 
         }
+
+        if (_showIntroHint)
+        {
+            HintManager.Instance.CreateHint(0, Vector3.zero);
+            _showIntroHint = false;
+        }
+
+       
 
     }
 
