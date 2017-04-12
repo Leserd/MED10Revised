@@ -19,6 +19,7 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StartListening("Upgrade", Upgraded);
         EventManager.StartListening("LevelLost", LevelLost);
         EventManager.StartListening("SpawnFirstUnit", StartTime);
+        
     }
     void FirstTimePress()
     {

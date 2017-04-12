@@ -44,7 +44,7 @@ public class UpgradeManager : MonoBehaviour {
                     {
                         SafeLocked();
                     }
-                        break;
+                    break;
                 }
 
                 if (!SafeStats.Unlocked)
