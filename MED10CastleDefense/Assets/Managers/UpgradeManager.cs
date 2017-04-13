@@ -7,7 +7,8 @@ using System;
 public class UpgradeManager : MonoBehaviour {
 
     private Text[] _values;
-    private Button[] _buttons;
+    private Button[] _buttons;  
+ 
 
     private void OnEnable()
     {
@@ -18,15 +19,13 @@ public class UpgradeManager : MonoBehaviour {
         switch (StateManager.Instance.LevelsAvailable)
         {
             case 1:
-                _buttons[1].interactable = false;
-                _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
-                _buttons[2].interactable = false;
-                _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+                _buttons[1].GetComponent<SpriteManager>().Locked();
+                _buttons[2].GetComponent<SpriteManager>().Locked();
 
                 break;
             case 2:
-                _buttons[2].interactable = false;
-                _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+                _buttons[2].GetComponent<SpriteManager>().Locked();
+
                 if (!PigStats.Unlocked)
                 {
                     PigLocked();
@@ -36,7 +35,6 @@ public class UpgradeManager : MonoBehaviour {
 
                 break;
             default:
-                Debug.Log("fuck this");
                 if (!PigStats.Unlocked)
                 {
                     PigLocked();
@@ -44,17 +42,25 @@ public class UpgradeManager : MonoBehaviour {
                     {
                         SafeLocked();
                     }
-                        break;
+                    else
+                    {
+                        _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+
+                    }
+                    break;
                 }
 
                 if (!SafeStats.Unlocked)
                 {
                     SafeLocked();
+                    _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
+
                     break;
                 }
+                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+
                 _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
 
-                _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
                 break;
 
 
@@ -64,12 +70,14 @@ public class UpgradeManager : MonoBehaviour {
     }
     void PigLocked()
     {
-        _buttons[1].image.color = new Color(0.35f, 0.35f, 0.35f);
+        _buttons[1].GetComponent<SpriteManager>().Unlock();        
         _buttons[1].onClick.AddListener(() => UpgradeFirstTime(_buttons[1], "piggy"));
+
     }
     void SafeLocked()
     {
-        _buttons[2].image.color = new Color(0.35f, 0.35f, 0.35f);
+
+        _buttons[2].GetComponent<SpriteManager>().Unlock();
         _buttons[2].onClick.AddListener(() => UpgradeFirstTime(_buttons[2], "safe"));
     }
     
@@ -80,14 +88,15 @@ public class UpgradeManager : MonoBehaviour {
             if (StateManager.Instance.UpgradesAvailable > 0)
             {
                 PigStats.Unlocked = true;
-
-                button.image.color = Color.white;
+                button.GetComponent<SpriteManager>().Upgrade();
 
                 StateManager.Instance.UpgradesAvailable = -1;
                 EventManager.TriggerEvent("Upgrade");
                 UpdateValues();
                 button.onClick.RemoveAllListeners();
                 _buttons[1].onClick.AddListener(() => OnUpgradePiggy());
+                if (StateManager.Instance.UpgradesAvailable == 0) NoUpgrades();
+
             }
             return;
         }
@@ -96,14 +105,15 @@ public class UpgradeManager : MonoBehaviour {
             if (StateManager.Instance.UpgradesAvailable > 0)
             {
                 SafeStats.Unlocked = true;
-
-                button.image.color = Color.white;
+                button.GetComponent<SpriteManager>().Upgrade();
 
                 StateManager.Instance.UpgradesAvailable = -1;
                 EventManager.TriggerEvent("Upgrade");
                 UpdateValues();
                 button.onClick.RemoveAllListeners();
                 _buttons[2].onClick.AddListener(() => OnUpgradeSafe());
+                if (StateManager.Instance.UpgradesAvailable == 0) NoUpgrades();
+
             }
             return;
         }
@@ -148,44 +158,55 @@ public class UpgradeManager : MonoBehaviour {
 
     private void UpdatePiggyValues()
     {
-        Text[] values = new Text[3];
-        Array.Copy(_values, 6, values, 0, 3);
-        Text[] UpgradeValues = new Text[3];
-        Array.Copy(_values, 9, UpgradeValues, 0, 3);
-        for (int i = 0; i < 3; i++)
-        {
-            values[i].text = FormatValues(PigStats.Values()[i]);
-            if (PigStats.UpgradedValues()[i] != "")
+
+            Text[] values = new Text[3];
+            Array.Copy(_values, 6, values, 0, 3);
+            Text[] UpgradeValues = new Text[3];
+            Array.Copy(_values, 9, UpgradeValues, 0, 3);
+            for (int i = 0; i < 3; i++)
             {
-                UpgradeValues[i].text = PigStats.UpgradedValues()[i];
+                values[i].text = FormatValues(PigStats.Values()[i]);
+            if (PigStats.Unlocked)
+            {
+                if (PigStats.UpgradedValues()[i] != "")
+                {
+                    UpgradeValues[i].text = PigStats.UpgradedValues()[i];
+
+                }
+                else
+                {
+                    UpgradeValues[i].text = "";
+                }
 
             }
-            else
-            {
-                UpgradeValues[i].text = "";
-            }
         }
+
     }
 
     private void UpdateSafeValues()
     {
-        Text[] values = new Text[3];
-        Array.Copy(_values, 12, values, 0, 3);
-        Text[] UpgradeValues = new Text[3];
-        Array.Copy(_values, 15, UpgradeValues, 0, 3);
-        for (int i = 0; i < 3; i++)
-        {
-            values[i].text = FormatValues(SafeStats.Values()[i]);
-            if (SafeStats.UpgradedValues()[i] != "")
-            {
-                UpgradeValues[i].text = SafeStats.UpgradedValues()[i];
 
-            }
-            else
+            Text[] values = new Text[3];
+            Array.Copy(_values, 12, values, 0, 3);
+            Text[] UpgradeValues = new Text[3];
+            Array.Copy(_values, 15, UpgradeValues, 0, 3);
+            for (int i = 0; i < 3; i++)
             {
-                UpgradeValues[i].text = "";
+                values[i].text = FormatValues(SafeStats.Values()[i]);
+            if (SafeStats.Unlocked)
+            {
+                if (SafeStats.UpgradedValues()[i] != "")
+                {
+                    UpgradeValues[i].text = SafeStats.UpgradedValues()[i];
+
+                }
+                else
+                {
+                    UpgradeValues[i].text = "";
+                }
             }
         }
+
     }
 
     private void OnUpgradeCoin()
@@ -204,9 +225,22 @@ public class UpgradeManager : MonoBehaviour {
 
     void NoUpgrades()
     {
-        foreach (var button in _buttons)
+        _buttons[0].GetComponent<SpriteManager>().NonInteractable();
+        if (!SafeStats.Unlocked)
         {
-            button.interactable = false;
+            _buttons[2].GetComponent<SpriteManager>().Locked();
+        }
+        else
+        {
+            _buttons[2].GetComponent<SpriteManager>().NonInteractable();
+        }
+        if (!PigStats.Unlocked)
+        {
+            _buttons[1].GetComponent<SpriteManager>().Locked();
+        }
+        else
+        {
+            _buttons[1].GetComponent<SpriteManager>().NonInteractable();
         }
     }
     private void OnUpgradePiggy()

@@ -15,6 +15,7 @@ public class SpawnButton : MonoBehaviour
 
     void Start()
     {
+        if (!_firstSpawn) _firstSpawn = true;
         _btn = GetComponent<Button>();
 
         _btn.onClick.AddListener(() => SpawnPress(transform.name));
