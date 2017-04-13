@@ -21,6 +21,9 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StartListening("SpawnFirstUnit", StartTime);
         
     }
+
+
+
     void FirstTimePress()
     {
         _pressedFinish = true; 
@@ -28,6 +31,8 @@ public class LevelCompleteText : MonoBehaviour {
         GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
 
     }
+
+
 
     IEnumerator SlideRightIn(float startTime)
     {
@@ -45,7 +50,21 @@ public class LevelCompleteText : MonoBehaviour {
             {
                 _pressedFinish = false;
 
+                Debug.Log("SlidedRightIn");
 
+                if(StateManager.Instance.SelectedLevel == 1)
+                {
+                    HintManager.Instance.CreateHint(7, Vector3.zero);
+                }
+
+                else if (StateManager.Instance.SelectedLevel == 2)
+                {
+                    HintManager.Instance.CreateHint(9, Vector3.zero);
+                }
+                else if(StateManager.Instance.SelectedLevel == PretendData.Instance.Data.Length + 1)
+                {
+                    HintManager.Instance.CreateHint(10, Vector3.zero);
+                }
                 break;
             }
 
@@ -54,10 +73,12 @@ public class LevelCompleteText : MonoBehaviour {
     }
 
 
+
     private void StartTime()
     {
         _timeSinceStart = Time.fixedTime;
     }
+
 
 
     private void OnDestroy()
@@ -68,6 +89,8 @@ public class LevelCompleteText : MonoBehaviour {
         EventManager.StopListening("SpawnFirstUnit", StartTime);
 
     }
+
+
 
     private void StarSystem()
     {
@@ -94,6 +117,8 @@ public class LevelCompleteText : MonoBehaviour {
         image.sprite = Stars.A_Stars(0);
 
     }
+
+
     IEnumerator stars(int starsNum, Image starImage)
     {
         var particles = GetComponentsInChildren<ParticleSystem>();
@@ -138,10 +163,15 @@ public class LevelCompleteText : MonoBehaviour {
         }
     }
 
+
+
     private void Upgraded()
     {
         GetComponentsInChildren<Text>()[0].text = StateManager.Instance.UpgradesAvailable.ToString();
     }
+
+
+
     private void LevelLost()
     {
         _timeEnded = Time.fixedTime;
@@ -153,9 +183,13 @@ public class LevelCompleteText : MonoBehaviour {
 
         }
         UpdateFinishMenu();
+        Debug.Log("LevelLost");
 
         StartCoroutine(WaitSecondsLost(Time.time));
     }
+
+
+
     IEnumerator WaitSecondsLost(float starttime)
     {
 
@@ -180,8 +214,12 @@ public class LevelCompleteText : MonoBehaviour {
 
         }
 
+        Debug.Log("End of WaitSecondsLost");
 
     }
+
+
+
     IEnumerator WaitSeconds(float starttime)
     {
 
@@ -205,17 +243,17 @@ public class LevelCompleteText : MonoBehaviour {
                 StarSystem();
                 break;
             }
-
-
         }
-
-
+        Debug.Log("End of WaitSeconds");
 
     }
+
+
 
     private void LevelComplete()
     {
         _timeEnded = Time.fixedTime;
+        Debug.Log("LevelComplete");
 
 
         if (StateManager.Instance.LevelsAvailable == StateManager.Instance.SelectedLevel)
@@ -248,10 +286,13 @@ public class LevelCompleteText : MonoBehaviour {
         StartCoroutine(WaitSeconds(Time.time));
 
     }
+
+
+
     private void UpdateFinishMenu()
     {
         //show end level screen
-
+        Debug.Log("UpdateFinishMenu");
 
         
         //update text fields on end level screen
