@@ -32,6 +32,8 @@ public class InputData
 
     public string BSDataName;
     public string BSDataAmount;
+    public string BSDataAmountMonthly;
+    public string BSDataFrequency;
 }
 
 

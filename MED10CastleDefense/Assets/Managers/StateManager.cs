@@ -13,7 +13,6 @@ public class StateManager : MonoBehaviour {
 
     private static string _levelName;
 
-
     private static StateManager _instance = null;
     public static StateManager Instance
     {

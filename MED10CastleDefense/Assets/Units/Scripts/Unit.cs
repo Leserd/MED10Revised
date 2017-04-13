@@ -25,7 +25,8 @@ public class Unit : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         EventManager em = EventManager.Instance;    //Only to make sure no errors happen with the eventmanager
-
+        //PolygonCollider2D col = gameObject.AddComponent<PolygonCollider2D>();
+        //col.isTrigger = true;
 
         EventManager.Damage += TakeDamage;
 

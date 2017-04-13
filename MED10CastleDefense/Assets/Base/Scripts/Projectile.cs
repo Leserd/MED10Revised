@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour {
         {
             if(_target != null)
             {
-                transform.position = Vector2.MoveTowards(transform.position, _target.position, Time.deltaTime * _projectileSpeed);
+                transform.position = Vector2.MoveTowards(transform.position, _target.position - (Vector3.up * 0.5f), Time.deltaTime * _projectileSpeed);
             }
             else
             {

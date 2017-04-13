@@ -9,6 +9,7 @@ public class KingAnimation : MonoBehaviour {
     private string fallState = "Fall";
     private string victoryState = "Victory";
     private GameObject _ownBase;
+    private bool _showIntroHints = true;
 
     private void Awake()
     {
@@ -21,6 +22,12 @@ public class KingAnimation : MonoBehaviour {
         EventManager.StartListening("LevelComplete", Victory);
         EventManager.StartListening("LevelLost", Loss);
         EventManager.Damage += TakeDamage;
+
+        if (_showIntroHints)
+        {
+            HintManager.Instance.CreateHint(3, Vector3.zero);
+            _showIntroHints = false;
+        }
     }
 
 
@@ -48,6 +55,7 @@ public class KingAnimation : MonoBehaviour {
     public void Victory()
     {
         _animator.Play(victoryState);
+
     }
 
 

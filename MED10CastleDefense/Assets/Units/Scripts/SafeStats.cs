@@ -18,7 +18,6 @@ public static class SafeStats {
     }
     public static void Upgrade()
     {
-        Damage +=2;
         Cooldown = Cooldown *0.9f;
         UpgradeLevel++;
     }
