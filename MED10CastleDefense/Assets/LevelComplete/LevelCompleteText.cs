@@ -52,12 +52,12 @@ public class LevelCompleteText : MonoBehaviour {
 
                 Debug.Log("SlidedRightIn");
 
-                if(StateManager.Instance.SelectedLevel == 1)
+                if(StateManager.Instance.SelectedLevel == 1 && StateManager.Instance.NewLevelComplete == true)
                 {
                     HintManager.Instance.CreateHint(7, Vector3.zero);
                 }
 
-                else if (StateManager.Instance.SelectedLevel == 2)
+                else if (StateManager.Instance.SelectedLevel == 2 && StateManager.Instance.NewLevelComplete == true)
                 {
                     HintManager.Instance.CreateHint(9, Vector3.zero);
                 }

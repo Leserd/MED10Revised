@@ -78,10 +78,7 @@ public class ChooseLevelManager : MonoBehaviour {
             }
             _levels[i].interactable = true;
             var billImage = Instantiate(BillObject, _levels[i].transform, false);
-            if (i %2 ==1)
-            {
-                billImage.transform.localPosition += new Vector3(0f, 100f, 0f);
-            }
+
             var bill = billImage.GetComponentsInChildren<Text>();
             bill[0].text = PretendData.Instance.Data[i].BSDataName;
             bill[1].text = PretendData.Instance.Data[i].BSDataAmount;
