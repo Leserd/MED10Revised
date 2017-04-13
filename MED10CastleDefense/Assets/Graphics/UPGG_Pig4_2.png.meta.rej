@@ -1,0 +1,24 @@
+diff a/MED10CastleDefense/Assets/Graphics/UPGG_Pig4_2.png.meta b/MED10CastleDefense/Assets/Graphics/UPGG_Pig4_2.png.meta	(rejected hunks)
+@@ -1,13 +1,22 @@
+ fileFormatVersion: 2
++<<<<<<< HEAD
++guid: 454a332ddb3d25d48bef6d6605ca30e2
++timeCreated: 1492000501
++=======
+ guid: 2628fbfc7617cb6418e9ff1d31a13603
+ timeCreated: 1492004289
++>>>>>>> 8fbe7bae228efe7fd339b5f05e7d2efae965dd9f
+ licenseType: Free
+ TextureImporter:
+   fileIDToRecycleName: {}
+   serializedVersion: 4
+   mipmaps:
+     mipMapMode: 0
++<<<<<<< HEAD
++    enableMipMap: 1
++=======
+     enableMipMap: 0
++>>>>>>> 8fbe7bae228efe7fd339b5f05e7d2efae965dd9f
+     sRGBTexture: 1
+     linearTexture: 0
+     fadeOut: 0

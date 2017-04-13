@@ -1,0 +1,9 @@
+diff a/MED10CastleDefense/Assets/Graphics/UPGG_Pig4.png.meta b/MED10CastleDefense/Assets/Graphics/UPGG_Pig4.png.meta	(rejected hunks)
+@@ -99,6 +99,7 @@
+     crunchedCompression: 0
+     allowsAlphaSplitting: 0
+     overridden: 0
++>>>>>>> 8fbe7bae228efe7fd339b5f05e7d2efae965dd9f
+   spriteSheet:
+     serializedVersion: 2
+     sprites: []
