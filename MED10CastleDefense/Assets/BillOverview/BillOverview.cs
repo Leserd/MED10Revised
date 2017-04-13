@@ -14,6 +14,11 @@ public class BillOverview : MonoBehaviour {
         EventManager.StartListening("SelectedLevel", SelectedLevel);
     }
 
+    private void Start()
+    {
+        SelectedLevel();
+    }
+
     void SelectedLevel()
     {
         int lvl = StateManager.Instance.SelectedLevel - 1;

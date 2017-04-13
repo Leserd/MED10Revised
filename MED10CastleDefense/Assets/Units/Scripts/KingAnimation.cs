@@ -9,7 +9,7 @@ public class KingAnimation : MonoBehaviour {
     private string fallState = "Fall";
     private string victoryState = "Victory";
     private GameObject _ownBase;
-    private bool _showIntroHints = true;
+    private static bool _showIntroHints = true;
 
     private void Awake()
     {
