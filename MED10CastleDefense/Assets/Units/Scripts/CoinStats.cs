@@ -13,14 +13,14 @@ public static class CoinStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[3] { "", "(+.5)","(-0.1)"  };
+        return new string[3] { "", "(+1)","(-0.1)"  };
     }
     public static void Upgrade()
     {
         //speed cooldown damage
         Damage += 0; //Mathf.RoundToInt((Damage * (UpgradeLevel*0.5f)));
         Cooldown -= 0.1f; //Cooldown * UpgradeLevel;
-        Speed += 0.5f; //Speed * UpgradeLevel;
+        Speed += 1f; //Speed * UpgradeLevel;
         UpgradeLevel++;
     }
     public static string[] Values()
