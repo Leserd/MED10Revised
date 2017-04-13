@@ -153,7 +153,14 @@ public class UpgradeManager : MonoBehaviour {
     }
     private string FormatValues(string upgradeValue)
     {
-        return float.Parse(upgradeValue).ToString("F1");
+        try
+        {
+            return float.Parse(upgradeValue).ToString("F1");
+        }
+        catch
+        {
+            return "";
+        }
     }
 
     private void UpdatePiggyValues()

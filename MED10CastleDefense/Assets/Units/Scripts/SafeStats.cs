@@ -23,7 +23,9 @@ public static class SafeStats {
     }
     public static string[] Values()
     {
-        return new string[3] { Health.ToString(), Speed.ToString(), Cooldown.ToString() };
+        if(Unlocked) return new string[3] { Health.ToString(), Speed.ToString(), Cooldown.ToString() };
+        return new string[3] { "", "", "" };
+
     }
 
     public static bool Unlocked
