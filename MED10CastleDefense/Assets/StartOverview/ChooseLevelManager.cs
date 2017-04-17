@@ -33,6 +33,8 @@ public class ChooseLevelManager : MonoBehaviour {
             try
             {
                 SelectedLevelIcon.transform.parent = _levels[StateManager.Instance.LevelsAvailable -1].transform;
+                StateManager.Instance.LevelName = PretendData.Instance.Data[StateManager.Instance.LevelsAvailable-1].BSDataName;
+                EventManager.TriggerEvent("SelectedLevel");
 
                 StateManager.Instance.SelectedLevel = StateManager.Instance.LevelsAvailable;
 
@@ -43,6 +45,8 @@ public class ChooseLevelManager : MonoBehaviour {
                 Debug.Log("catch");
                 SelectedLevelIcon.transform.parent = _levels[(StateManager.Instance.LevelsAvailable)-2].transform;
                 StateManager.Instance.SelectedLevel = StateManager.Instance.LevelsAvailable -1;
+                StateManager.Instance.LevelName = PretendData.Instance.Data[StateManager.Instance.LevelsAvailable - 2].BSDataName;
+
 
             }
             SelectedLevelIcon.transform.localPosition = Vector3.zero;
@@ -68,8 +72,8 @@ public class ChooseLevelManager : MonoBehaviour {
         var data = PretendData.Instance.Data[number-1];
         var instance = StateManager.Instance;
         instance.LevelName = data.BSDataName;
-        instance.SelectedLevel = number;
         EventManager.TriggerEvent("SelectedLevel");
+        instance.SelectedLevel = number;
         SelectedLevelIcon.transform.parent = _levels[number - 1].transform;
         SelectedLevelIcon.transform.localPosition = new Vector3(5f,114f,0f);
 
@@ -96,7 +100,7 @@ public class ChooseLevelManager : MonoBehaviour {
                 var billImage2 = Instantiate(BillObject, _levels[i].transform, false);
                 var bill = billImage2.GetComponentsInChildren<Text>();
                 bill[0].text = PretendData.Instance.Data[i].BSDataName;
-                bill[1].text = PretendData.Instance.Data[i].BSDataAmount;
+                bill[1].text = PretendData.Instance.Data[i].BSDataAmount + " kr";
 
             }
             catch 
