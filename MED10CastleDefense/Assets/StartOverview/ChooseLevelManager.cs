@@ -60,8 +60,7 @@ public class ChooseLevelManager : MonoBehaviour {
         SelectedLevelIcon.transform.localPosition = new Vector3(5f,114f,0f);
 
         
-    }
-    
+    }    
 
     private void InteractableLevels()
     {
@@ -79,8 +78,9 @@ public class ChooseLevelManager : MonoBehaviour {
             try
             {
                 _levels[i].interactable = true;
-                var billImage = Instantiate(BillObject, _levels[i].transform, false);
-                var bill = billImage.GetComponentsInChildren<Text>();
+                
+                var billImage2 = Instantiate(BillObject, _levels[i].transform, false);
+                var bill = billImage2.GetComponentsInChildren<Text>();
                 bill[0].text = PretendData.Instance.Data[i].BSDataName;
                 bill[1].text = PretendData.Instance.Data[i].BSDataAmount;
 
@@ -90,11 +90,6 @@ public class ChooseLevelManager : MonoBehaviour {
 
                 Debug.Log("failed completion of castle buttton " + i);
             }
-
-
-            //   if (MaxLevel >= _levels.Length) MaxLevel = _levels.Length;
-
-
         }
     }
 

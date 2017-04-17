@@ -7,19 +7,19 @@ public static class PigStats {
     public static int Health = 3;
     public static int Damage = 15;
     public static float Speed = 2;
-    public static float Cooldown = 10f;
+    public static float Cooldown = 5f;
     public static int UpgradeLevel = 0;
     public static GameObject explosion;
     private static bool _isActivated = false;
 
     public static string[] UpgradedValues()
     {
-        return new string[3] { "(+3)", "(+1)","" };
+        return new string[3] { "(+2)", "(+.5)","" };
     }
     public static void Upgrade()
     {
-        Health +=3;
-        Speed  +=1;
+        Health += 2;
+        Speed  += 0.5f;
         UpgradeLevel++;
         
     }
