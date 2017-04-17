@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Hint {
 
@@ -61,6 +62,10 @@ public class Hint {
         {
             Vector3 pos =  Vector3.zero;
             HintManager.Instance.CreateHint(_hintNumber+1, pos);
+        }
+        else if(_hintNumber == 10)
+        {
+            SceneManager.LoadScene("GraphScene");
         }
 
         //TODO: Fancy måde hints fjernes på. 
