@@ -102,12 +102,7 @@ public class StateManager : MonoBehaviour {
                 if(_maxLevel == 0)
                 {
                     _maxLevel = 1;
-                }
-                if (_maxLevel > PretendData.Instance.Data.Length)
-                {
-                   // _maxLevel = PretendData.Instance.Data.Length;
-                }
-                
+                }                
             }
         }
     }

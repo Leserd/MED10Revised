@@ -30,7 +30,18 @@ public class ChooseLevelManager : MonoBehaviour {
         }
         if (StateManager.Instance.SelectedLevel != 0)
         {
-            SelectedLevelIcon.transform.parent = _levels[StateManager.Instance.SelectedLevel-1].transform;
+            try
+            {
+                Debug.Log(StateManager.Instance.LevelsAvailable);
+                SelectedLevelIcon.transform.parent = _levels[StateManager.Instance.LevelsAvailable -1].transform;
+                Debug.Log("try");
+
+            }
+            catch
+            {
+                Debug.Log("catch");
+                SelectedLevelIcon.transform.parent = _levels[(StateManager.Instance.LevelsAvailable)-2].transform;
+            }
             SelectedLevelIcon.transform.localPosition = Vector3.zero;
             SelectedLevelIcon.transform.localPosition = new Vector3(5f, 114f, 0f);
 
