@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class SafeStats {
 
-    public static int Health = 5;
+    public static int Health = 6;
     public static int Damage = 20;
     public static float Speed = 1;
     public static float Cooldown = 15f;
@@ -18,7 +18,7 @@ public static class SafeStats {
     }
     public static void Upgrade()
     {
-        Health += 3;
+        Health += 4;
         Cooldown = Cooldown *0.9f;
         UpgradeLevel++;
     }
