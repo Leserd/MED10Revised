@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PretendData : MonoBehaviour {
     public InputData[] Data;
-    private  static PretendData _instance;
+    private static PretendData _instance;
     public static PretendData Instance
     {
         get
@@ -34,7 +34,5 @@ public class InputData
     public string BSDataAmount;
     public string BSDataAmountMonthly;
     public string BSDataFrequency;
+    public List<int> BSDataPaymentMonths;
 }
-
-
-
