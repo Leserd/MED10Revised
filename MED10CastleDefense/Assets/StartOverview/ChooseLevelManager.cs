@@ -99,6 +99,7 @@ public class ChooseLevelManager : MonoBehaviour {
                 _levels[i].interactable = true;
                 
                 var billImage2 = Instantiate(BillObject, _levels[i].transform, false);
+                billImage2.name = "BillObject";
                 var bill = billImage2.GetComponentsInChildren<Text>();
                 bill[0].text = PretendData.Instance.Data[i].BSDataName;
                 bill[1].text = PretendData.Instance.Data[i].BSDataAmount + " kr";
