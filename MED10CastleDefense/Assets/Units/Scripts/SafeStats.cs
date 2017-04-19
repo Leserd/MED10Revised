@@ -14,7 +14,7 @@ public static class SafeStats {
 
     public static string[] UpgradedValues()
     {
-        return new string[3] { "(+3)", "","(-"+( Cooldown-(Cooldown *0.9f)).ToString("F1")+")" };
+        return new string[3] { "(+4)", "","(-"+( Cooldown-(Cooldown *0.9f)).ToString("F1")+")" };
     }
     public static void Upgrade()
     {
