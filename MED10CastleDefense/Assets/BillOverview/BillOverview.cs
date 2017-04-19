@@ -10,6 +10,8 @@ public class BillOverview : MonoBehaviour {
     public Sprite[] monthsToPay;
     public Sprite[] monthsToNotPay;
     
+
+
     void Awake()
     {
         panelTexts = GetComponentsInChildren<Text>();
@@ -17,10 +19,14 @@ public class BillOverview : MonoBehaviour {
         EventManager.StartListening("SelectedLevel", SelectedLevel);
     }
 
+
+
     private void Start()
     {
         SelectedLevel();
     }
+
+
 
     void SelectedLevel()
     {

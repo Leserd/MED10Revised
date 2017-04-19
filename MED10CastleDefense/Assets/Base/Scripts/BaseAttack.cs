@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseAttack : MonoBehaviour {
 
@@ -23,6 +24,8 @@ public class BaseAttack : MonoBehaviour {
     private Animator _gunAnim;
     public GameObject fireParticleEffect;
     private ParticleSystem _particle;
+    public GameObject damageStatsPrefab;
+    private Transform damageStatsCurrent;
 
     private void Start()
     {
@@ -56,6 +59,26 @@ public class BaseAttack : MonoBehaviour {
         {
             attackSpeed -= lvl * upgAttackSpeed;
         }
+        DisplayAttackStats();
+    }
+
+
+    public void DisplayAttackStats()
+    {
+        if(damageStatsCurrent == null)
+        {
+            damageStatsCurrent = Instantiate(damageStatsPrefab, GameObject.Find("HealthBarCanvas").transform, false).transform;
+
+        }
+
+        damageStatsCurrent.GetChild(1).GetComponent<Text>().text = damage.ToString();
+        damageStatsCurrent.GetChild(3).GetComponent<Text>().text = attackSpeed.ToString("F2");
+
+        damageStatsCurrent.position = Camera.main.WorldToScreenPoint(transform.position);
+        int yOffset = (int)(GetComponent<SpriteRenderer>().sprite.rect.height * transform.localScale.y) / 2 + 150;
+        //int xOffset = (int)(GetComponent<SpriteRenderer>().sprite.rect.width * transform.localScale.x) / 2 + 30;
+        damageStatsCurrent.position = new Vector2(damageStatsCurrent.position.x, damageStatsCurrent.position.y + yOffset);
+        //damageStatsCurrent.position = new Vector2(damageStatsCurrent.position.x + xOffset, damageStatsCurrent.position.y);
     }
 
 

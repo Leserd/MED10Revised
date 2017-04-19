@@ -64,8 +64,14 @@ public class HealthBarScript : MonoBehaviour
 
     private void PlaceHealthBar()
     {
+        int offsetAmount = 30;
+        if (_target.tag == "EnemyBase")
+            offsetAmount = -30;
+        else if (_target.tag == "Unit")
+            offsetAmount = -100;
+
         _transform.position = Camera.main.WorldToScreenPoint(_target.transform.position);
-        int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 + 30;
+        int yOffset = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.height * _target.transform.localScale.y) / 2 + offsetAmount;
         _transform.position = new Vector2(_transform.position.x, _transform.position.y + yOffset);
     }
 
@@ -88,6 +94,11 @@ public class HealthBarScript : MonoBehaviour
 
         //Change width of health bars
         int barWidth = (int)(_target.GetComponent<SpriteRenderer>().sprite.rect.width * _target.transform.localScale.x);
+        if(_target.tag == "Unit")
+        {
+            barWidth /= 2;
+        }
+
         _barForeground.rectTransform.sizeDelta = new Vector2(barWidth, _barForeground.rectTransform.sizeDelta.y);
         _barBackground.rectTransform.sizeDelta = new Vector2(barWidth, _barBackground.rectTransform.sizeDelta.y);
         _ready = true;
