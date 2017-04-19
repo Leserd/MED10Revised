@@ -4,34 +4,23 @@ using System.Collections.Generic;
 
 public class CreateCharts : MonoBehaviour {
 
-    public string ChooseChart = "testBarChart";
     public Vector3 ChooseStartLocation;
     public GameObject Bars;
-    public GameObject Pies;
-    public Dropdown DropdownChooser;
-    
-    void Start()
-    {
-        ChooseChart = "testBarChart";
-    }    	
+   	
 	void Update () {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            var newChart = new GameObject(ChooseChart);
-            newChart.transform.SetParent(transform, false);
-            newChart.AddComponent<CreateSubCanvas>().CreateCharts(ChooseChart, ChooseStartLocation,Bars,Pies );
-            Debug.Log("Pressed M"); 
-        }	
-	}
-    public void changeChart()
-    {
-        if (DropdownChooser.value == 0)
-        {
-            ChooseChart = "testBarChart";
-        }
-        else if (DropdownChooser.value == 1)
-        {
-            ChooseChart = "testPieChart";
+
+            var canvasSpawnAtLoc = new GameObject();
+
+            canvasSpawnAtLoc.transform.SetParent(transform, false);
+            canvasSpawnAtLoc.name = "Barchart";
+            canvasSpawnAtLoc.AddComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+            canvasSpawnAtLoc.AddComponent<CanvasScaler>();
+            canvasSpawnAtLoc.AddComponent<ChartTester>().barChartPrefab = Bars;
+            canvasSpawnAtLoc.GetComponent<RectTransform>().sizeDelta = new Vector2(500, 500);
+            canvasSpawnAtLoc.GetComponent<RectTransform>().localPosition = ChooseStartLocation;
+
         }
     }
 }
