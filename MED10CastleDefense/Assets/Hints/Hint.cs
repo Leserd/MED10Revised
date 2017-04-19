@@ -23,7 +23,7 @@ public class Hint {
         _hintNumber = num;
         Sprite = Resources.Load<Sprite>("Sprites/Hints/Hint" + _hintNumber.ToString());
        
-        Debug.Log("Hint #" + _hintNumber + " created.");
+        //Debug.Log("Hint #" + _hintNumber + " created.");
        // _nextHintToShow++;
 
         //AddListener to button
@@ -55,7 +55,7 @@ public class Hint {
 
     public void DestroyHint()
     {
-        Debug.Log("Destroying hint #" + _hintNumber);
+        //Debug.Log("Destroying hint #" + _hintNumber);
 
         //Hvis hintet skal vise ny hint når det lukkes, gør det her:
         if (_hintNumber == 0 || _hintNumber == 1 || _hintNumber == 3 || _hintNumber == 4 || _hintNumber == 5 || _hintNumber == 7)
