@@ -161,6 +161,9 @@ public class Unit : MonoBehaviour
 
         EventManager.Instance.UnitDead(gameObject);
 
+        //Disable collider
+        GetComponent<BoxCollider2D>().enabled = false;
+
         EventManager.Damage -= TakeDamage;
 
         //Destroy gameObject
