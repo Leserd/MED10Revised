@@ -63,10 +63,6 @@ public class Hint {
             Vector3 pos =  Vector3.zero;
             HintManager.Instance.CreateHint(_hintNumber+1, pos);
         }
-        else if(_hintNumber == 11)
-        {
-            SceneManager.LoadScene("LevelOverviewScene");
-        }
 
         //TODO: Fancy måde hints fjernes på. 
         HintManager.Instance.RemoveHint(this);

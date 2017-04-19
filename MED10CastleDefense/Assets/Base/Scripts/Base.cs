@@ -25,10 +25,7 @@ public class Base : MonoBehaviour {
 
         EventManager.Damage += TakeDamage;
 
-        if(StateManager.Instance.SelectedLevel == 2)
-        {
-            HintManager.Instance.CreateHint(9, Vector3.zero);
-        }
+       
 
         SetMaxHealth();
         SetName();

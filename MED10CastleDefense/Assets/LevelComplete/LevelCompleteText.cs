@@ -59,11 +59,11 @@ public class LevelCompleteText : MonoBehaviour {
 
                 else if (StateManager.Instance.SelectedLevel == 2 && StateManager.Instance.NewLevelComplete == true)
                 {
-                    HintManager.Instance.CreateHint(9, Vector3.zero);
+                    HintManager.Instance.CreateHint(11, Vector3.zero);
                 }
                 else if(StateManager.Instance.SelectedLevel == PretendData.Instance.Data.Length)
                 {
-                    HintManager.Instance.CreateHint(10, Vector3.zero);
+                    HintManager.Instance.CreateHint(12, Vector3.zero);
                 }
                 break;
             }

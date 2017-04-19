@@ -26,6 +26,15 @@ public class BillOverview : MonoBehaviour {
     private void Start()
     {
         SelectedLevel();
+
+        if(StateManager.Instance.LevelsAvailable == 2 && StateManager.Instance.NewLevelComplete == true)
+        {
+            HintManager.Instance.CreateHint(9, Vector3.zero);
+        }
+        else if(StateManager.Instance.LevelsAvailable == 8 && StateManager.Instance.NewLevelComplete == true)
+        {
+            HintManager.Instance.CreateHint(13, Vector3.zero);
+        }
     }
 
 
