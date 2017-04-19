@@ -28,11 +28,11 @@ public class PretendData : MonoBehaviour {
 [System.Serializable]
 public class InputData
 {
-    // public string BSdataName;
 
     public string BSDataName;
     public string BSDataAmount;
     public string BSDataAmountMonthly;
     public string BSDataFrequency;
     public List<int> BSDataPaymentMonths;
+    public int ID;
 }
