@@ -72,8 +72,9 @@ public class ChooseLevelManager : MonoBehaviour {
         var data = PretendData.Instance.Data[number-1];
         var instance = StateManager.Instance;
         instance.LevelName = data.BSDataName;
-        EventManager.TriggerEvent("SelectedLevel");
         instance.SelectedLevel = number;
+        EventManager.TriggerEvent("SelectedLevel");
+
         SelectedLevelIcon.transform.parent = _levels[number - 1].transform;
         SelectedLevelIcon.transform.localPosition = new Vector3(5f,114f,0f);
 

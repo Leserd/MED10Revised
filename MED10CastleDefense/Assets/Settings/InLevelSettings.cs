@@ -25,6 +25,15 @@ public class InLevelSettings : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("Faked a complete lvl");
+            EventManager.TriggerEvent("LevelComplete"); //EventManager.TriggerEvent("LevelLost");
+        }
+    }
+
     private void ButtonInSettings(string buttonNum)
     {
         switch (buttonNum)

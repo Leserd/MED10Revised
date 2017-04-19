@@ -39,6 +39,7 @@ public class BaseAttack : MonoBehaviour {
         EventManager.StartListening("LevelLost", StopAttacking);
         EventManager.StartListening("SpawnFirstUnit", StartAttacking);
 
+
         _gun = transform.GetChild(0);
         _gunAnim = _gun.GetComponent<Animator>();
         _particle = _gun.GetChild(0).GetComponent<ParticleSystem>();
@@ -81,6 +82,15 @@ public class BaseAttack : MonoBehaviour {
         //damageStatsCurrent.position = new Vector2(damageStatsCurrent.position.x + xOffset, damageStatsCurrent.position.y);
     }
 
+
+    public void RemoveAttackStats()
+    {
+        if(damageStatsCurrent != null)
+        {
+            Destroy(damageStatsCurrent.gameObject);
+            damageStatsCurrent = null;
+        }
+    }
 
 
     private void OnDisable()
@@ -142,6 +152,7 @@ public class BaseAttack : MonoBehaviour {
         }
         _attackCoroutine = null;
         canAttack = false;
+        RemoveAttackStats();
     }
 
 

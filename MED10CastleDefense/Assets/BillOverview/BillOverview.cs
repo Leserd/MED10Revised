@@ -42,7 +42,7 @@ public class BillOverview : MonoBehaviour {
             for (int i = 0; i < monthsParent.childCount; i++)
             {
                 Sprite paymentSprite = monthsToNotPay[i];
-                if (PretendData.Instance.Data[i].BSDataPaymentMonths.Contains(i))
+                if (PretendData.Instance.Data[lvl].BSDataPaymentMonths.Contains(i))
                 {
                     paymentSprite = monthsToPay[i];
                 }
