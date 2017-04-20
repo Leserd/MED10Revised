@@ -46,7 +46,7 @@ public class BudgetButton : MonoBehaviour {
         {
             open.onClick.AddListener(() => ToggleDisplay());
             open.enabled = true;
-            HintManager.Instance.CreateHint(12,Vector3.zero);
+            HintManager.Instance.CreateHint(12);
         }
     }
 

@@ -56,7 +56,7 @@ public class ChooseLevelManager : MonoBehaviour {
 
         if (_showIntroHint)
         {
-            HintManager.Instance.CreateHint(0, Vector3.zero);
+            HintManager.Instance.CreateHint(0);
             _showIntroHint = false;
         }
 

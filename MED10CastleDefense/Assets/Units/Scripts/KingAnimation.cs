@@ -25,7 +25,7 @@ public class KingAnimation : MonoBehaviour {
 
         if (_showIntroHints)
         {
-            HintManager.Instance.CreateHint(3, Vector3.zero);
+            HintManager.Instance.CreateHint(3);
             _showIntroHints = false;
         }
     }

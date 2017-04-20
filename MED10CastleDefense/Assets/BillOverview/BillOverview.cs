@@ -29,7 +29,7 @@ public class BillOverview : MonoBehaviour {
 
         if(StateManager.Instance.LevelsAvailable == 2 && StateManager.Instance.NewLevelComplete == true)
         {
-            HintManager.Instance.CreateHint(9, Vector3.zero);
+            HintManager.Instance.CreateHint(9);
         }
     }
 

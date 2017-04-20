@@ -13,7 +13,7 @@ public class Hint {
 
 
 
-    public Hint(int num, Vector3 position)
+    public Hint(int num)
     {
         //instantiate hint prefab
         GameObject newBtn = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Hint"), GameObject.Find("HintCanvas").transform);
@@ -31,7 +31,7 @@ public class Hint {
         _hintObj.onClick.AddListener(() => DestroyHint());
 
         //Change position
-        _hintObj.GetComponent<RectTransform>().localPosition = position;
+        _hintObj.GetComponent<RectTransform>().localPosition = Vector3.zero;
 
         //_hintObj.transform.GetChild(0).GetComponent<Text>().text = _hintNumber.ToString();
 
@@ -60,8 +60,7 @@ public class Hint {
         //Hvis hintet skal vise ny hint når det lukkes, gør det her:
         if (_hintNumber == 0 || _hintNumber == 1 || _hintNumber == 3 || _hintNumber == 4 || _hintNumber == 5 || _hintNumber == 7 || _hintNumber == 12)
         {
-            Vector3 pos =  Vector3.zero;
-            HintManager.Instance.CreateHint(_hintNumber+1, pos);
+            HintManager.Instance.CreateHint(_hintNumber+1);
         }
 
         //TODO: Fancy måde hints fjernes på. 

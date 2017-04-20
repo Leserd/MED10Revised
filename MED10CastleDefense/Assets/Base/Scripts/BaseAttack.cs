@@ -47,7 +47,7 @@ public class BaseAttack : MonoBehaviour {
 
         if (StateManager.Instance.SelectedLevel == 2 && StateManager.Instance.NewLevelComplete == false)
         {
-            HintManager.Instance.CreateHint(10, Vector3.zero);
+            HintManager.Instance.CreateHint(10);
         }
 
         UpdateStats();

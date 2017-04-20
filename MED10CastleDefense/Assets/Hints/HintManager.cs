@@ -7,7 +7,7 @@ public class HintManager : MonoBehaviour {
 
     private List<Hint> _activeHints = new List<Hint>();
     private static HintManager _instance;
-    
+    private List<int> _shownHints = new List<int>();
 
     public static HintManager Instance
     {
@@ -40,42 +40,47 @@ public class HintManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
-            CreateHint(0, new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0));
+            CreateHint(0);
         }
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            CreateHint(1, new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0));
+            CreateHint(1);
         }
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            CreateHint(2, new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0));
+            CreateHint(2);
         }
         if (Input.GetKeyDown(KeyCode.Keypad3))
         {
-            CreateHint(3, new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0));
+            CreateHint(3);
         }
         if (Input.GetKeyDown(KeyCode.Keypad4))
         {
-            CreateHint(4, new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0));
+            CreateHint(4);
         }
         if (Input.GetKeyDown(KeyCode.Keypad5))
         {
-            CreateHint(5, new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0));
+            CreateHint(5);
         }
         if (Input.GetKeyDown(KeyCode.Keypad6))
         {
-            CreateHint(6, new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0));
+            CreateHint(6);
         }
         if (Input.GetKeyDown(KeyCode.Keypad7))
         {
-            CreateHint(7, new Vector3(Random.Range(-900f, 900f), Random.Range(-500f, 500f), 0));
+            CreateHint(7);
         }
     }
 
-    public void CreateHint(int num, Vector3 position)
+    public void CreateHint(int num)
     {
-        Hint hint = new Hint(num, Vector3.zero);
-        AddActiveHint(hint);
+        if (!_shownHints.Contains(num))
+        {
+            Hint hint = new Hint(num);
+            AddActiveHint(hint);
+            _shownHints.Add(num);
+        }
+        
     }
 
 
