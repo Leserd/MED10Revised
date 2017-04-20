@@ -61,10 +61,7 @@ public class LevelCompleteText : MonoBehaviour {
                 {
                     HintManager.Instance.CreateHint(11);
                 }
-                else if(StateManager.Instance.SelectedLevel == PretendData.Instance.Data.Length)
-                {
-                    HintManager.Instance.CreateHint(12);
-                }
+                
                 break;
             }
 

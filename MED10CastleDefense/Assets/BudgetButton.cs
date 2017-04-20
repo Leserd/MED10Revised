@@ -42,7 +42,7 @@ public class BudgetButton : MonoBehaviour {
         BudgetUpdate();
         EventManager.StartListening("SelectedLevel", BudgetUpdate);
 
-        if (StateManager.Instance.LevelsAvailable == PretendData.Instance.Data.Length + 1) 
+        if (StateManager.Instance.LevelsAvailable == PretendData.Instance.Data.Length + 1 && StateManager.Instance.NewLevelComplete == true) 
         {
             open.onClick.AddListener(() => ToggleDisplay());
             open.enabled = true;
