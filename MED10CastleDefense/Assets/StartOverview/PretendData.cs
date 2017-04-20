@@ -5,6 +5,15 @@ using UnityEngine;
 public class PretendData : MonoBehaviour {
     public InputData[] Data;
     private static PretendData _instance;
+    public List<InputData> GetListData
+    {
+        get
+        {
+            var list = new List<InputData>();
+            list.AddRange(Data);
+            return list;
+        }
+    }
     public static PretendData Instance
     {
         get

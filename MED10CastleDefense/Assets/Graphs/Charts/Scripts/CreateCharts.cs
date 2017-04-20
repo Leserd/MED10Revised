@@ -5,35 +5,23 @@ using System.Collections.Generic;
 public class CreateCharts : MonoBehaviour {
 
     public Vector3 ChooseStartLocation;
-    public GameObject Bars;
+    public GameObject BarCanvas;
    	
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
-            var canvasSpawnAtLoc = new GameObject();
-
-            canvasSpawnAtLoc.transform.SetParent(transform, false);
-            canvasSpawnAtLoc.name = "Barchart";
-            canvasSpawnAtLoc.AddComponent<Canvas>().renderMode = RenderMode.WorldSpace;
-            canvasSpawnAtLoc.AddComponent<CanvasScaler>();
-           // canvasSpawnAtLoc.AddComponent<ChartTester>().barChartPrefab = Bars;
-            canvasSpawnAtLoc.GetComponent<RectTransform>().sizeDelta = new Vector2(500, 500);
-            canvasSpawnAtLoc.GetComponent<RectTransform>().localPosition = ChooseStartLocation;
-
-
             var data = PretendData.Instance.Data;
+            
+            var barchart = Instantiate(BarCanvas);
+            barchart.transform.SetParent(transform, false);
 
+            var chart = barchart.GetComponentInChildren<BarChart>();
 
+            var chartButtons = barchart.GetComponentInChildren<BarButtons>();
+            chartButtons.InstantiateButtons(data, chart);
 
-
-            var barchart = Instantiate(Bars);
-            barchart.transform.SetParent(canvasSpawnAtLoc.transform, false);
-
-            var chart = barchart.GetComponent<BarChart>();
-
-            chart.ChartWidth = canvasSpawnAtLoc.GetComponent<RectTransform>().rect.width;
-            chart.ChartHeight = canvasSpawnAtLoc.GetComponent<RectTransform>().rect.height;
+            chart.ChartWidth = 1920f - 200f - 600f; //canvasSpawnAtLoc.GetComponent<RectTransform>().rect.width;
+            chart.ChartHeight = 1080f - 100f - 100f; //canvasSpawnAtLoc.GetComponent<RectTransform>().rect.height;
 
             //chart.SetData(data);
             chart.SetMonthsData(data);
