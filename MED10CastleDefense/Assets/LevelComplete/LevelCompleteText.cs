@@ -94,6 +94,8 @@ public class LevelCompleteText : MonoBehaviour {
 
     private void StarSystem()
     {
+        //Uncomment dette hvis du vil bruge tid i stedet for liv som årsag til stjerner
+        /*
         var image = GetComponentsInChildren<Image>()[6];
         var timeDiff = _timeEnded - _timeSinceStart;
         if (timeDiff <= 30f)
@@ -102,7 +104,7 @@ public class LevelCompleteText : MonoBehaviour {
             //image.sprite = Stars.A_Stars(3);
             return;
         }
-        if (timeDiff <=60)
+        if (timeDiff <= 60)
         {
             StartCoroutine(stars(2, image));
             //image.sprite = Stars.A_Stars(2);
@@ -115,7 +117,33 @@ public class LevelCompleteText : MonoBehaviour {
             return;
         }
         image.sprite = Stars.A_Stars(0);
+        */
 
+        //Livbaseret stjerneudregning
+        var image = GetComponentsInChildren<Image>()[6];
+        //var timeDiff = _timeEnded - _timeSinceStart;
+        Base playerBase = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<Base>();
+        float baseHpPercent = (float)playerBase.health / (float)playerBase.maxHealth;
+        print(baseHpPercent);
+        if (baseHpPercent == 1f)
+        {
+            StartCoroutine(stars(3, image));
+            //image.sprite = Stars.A_Stars(3);
+            return;
+        }
+        else if (baseHpPercent >= 0.5f)
+        {
+            StartCoroutine(stars(2, image));
+            //image.sprite = Stars.A_Stars(2);
+            return;
+        }
+        else if(baseHpPercent != 0f)
+        {
+            image.sprite = Stars.A_Stars(1);
+            GetComponentsInChildren<ParticleSystem>()[0].Play();
+            return;
+        }
+        image.sprite = Stars.A_Stars(0);
     }
 
 

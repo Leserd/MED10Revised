@@ -75,7 +75,7 @@ public class ChooseLevelManager : MonoBehaviour {
         instance.SelectedLevel = number;
         EventManager.TriggerEvent("SelectedLevel");
 
-        SelectedLevelIcon.transform.parent = _levels[number - 1].transform;
+        SelectedLevelIcon.transform.SetParent(_levels[number - 1].transform);
         SelectedLevelIcon.transform.localPosition = new Vector3(5f,114f,0f);
 
         

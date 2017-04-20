@@ -58,7 +58,7 @@ public class Hint {
         //Debug.Log("Destroying hint #" + _hintNumber);
 
         //Hvis hintet skal vise ny hint når det lukkes, gør det her:
-        if (_hintNumber == 0 || _hintNumber == 1 || _hintNumber == 3 || _hintNumber == 4 || _hintNumber == 5 || _hintNumber == 7)
+        if (_hintNumber == 0 || _hintNumber == 1 || _hintNumber == 3 || _hintNumber == 4 || _hintNumber == 5 || _hintNumber == 7 || _hintNumber == 12)
         {
             Vector3 pos =  Vector3.zero;
             HintManager.Instance.CreateHint(_hintNumber+1, pos);

@@ -23,11 +23,10 @@ public class StartGameButton : MonoBehaviour {
         Transform bases = GameObject.Find("Bases").transform;
         int lvl = StateManager.Instance.SelectedLevel;
         currentLevel = bases.GetChild(lvl - 1).gameObject;
-        transform.parent = currentLevel.transform;
+        transform.SetParent(currentLevel.transform);
         transform.SetAsLastSibling();
         currentLevel.transform.FindChild("BillObject").gameObject.SetActive(false);
        
         transform.localPosition = new Vector2(0, 195);
-        print("STart button new parent: " + bases.GetChild(lvl - 1).name);
     }
 }

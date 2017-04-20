@@ -45,7 +45,7 @@ public class BaseAttack : MonoBehaviour {
         _particle = _gun.GetChild(0).GetComponent<ParticleSystem>();
         _availableTargets.Add(GameObject.FindGameObjectWithTag("PlayerBase"));
 
-        if (StateManager.Instance.SelectedLevel == 2 && StateManager.Instance.NewLevelComplete == true)
+        if (StateManager.Instance.SelectedLevel == 2 && StateManager.Instance.NewLevelComplete == false)
         {
             HintManager.Instance.CreateHint(10, Vector3.zero);
         }

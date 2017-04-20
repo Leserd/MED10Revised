@@ -31,10 +31,6 @@ public class BillOverview : MonoBehaviour {
         {
             HintManager.Instance.CreateHint(9, Vector3.zero);
         }
-        else if(StateManager.Instance.LevelsAvailable == 8 && StateManager.Instance.NewLevelComplete == true)
-        {
-            HintManager.Instance.CreateHint(13, Vector3.zero);
-        }
     }
 
 
@@ -46,8 +42,6 @@ public class BillOverview : MonoBehaviour {
         panelTexts[1].text = PretendData.Instance.Data[lvl].BSDataAmountMonthly + " kr";
         panelTexts[2].text = PretendData.Instance.Data[lvl].BSDataFrequency;
         panelTexts[3].text = PretendData.Instance.Data[lvl].BSDataAmount + " kr";
-        panelTexts[4].text = Mathf.RoundToInt(StateManager.Instance.YearlyExpense / 12).ToString() + " kr";
-        panelTexts[5].text = StateManager.Instance.YearlyExpense.ToString() + " kr";
 
         //Show payment months
         if (monthsToPay.Length != 0 && monthsToNotPay.Length != 0)
