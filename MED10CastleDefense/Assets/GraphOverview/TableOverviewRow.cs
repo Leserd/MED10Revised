@@ -7,15 +7,15 @@ public class TableOverviewRow : MonoBehaviour {
 
     private Text[] _rowTexts;   //0 = name, 1-12 = months, 13 = avg, 14 = total
     private Image _background;
-    private Color _colorWhite = new Color(1, 1, 1, 0.7f);
-    private Color _colorGrey = new Color(0.9f, 0.9f, 0.9f, 0.7f);
+    public Sprite _colorWhite;
+    public Sprite _colorGrey;
 
     private void Awake()
     {
 
         _rowTexts = transform.GetComponentsInChildren<Text>();
         _background = GetComponent<Image>();
-        _background.color = transform.GetSiblingIndex() % 2 > 0 ? _colorWhite : _colorGrey;
+        _background.sprite = transform.GetSiblingIndex() % 2 > 0 ? _colorWhite : _colorGrey;
     }
 
 
