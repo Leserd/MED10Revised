@@ -5,20 +5,48 @@ using System.Collections.Generic;
 public class CreateCharts : MonoBehaviour {
 
     public Vector3 ChooseStartLocation;
-    public GameObject BarCanvas;
-   	
-	public void ToggleDisplay () {
+    public GameObject BarCanvasPrefab;
+    private Button _exit;
+    private bool _isMade = false;
+    private GameObject _barOverview;
+    private bool _isShown = false;
+
+    private void Awake()
+    {
+        _exit = transform.GetChild(0).GetComponent<Button>();
+        _exit.onClick.AddListener(() => ToggleDisplay());
+    }
+
+
+
+    public void ToggleDisplay () {
+        _isShown = !_isShown;
+
+        if(_isMade == false)
+        {
+            CreateChart();
+            _isMade = true;
+        }
+
+        _exit.gameObject.SetActive(_isShown);
+        _barOverview.SetActive(_isShown);
+    }
+
+
+
+    private void CreateChart()
+    {
         var data = PretendData.Instance.Data;
-            
-        var barchart = Instantiate(BarCanvas);
-        barchart.transform.SetParent(transform, false);
 
-        var chart = barchart.GetComponentInChildren<BarChart>();
+        _barOverview = Instantiate(BarCanvasPrefab);
+        _barOverview.transform.SetParent(transform, false);
 
-        var mediumLine = barchart.GetComponentInChildren<MediumLine>();
+        var chart = _barOverview.GetComponentInChildren<BarChart>();
+
+        var mediumLine = _barOverview.GetComponentInChildren<MediumLine>();
         mediumLine.InitializeAvg(1920f - 200f - 600f, data);
 
-        var chartButtons = barchart.GetComponentInChildren<BarButtons>();
+        var chartButtons = _barOverview.GetComponentInChildren<BarButtons>();
         chartButtons.InstantiateButtons(data, chart, mediumLine);
 
         chart.ChartWidth = 1920f - 200f - 600f; //canvasSpawnAtLoc.GetComponent<RectTransform>().rect.width;
@@ -26,6 +54,6 @@ public class CreateCharts : MonoBehaviour {
 
         chart.SetMonthsData(data);
 
-
+        _barOverview.transform.SetAsFirstSibling();
     }
 }
