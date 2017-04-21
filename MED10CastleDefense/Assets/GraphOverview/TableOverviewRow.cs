@@ -28,7 +28,7 @@ public class TableOverviewRow : MonoBehaviour {
         }
         _rowTexts[13].text = Mathf.RoundToInt(int.Parse(bill.BSDataAmount) / 12).ToString();
         _rowTexts[14].text = Mathf.RoundToInt(int.Parse(bill.BSDataAmount)).ToString();
-
+        
     }
 
     public Text GetRowText(int index)
