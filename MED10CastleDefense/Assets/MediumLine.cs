@@ -30,11 +30,9 @@ public class MediumLine : MonoBehaviour {
     private Vector3 Position(InputData[] data)
     {
         var yearMax = BarChart.GetMaxValue(data);
-       // var yearMax = GetMaxValue(data);
         var avgMonthly = AverageMonthly(data);
 
-        Debug.Log(yearMax + " and " + avgMonthly + " widthchat: " + _widthChart);
-        var pos = (avgMonthly / yearMax) * (_widthChart);//(avgMonthly >= yearMax/2f) ? (avgMonthly / yearMax) *( _widthChart) : -( avgMonthly / yearMax) *(_widthChart );
+        var pos =  (yearMax >0) ?  (avgMonthly / yearMax) * (_widthChart) : 0f;//(avgMonthly >= yearMax/2f) ? (avgMonthly / yearMax) *( _widthChart) : -( avgMonthly / yearMax) *(_widthChart );
         return new Vector3( pos,-500,0f);
 
     }
