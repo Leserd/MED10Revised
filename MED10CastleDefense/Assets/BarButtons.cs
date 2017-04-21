@@ -24,7 +24,7 @@ public class BarButtons : MonoBehaviour {
         var colors = ColorGenerator.GetColorsGoldenRatio(data.Length);
         var sorted = sort(data);
         _allData.AddRange(sorted);
-        _currentData = _allData;
+        _currentData.AddRange(sorted);
 
 
         foreach (var bill in sorted)
@@ -47,19 +47,16 @@ public class BarButtons : MonoBehaviour {
 
     private void ButtonPress(int id, int buttonNum)
     {
-        Debug.Log(id + " was the id and the buttonNum pressed was " + buttonNum);
         if (!_legendButtons[buttonNum].LegendActive)
         {
             var colors = ColorGenerator.GetColorsGoldenRatio(_allData.Count);
 
-            var temp2 = _currentData;
-           // temp2.Add(_allData.SingleOrDefault(x => x.ID == id));
-            _currentData = temp2;
-
-
+            var tempo = _currentData;
+            var item = _allData.SingleOrDefault(x => x.ID == id);
+            if (item != null) tempo.Add(item);
+            _currentData = tempo;
 
             _legendButtons[buttonNum].LegendForeground.color = colors[id] ;
-
             _legendButtons[buttonNum].LegendActive = true;
             
 
@@ -67,20 +64,21 @@ public class BarButtons : MonoBehaviour {
         else
         {
             var temp = _currentData;
-            //var item = temp.SingleOrDefault(x => x.ID == id);
-           // if (item != null) temp.Remove(item);
+            var item = temp.SingleOrDefault(x => x.ID == id);
+            if (item != null) temp.Remove(item);
             _currentData = temp;
+
             _legendButtons[buttonNum].LegendForeground.color = Color.gray;
             _legendButtons[buttonNum].LegendActive = false;
 
-
+            
 
         }
-
         _chart.DeleteCurrentGraph();
-       // _chart.SetMonthsData(_currentData.ToArray());
+        _chart.SetMonthsData(_currentData.ToArray());
 
     }
+
 
     private InputData[] sort(InputData[] unsorted)
     {

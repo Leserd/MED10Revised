@@ -8,9 +8,12 @@ using UnityEngine.UI;
 
 public class BarChart : MonoBehaviour
 {
+
+
+
     public Bar barPrefab;
 
-    private List<Bar> _currentBars = new List<Bar>();
+    private List<GameObject> _currentBars = new List<GameObject>();
     
 
     public float ChartWidth { get; set; }
@@ -88,11 +91,10 @@ public class BarChart : MonoBehaviour
 
     public void SetMonthsData(InputData[] dataCollection)
     {
-
         var sortedBills = GetSortedBillsEachMonth(dataCollection);
         float maxValue = GetMaxValue(sortedBills);
 
-        var colors = ColorGenerator.GetColorsGoldenRatio(dataCollection.Length);
+        var colors = ColorGenerator.GetColorsGoldenRatio(PretendData.Instance.Data.Length);
         for (int i = 0; i < sortedBills.Count; i++)
         {
             Bar newBar = Instantiate(barPrefab) as Bar;
@@ -124,76 +126,29 @@ public class BarChart : MonoBehaviour
                 var rectTrans = billbar.GetComponent<RectTransform>();
                 rectTrans.sizeDelta =new Vector2( (float.Parse(bill.BSDataAmountMonthly)/maxMonth)*monthTotalWidth,newBar.Bars.sizeDelta.y);
 
-                //test.
             }
-            _currentBars.Add(newBar);
+            _currentBars.Add(newBar.gameObject);
 
-
-
-            /// skal være i forhold til bill id 
-            //newBar.bar.color = colors[i];
-
-
-            //set value label
-            //newBar.barValue.text = value.ToString();
 
 
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        /*
-        for (int i = 0; i < dataCollection.Length; i++)
-        {
-            Bar newBar = Instantiate(barPrefab) as Bar;
-            newBar.transform.SetParent(transform);
-
-            var data = dataCollection[i];
-            float value = int.Parse(data.BSDataAmountMonthly);
-
-            // set size of bar/s
-            RectTransform rt = newBar.bar.GetComponent<RectTransform>();
-            float normalizedValue = (value / maxValue) * 0.95f;
-            rt.sizeDelta = new Vector2(ChartWidth * normalizedValue, ChartHeight / 12 * 0.95f);
-
-            newBar.bar.color = colors[i];
-
-            newBar.label.text = data.BSDataName;
-
-            //set value label
-            newBar.barValue.text = value.ToString();
-
-            
-
-
-
-        
-            /* if (rt.sizeDelta.x < 30f)
-             {
-                 newBar.barValue.rectTransform.pivot = new Vector2(0.5f, 0f);
-                 newBar.barValue.rectTransform.anchoredPosition = Vector2.zero;
-             }
-        }*/
     }
 
     public void DeleteCurrentGraph()
     {
-        foreach (var item in gameObject.GetComponentsInChildren<GameObject>())
+        foreach (var item in _currentBars)
         {
-            Destroy(item);
+            try
+            {
+                Destroy(item);
+
+            }
+            catch 
+            {
+
+                Debug.Log("Failed deletion");
+            }
         }
     }
-
-
 }
