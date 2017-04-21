@@ -5,25 +5,29 @@ using UnityEngine.UI;
 
 public class BudgetButton : MonoBehaviour {
 
-    Text[] totalBudgetTexts;
-    GameObject graphButtonPanel, tablePanel, barChartPanel;
-
-    Button open, table, barChart;
-
-
+    private Text[] totalBudgetTexts;
+    private GameObject buttonPanel, tableOverview, barOverview;
+    private Button totalBudget, tableBtn, barChartBtn, sendBtn;
+    private Vector3 _startPos, _endPos = new Vector3(0, 300, 0);
+    private bool _moving = false;
+    private float _slideSpeed = 2f;
 
     private void Awake()
     {
-        graphButtonPanel = transform.GetChild(0).gameObject;
-        open = transform.GetChild(1).GetComponent<Button>();
-        totalBudgetTexts = open.transform.GetComponentsInChildren<Text>();
-        tablePanel = transform.GetChild(2).gameObject;
-        table = graphButtonPanel.transform.GetChild(0).GetComponent<Button>();
+        
+        totalBudget = transform.GetChild(0).GetComponent<Button>();
+            buttonPanel = totalBudget.transform.GetChild(0).gameObject;
+                tableBtn = buttonPanel.transform.GetChild(0).GetComponent<Button>();
+                barChartBtn = buttonPanel.transform.GetChild(1).GetComponent<Button>();
+                sendBtn = buttonPanel.transform.GetChild(2).GetComponent<Button>();
+            totalBudgetTexts = totalBudget.transform.GetChild(1).GetComponentsInChildren<Text>();
+        tableOverview = transform.GetChild(1).gameObject;
 
-        table.onClick.AddListener(() => tablePanel.GetComponent<TableOverview>().ToggleDisplay());
+        tableBtn.onClick.AddListener(() => tableOverview.GetComponent<TableOverview>().ToggleDisplay());
 
+        totalBudget.enabled = false;
 
-        open.enabled = false;
+        _startPos = totalBudget.transform.localPosition;
     }
 
 
@@ -31,8 +35,8 @@ public class BudgetButton : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            open.onClick.AddListener(() => ToggleDisplay());
-            open.enabled = true;
+            totalBudget.onClick.AddListener(() => ToggleDisplay());
+            totalBudget.enabled = true;
         }
     }
 
@@ -54,8 +58,8 @@ public class BudgetButton : MonoBehaviour {
 
     private void EnableBudget()
     {
-        open.onClick.AddListener(() => ToggleDisplay());
-        open.enabled = true;
+        totalBudget.onClick.AddListener(() => ToggleDisplay());
+        totalBudget.enabled = true;
     }
 
 
@@ -69,7 +73,40 @@ public class BudgetButton : MonoBehaviour {
 
     public void ToggleDisplay()
     {
-        graphButtonPanel.SetActive(!graphButtonPanel.activeSelf);
+        //buttonPanel.SetActive(!buttonPanel.activeSelf);
+        StartCoroutine(Slide(Time.time));
     }
 
+
+
+
+    IEnumerator Slide(float startTime)
+    {
+        Vector3 start = _startPos;
+        Vector3 end = _endPos;
+        if(totalBudget.transform.localPosition != _startPos)
+        {
+            start = _endPos;
+            end = _startPos;
+        }
+        _moving = true;
+
+        while (_moving)
+        {
+            yield return new WaitForFixedUpdate();
+            var timeSinceStart = Time.time - startTime;
+            var percentageComplete = timeSinceStart / 1f * _slideSpeed;
+
+            totalBudget.transform.localPosition = Vector3.Lerp(start, end, percentageComplete);
+
+            if (percentageComplete >= 1f)
+            {
+                _moving = false;
+                totalBudget.transform.localPosition = end;
+                break;
+            }
+
+
+        }
+    }
 }

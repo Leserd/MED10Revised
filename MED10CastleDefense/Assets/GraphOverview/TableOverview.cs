@@ -13,6 +13,8 @@ public class TableOverview : MonoBehaviour {
     private List<TableOverviewRow> bills = new List<TableOverviewRow>();
     int testNum = 0;
     private bool _isTableFilled = false;
+    
+
 
 
     private void Awake()
@@ -24,11 +26,16 @@ public class TableOverview : MonoBehaviour {
         _botRow = _table.transform.GetChild(1).gameObject;
     }
 
+
+
     private void Start()
     {
         //EventManager.StartListening("EnableBudgetOverview", CreateTableOverview);
         //print("Listening");
+       
     }
+
+
 
     private void Update()
     {
@@ -64,7 +71,7 @@ public class TableOverview : MonoBehaviour {
 
     private void CreateTableOverview()
     {
-        print("CreatingTableOverview");
+        //print("CreatingTableOverview");
         InputData[] sortedList = sort(PretendData.Instance.Data);
         foreach (InputData bill in sortedList)
         {
@@ -85,9 +92,8 @@ public class TableOverview : MonoBehaviour {
 
     public void CreateNewRow(InputData bill)
     {
-        print("Bill: " + bill.BSDataName);
+        //print("Bill: " + bill.BSDataName);
         TableOverviewRow newBill = Instantiate(rowPrefab, _table.transform).GetComponent<TableOverviewRow>();
-        print(newBill);
         newBill.Fill(bill);
         bills.Add(newBill);
 
@@ -123,4 +129,7 @@ public class TableOverview : MonoBehaviour {
         botRowTexts[13].text = Mathf.RoundToInt((StateManager.Instance.YearlyExpense / 12)).ToString();
         botRowTexts[14].text = StateManager.Instance.YearlyExpense.ToString();
     }
+
+
+
 }
