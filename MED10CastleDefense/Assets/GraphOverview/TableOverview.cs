@@ -7,19 +7,64 @@ using System.Linq;
 public class TableOverview : MonoBehaviour {
 
     public GameObject rowPrefab;
-    private GameObject _topRow, _botRow;
+    private GameObject _table, _topRow, _botRow;
+    private Button _exit;
 
     private List<TableOverviewRow> bills = new List<TableOverviewRow>();
     int testNum = 0;
+    private bool _isTableFilled = false;
+
+
+    private void Awake()
+    {
+        _table = transform.GetChild(0).gameObject;   
+        _exit = transform.GetChild(1).GetComponent<Button>();
+        _exit.onClick.AddListener(() => ToggleDisplay());
+        _topRow = _table.transform.GetChild(0).gameObject;
+        _botRow = _table.transform.GetChild(1).gameObject;
+    }
 
     private void Start()
     {
-        EventManager.StartListening("EnableBudgetOverview", CreateTableOverview);
+        //EventManager.StartListening("EnableBudgetOverview", CreateTableOverview);
+        //print("Listening");
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            //foreach(InputData bill in PretendData.Instance.Data)
+            //{
+            //    CreateNewRow(bill);
+            //}
+            //CreateTableOverview();
+            ToggleDisplay();
+            //CreateNewRow(PretendData.Instance.Data[testNum]);
+
+            //testNum++;
+        }
+    }
+    
+
+
+    public void ToggleDisplay()
+    {
+        _table.SetActive(!_table.activeSelf);
+        _exit.gameObject.SetActive(!_exit.gameObject.activeSelf);
+
+        if (!_isTableFilled)
+        {
+            CreateTableOverview();
+            _isTableFilled = true;
+        }
+    }
+
 
 
     private void CreateTableOverview()
     {
+        print("CreatingTableOverview");
         InputData[] sortedList = sort(PretendData.Instance.Data);
         foreach (InputData bill in sortedList)
         {
@@ -38,36 +83,11 @@ public class TableOverview : MonoBehaviour {
 
 
 
-    private void Awake()
-    {
-        _topRow = transform.GetChild(0).gameObject;
-        _botRow = transform.GetChild(1).gameObject;
-    }
-
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            //foreach(InputData bill in PretendData.Instance.Data)
-            //{
-            //    CreateNewRow(bill);
-            //}
-            CreateTableOverview();
-            //CreateNewRow(PretendData.Instance.Data[testNum]);
-
-            //testNum++;
-        }
-    }
-
-
-
-
-
     public void CreateNewRow(InputData bill)
     {
-        TableOverviewRow newBill = Instantiate(rowPrefab, transform).GetComponent<TableOverviewRow>();
+        print("Bill: " + bill.BSDataName);
+        TableOverviewRow newBill = Instantiate(rowPrefab, _table.transform).GetComponent<TableOverviewRow>();
+        print(newBill);
         newBill.Fill(bill);
         bills.Add(newBill);
 

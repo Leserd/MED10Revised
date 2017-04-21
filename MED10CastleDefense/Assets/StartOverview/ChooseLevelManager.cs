@@ -32,7 +32,7 @@ public class ChooseLevelManager : MonoBehaviour {
         {
             try
             {
-                SelectedLevelIcon.transform.parent = _levels[StateManager.Instance.LevelsAvailable -1].transform;
+                SelectedLevelIcon.transform.SetParent(_levels[StateManager.Instance.LevelsAvailable -1].transform);
                 StateManager.Instance.LevelName = PretendData.Instance.Data[StateManager.Instance.LevelsAvailable-1].BSDataName;
                 EventManager.TriggerEvent("SelectedLevel");
 

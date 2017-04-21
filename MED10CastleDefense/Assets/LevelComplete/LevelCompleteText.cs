@@ -50,7 +50,7 @@ public class LevelCompleteText : MonoBehaviour {
             {
                 _pressedFinish = false;
 
-                Debug.Log("SlidedRightIn");
+                //Debug.Log("SlidedRightIn");
 
                 if(StateManager.Instance.SelectedLevel == 1 && StateManager.Instance.NewLevelComplete == true)
                 {
@@ -121,7 +121,7 @@ public class LevelCompleteText : MonoBehaviour {
         //var timeDiff = _timeEnded - _timeSinceStart;
         Base playerBase = GameObject.FindGameObjectWithTag("PlayerBase").GetComponent<Base>();
         float baseHpPercent = (float)playerBase.health / (float)playerBase.maxHealth;
-        print(baseHpPercent);
+        //print(baseHpPercent);
         if (baseHpPercent == 1f)
         {
             StartCoroutine(stars(3, image));
@@ -269,7 +269,7 @@ public class LevelCompleteText : MonoBehaviour {
                 break;
             }
         }
-        Debug.Log("End of WaitSeconds");
+        //Debug.Log("End of WaitSeconds");
 
     }
 
@@ -278,7 +278,7 @@ public class LevelCompleteText : MonoBehaviour {
     private void LevelComplete()
     {
         _timeEnded = Time.fixedTime;
-        Debug.Log("LevelComplete");
+        //Debug.Log("LevelComplete");
 
 
         if (StateManager.Instance.LevelsAvailable == StateManager.Instance.SelectedLevel)
@@ -317,7 +317,7 @@ public class LevelCompleteText : MonoBehaviour {
     private void UpdateFinishMenu()
     {
         //show end level screen
-        Debug.Log("UpdateFinishMenu");
+        //Debug.Log("UpdateFinishMenu");
 
         
         //update text fields on end level screen

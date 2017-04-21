@@ -63,6 +63,11 @@ public class Hint {
             HintManager.Instance.CreateHint(_hintNumber+1);
         }
 
+        else if(_hintNumber == 13)
+        {
+            EventManager.TriggerEvent("EnableBudgetOverview");
+        }
+
         //TODO: Fancy måde hints fjernes på. 
         HintManager.Instance.RemoveHint(this);
         Object.Destroy(_hintObj.gameObject);

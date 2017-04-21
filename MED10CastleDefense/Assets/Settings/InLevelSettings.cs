@@ -29,7 +29,7 @@ public class InLevelSettings : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("Faked a complete lvl");
+            //Debug.Log("Faked a complete lvl");
             EventManager.TriggerEvent("LevelComplete"); //EventManager.TriggerEvent("LevelLost");
         }
     }

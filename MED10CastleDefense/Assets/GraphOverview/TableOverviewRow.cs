@@ -14,6 +14,7 @@ public class TableOverviewRow : MonoBehaviour {
     {
 
         _rowTexts = transform.GetComponentsInChildren<Text>();
+        print(_rowTexts.Length);
         _background = GetComponent<Image>();
         _background.color = transform.GetSiblingIndex() % 2 > 0 ? _colorWhite : _colorGrey;
     }

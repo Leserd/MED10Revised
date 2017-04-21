@@ -20,7 +20,7 @@ public class BudgetButton : MonoBehaviour {
         tablePanel = transform.GetChild(2).gameObject;
         table = graphButtonPanel.transform.GetChild(0).GetComponent<Button>();
 
-        table.onClick.AddListener(() => tablePanel.GetComponent<GraphOverview>().ToggleDisplay());
+        table.onClick.AddListener(() => tablePanel.GetComponent<TableOverview>().ToggleDisplay());
 
 
         open.enabled = false;
@@ -37,18 +37,27 @@ public class BudgetButton : MonoBehaviour {
     }
 
 
+
     public void Start()
     {
         BudgetUpdate();
         EventManager.StartListening("SelectedLevel", BudgetUpdate);
+        EventManager.StartListening("EnableBudgetOverview", EnableBudget);
 
-        if (StateManager.Instance.LevelsAvailable == PretendData.Instance.Data.Length + 1 && StateManager.Instance.NewLevelComplete == true) 
+        if (StateManager.Instance.LevelsAvailable == PretendData.Instance.Data.Length + 1 && StateManager.Instance.NewLevelComplete == true)
         {
-            open.onClick.AddListener(() => ToggleDisplay());
-            open.enabled = true;
             HintManager.Instance.CreateHint(12);
         }
     }
+
+
+
+    private void EnableBudget()
+    {
+        open.onClick.AddListener(() => ToggleDisplay());
+        open.enabled = true;
+    }
+
 
 
     void BudgetUpdate()
