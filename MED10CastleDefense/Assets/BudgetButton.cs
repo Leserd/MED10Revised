@@ -22,8 +22,10 @@ public class BudgetButton : MonoBehaviour {
                 sendBtn = buttonPanel.transform.GetChild(2).GetComponent<Button>();
             totalBudgetTexts = totalBudget.transform.GetChild(1).GetComponentsInChildren<Text>();
         tableOverview = transform.GetChild(1).gameObject;
+        barOverview = transform.GetChild(2).gameObject;
 
         tableBtn.onClick.AddListener(() => tableOverview.GetComponent<TableOverview>().ToggleDisplay());
+        barChartBtn.onClick.AddListener(() => barOverview.GetComponent<CreateCharts>().ToggleDisplay());
 
         totalBudget.enabled = false;
 
