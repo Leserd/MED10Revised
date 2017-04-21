@@ -10,7 +10,5 @@ public class BillLegendButton : MonoBehaviour {
     public Text LegendText;
     public Image LegendForeground;
     public bool LegendActive = true;
-   // public static int id = 0;
-
 
 }

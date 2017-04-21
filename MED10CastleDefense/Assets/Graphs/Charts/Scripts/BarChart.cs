@@ -37,7 +37,7 @@ public class BarChart : MonoBehaviour
 
 
 
-    private List<List<InputData>> GetSortedBillsEachMonth(InputData[] bills)
+    private static List<List<InputData>> GetSortedBillsEachMonth(InputData[] bills)
     {
         List<List<InputData>> monthsData = new List<List<InputData>>();
         InputData[] sorted1 = bills.OrderBy(c => -int.Parse(c.BSDataAmountMonthly)).ToArray();
@@ -60,7 +60,7 @@ public class BarChart : MonoBehaviour
         return monthsData;
     }
 
-    private float GetMaxValue(List<List<InputData>> billsdata)
+    private static  float GetMaxValue(List<List<InputData>> billsdata)
     {
         float yearMax = 0f;
         foreach (var item in billsdata)
@@ -77,7 +77,14 @@ public class BarChart : MonoBehaviour
         return yearMax;
     }
 
-    private float GetTotalValueMonth(List<InputData> billsdata)
+    public static float GetMaxValue (InputData[] bills)
+    {
+        var sort = GetSortedBillsEachMonth(bills);
+        return GetMaxValue(sort);
+         
+    }
+
+    private static float GetTotalValueMonth(List<InputData> billsdata)
     {
         float monthlyMax = 0f;
         foreach (var bill in billsdata)

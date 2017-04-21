@@ -10,14 +10,16 @@ public class BarButtons : MonoBehaviour {
 
     public BillLegendButton BillLegend;
     private BarChart _chart;
+    private MediumLine _line;
     private List<InputData> _currentData = new List<InputData>();
     private List<InputData> _allData = new List<InputData>();
     private List<BillLegendButton> _legendButtons = new List<BillLegendButton>();
 
 
 
-    public void InstantiateButtons(InputData[] data, BarChart chart)
+    public void InstantiateButtons(InputData[] data, BarChart chart, MediumLine mediumLine)
     {
+        _line = mediumLine;
         _chart = chart;
 
 
@@ -41,8 +43,6 @@ public class BarButtons : MonoBehaviour {
             _legendButtons.Add(legendButtons);
         }
     }
-
-
 
 
     private void ButtonPress(int id, int buttonNum)
@@ -76,6 +76,7 @@ public class BarButtons : MonoBehaviour {
         }
         _chart.DeleteCurrentGraph();
         _chart.SetMonthsData(_currentData.ToArray());
+        _line.ReCenter(_currentData.ToArray());
 
     }
 
