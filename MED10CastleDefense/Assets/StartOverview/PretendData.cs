@@ -5,6 +5,15 @@ using UnityEngine;
 public class PretendData : MonoBehaviour {
     public InputData[] Data;
     private static PretendData _instance;
+    public List<InputData> GetListData
+    {
+        get
+        {
+            var list = new List<InputData>();
+            list.AddRange(Data);
+            return list;
+        }
+    }
     public static PretendData Instance
     {
         get
@@ -28,11 +37,11 @@ public class PretendData : MonoBehaviour {
 [System.Serializable]
 public class InputData
 {
-    // public string BSdataName;
 
     public string BSDataName;
     public string BSDataAmount;
     public string BSDataAmountMonthly;
     public string BSDataFrequency;
     public List<int> BSDataPaymentMonths;
+    public int ID;
 }
