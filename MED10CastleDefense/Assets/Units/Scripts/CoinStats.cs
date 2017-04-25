@@ -6,7 +6,7 @@ public static class CoinStats {
 
     public static int Health = 2;
     public static int Damage = 15;
-    public static float Speed = 4;
+    public static float Speed = 5;
     public static float Cooldown = 2f;
     public static int UpgradeLevel = 1;
     public static GameObject explosion;
