@@ -126,7 +126,7 @@ public class TableOverview : MonoBehaviour {
             botRowTexts[i + 1].text = totalMonth.ToString();
         }
 
-        botRowTexts[13].text = Mathf.RoundToInt((StateManager.Instance.YearlyExpense / 12)).ToString();
+        botRowTexts[13].text = Mathf.RoundToInt(((float)StateManager.Instance.YearlyExpense / 12)).ToString();
         botRowTexts[14].text = StateManager.Instance.YearlyExpense.ToString();
     }
 

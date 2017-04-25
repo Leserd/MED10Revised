@@ -26,8 +26,8 @@ public class TableOverviewRow : MonoBehaviour {
         {
             _rowTexts[bill.BSDataPaymentMonths[i] + 1].text = bill.BSDataAmountMonthly;
         }
-        _rowTexts[13].text = Mathf.RoundToInt(int.Parse(bill.BSDataAmount) / 12).ToString();
-        _rowTexts[14].text = Mathf.RoundToInt(int.Parse(bill.BSDataAmount)).ToString();
+        _rowTexts[13].text = Mathf.RoundToInt((float)int.Parse(bill.BSDataAmount) / 12).ToString();
+        _rowTexts[14].text = Mathf.RoundToInt((float)int.Parse(bill.BSDataAmount)).ToString();
         
     }
 
