@@ -7,9 +7,9 @@ using System.Linq;
 public class TableOverview : MonoBehaviour {
 
     public GameObject rowPrefab;
-    private GameObject _table, _topRow, _botRow;
+    private GameObject _table, _topRow, _botRow, _billParent;
     private Button _exit;
-
+    private ScrollRect _scrollRect;
     private List<TableOverviewRow> bills = new List<TableOverviewRow>();
     int testNum = 0;
     private bool _isTableFilled = false;
@@ -23,7 +23,11 @@ public class TableOverview : MonoBehaviour {
         _exit = transform.GetChild(1).GetComponent<Button>();
         _exit.onClick.AddListener(() => ToggleDisplay());
         _topRow = _table.transform.GetChild(0).gameObject;
-        _botRow = _table.transform.GetChild(1).gameObject;
+        _scrollRect = _table.transform.GetChild(1).GetComponent<ScrollRect>();
+        _billParent = _scrollRect.transform.GetChild(0).gameObject;
+        _botRow = _table.transform.GetChild(2).gameObject;
+
+        _scrollRect.enabled = false;
     }
 
 
@@ -46,7 +50,7 @@ public class TableOverview : MonoBehaviour {
             //    CreateNewRow(bill);
             //}
             //CreateTableOverview();
-            ToggleDisplay();
+            CreateTableOverview();
             //CreateNewRow(PretendData.Instance.Data[testNum]);
 
             //testNum++;
@@ -93,12 +97,14 @@ public class TableOverview : MonoBehaviour {
     public void CreateNewRow(InputData bill)
     {
         //print("Bill: " + bill.BSDataName);
-        TableOverviewRow newBill = Instantiate(rowPrefab, _table.transform).GetComponent<TableOverviewRow>();
+        TableOverviewRow newBill = Instantiate(rowPrefab, _billParent.transform).GetComponent<TableOverviewRow>();
         newBill.Fill(bill);
         bills.Add(newBill);
-
+        // _billParent.GetComponent<RectTransform>().sizeDelta += new Vector2(0, newBill.GetComponent<RectTransform>().rect.height);
+        _scrollRect.enabled = _billParent.transform.childCount >= 10 ? true : false;
+        
         //Make sure the total-row is last
-        _botRow.transform.SetAsLastSibling();
+        //_botRow.transform.SetAsLastSibling();
 
         UpdateTotal();
     }
