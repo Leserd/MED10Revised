@@ -12,20 +12,26 @@ public class BudgetButton : MonoBehaviour {
     private bool _moving = false;
     private float _slideSpeed = 2f;
 
+    [SerializeField]
+    private GameObject _endgameScreen;
+
+
     private void Awake()
     {
         
         totalBudget = transform.GetChild(0).GetComponent<Button>();
-            buttonPanel = totalBudget.transform.GetChild(0).gameObject;
+            buttonPanel = totalBudget.transform.GetChild(1).gameObject;
                 tableBtn = buttonPanel.transform.GetChild(0).GetComponent<Button>();
                 barChartBtn = buttonPanel.transform.GetChild(1).GetComponent<Button>();
                 sendBtn = buttonPanel.transform.GetChild(2).GetComponent<Button>();
-            totalBudgetTexts = totalBudget.transform.GetChild(1).GetComponentsInChildren<Text>();
+            totalBudgetTexts = totalBudget.transform.GetChild(0).GetComponentsInChildren<Text>();
         tableOverview = transform.GetChild(1).gameObject;
         barOverview = transform.GetChild(2).gameObject;
 
         tableBtn.onClick.AddListener(() => tableOverview.GetComponent<TableOverview>().ToggleDisplay());
         barChartBtn.onClick.AddListener(() => barOverview.GetComponent<CreateCharts>().ToggleDisplay());
+        sendBtn.onClick.AddListener(() => _endgameScreen.SetActive(!_endgameScreen.activeSelf));
+
 
         totalBudget.enabled = false;
 
@@ -41,6 +47,8 @@ public class BudgetButton : MonoBehaviour {
             totalBudget.enabled = true;
         }
     }
+
+
 
 
 
@@ -76,7 +84,7 @@ public class BudgetButton : MonoBehaviour {
     public void ToggleDisplay()
     {
         //buttonPanel.SetActive(!buttonPanel.activeSelf);
-        StartCoroutine(Slide(Time.time));
+        if (!_moving) StartCoroutine(Slide(Time.time));
     }
 
 
@@ -103,8 +111,9 @@ public class BudgetButton : MonoBehaviour {
 
             if (percentageComplete >= 1f)
             {
-                _moving = false;
                 totalBudget.transform.localPosition = end;
+                _moving = false;
+
                 break;
             }
 
