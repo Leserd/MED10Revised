@@ -33,7 +33,7 @@ public class MediumLine : MonoBehaviour {
         var avgMonthly = AverageMonthly(data);
 
         var pos =  (yearMax >0) ?  (avgMonthly / yearMax) * (_widthChart) : 0f;//(avgMonthly >= yearMax/2f) ? (avgMonthly / yearMax) *( _widthChart) : -( avgMonthly / yearMax) *(_widthChart );
-        return new Vector3( pos,-500,0f);
+        return new Vector3( pos,-450,0f);
 
     }
 

@@ -117,6 +117,13 @@ public class BarChart : MonoBehaviour
             // bars width should be ( totalMonthValue / maxMonth) * chartwidth,            float monthTotalWidth = (maxMonth / maxValue) * ChartWidth;
             float monthTotalWidth = (maxMonth / maxValue) * ChartWidth;
 
+
+            // background == number of bills in current month + totalwidth + 5
+            if (sortedBills[i].Count >0)
+            {
+                newBar.barBackground.sizeDelta = new Vector2(monthTotalWidth + 5f + sortedBills[i].Count, newBar.barBackground.sizeDelta.y);
+
+            }
             newBar.Bars.sizeDelta = new Vector2(monthTotalWidth, ( ChartHeight / 12) * 0.65f);
             newBar.Bars.pivot = new Vector2(0f, 0.5f);
             newBar.Bars.localPosition = new Vector3(160f, 0f, 0f);
