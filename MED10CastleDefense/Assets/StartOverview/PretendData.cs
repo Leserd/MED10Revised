@@ -23,7 +23,7 @@ public class PretendData : MonoBehaviour {
                 _instance = FindObjectOfType(typeof(PretendData)) as PretendData;
                 if (!_instance)
                 {
-                    var go = Resources.Load("FakeInput") as GameObject;
+                    var go = Resources.LoadAll("InputDataActive", typeof(GameObject))[0] as GameObject; 
                     DontDestroyOnLoad(go);
                     _instance = go.GetComponent<PretendData>();
                 }
