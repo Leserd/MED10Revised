@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class CreateCharts : MonoBehaviour {
 
-    public Vector3 ChooseStartLocation;
     public GameObject BarCanvasPrefab;
     private Button _exit;
     private bool _isMade = false;
     private GameObject _barOverview;
     private bool _isShown = false;
 
+    
     private void Awake()
     {
         _exit = transform.GetChild(0).GetComponent<Button>();
@@ -44,13 +44,13 @@ public class CreateCharts : MonoBehaviour {
         var chart = _barOverview.GetComponentInChildren<BarChart>();
 
         var mediumLine = _barOverview.GetComponentInChildren<MediumLine>();
-        mediumLine.InitializeAvg(1920f - 200f - 600f, data);
+        mediumLine.InitializeAvg(1920f - 200f - 600f -10f , data);
 
         var chartButtons = _barOverview.GetComponentInChildren<BarButtons>();
         chartButtons.InstantiateButtons(data, chart, mediumLine);
 
-        chart.ChartWidth = 1920f - 200f - 600f; //canvasSpawnAtLoc.GetComponent<RectTransform>().rect.width;
-        chart.ChartHeight = 1080f - 100f - 100f; //canvasSpawnAtLoc.GetComponent<RectTransform>().rect.height;
+        chart.ChartWidth = 1920f - 200f - 600f -10f ; //canvasSpawnAtLoc.GetComponent<RectTransform>().rect.width;
+        chart.ChartHeight = 1080f - 100f - 100f -10f; //canvasSpawnAtLoc.GetComponent<RectTransform>().rect.height;
 
         chart.SetMonthsData(data);
 
