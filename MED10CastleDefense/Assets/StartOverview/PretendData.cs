@@ -1,9 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PretendData : MonoBehaviour {
-    public InputData[] Data;
+
+    [SerializeField]
+    private InputData[] _data;
+
+
+    public InputData[] Data
+    {
+        get
+        {
+            return _data.OrderBy(c => int.Parse(c.BSDataAmount)).ToArray();
+            // return sort(_data);
+        }
+    }
+
+    private InputData[] sort(InputData[] unsorted)
+    {
+        InputData[] sorted = unsorted.OrderBy(c => -int.Parse(c.BSDataAmount)).ToArray();
+        return sorted;
+    }
     private static PretendData _instance;
     public List<InputData> GetListData
     {
@@ -23,7 +42,7 @@ public class PretendData : MonoBehaviour {
                 _instance = FindObjectOfType(typeof(PretendData)) as PretendData;
                 if (!_instance)
                 {
-                    var go = Resources.Load("FakeInput") as GameObject;
+                    var go = Resources.LoadAll("InputDataActive", typeof(GameObject))[0] as GameObject; 
                     DontDestroyOnLoad(go);
                     _instance = go.GetComponent<PretendData>();
                 }
@@ -32,7 +51,8 @@ public class PretendData : MonoBehaviour {
             return _instance;
         }
     }
- 
+
+
 }
 [System.Serializable]
 public class InputData
