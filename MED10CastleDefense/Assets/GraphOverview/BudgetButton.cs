@@ -76,7 +76,7 @@ public class BudgetButton : MonoBehaviour {
 
     void BudgetUpdate()
     {
-        totalBudgetTexts[0].text = Mathf.RoundToInt(StateManager.Instance.YearlyExpense / 12).ToString() + " kr";
+        totalBudgetTexts[0].text = Mathf.RoundToInt((float)StateManager.Instance.YearlyExpense / 12).ToString() + " kr";
         totalBudgetTexts[1].text = StateManager.Instance.YearlyExpense.ToString() + " kr";
     }
 
