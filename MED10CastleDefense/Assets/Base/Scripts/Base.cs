@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Base : MonoBehaviour {
     public string baseName;
@@ -133,6 +134,7 @@ public class Base : MonoBehaviour {
         if(gameObject.tag == "EnemyBase")
         {
             baseName = PretendData.Instance.Data[StateManager.Instance.SelectedLevel - 1].BSDataName;
+            GameObject.Find("LevelNameImg").transform.GetChild(0).GetComponent<Text>().text = baseName;
             transform.name = baseName;
         }
         else if(gameObject.tag == "PlayerBase")

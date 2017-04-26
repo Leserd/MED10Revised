@@ -45,15 +45,7 @@ public class TableOverview : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            //foreach(InputData bill in PretendData.Instance.Data)
-            //{
-            //    CreateNewRow(bill);
-            //}
-            //CreateTableOverview();
-            CreateTableOverview();
-            //CreateNewRow(PretendData.Instance.Data[testNum]);
-
-            //testNum++;
+            CreateTableOverview(); //This addds 7 more rows to the table overview to test scrolling
         }
     }
     
