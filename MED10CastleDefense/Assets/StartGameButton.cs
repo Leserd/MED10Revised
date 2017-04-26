@@ -20,9 +20,9 @@ public class StartGameButton : MonoBehaviour {
             currentLevel.transform.FindChild("BillObject").gameObject.SetActive(true);
 
         
-        Transform bases = GameObject.Find("Bases").transform;
+        Transform bases = GameObject.Find("BaseScrollRect").transform;
         int lvl = StateManager.Instance.SelectedLevel;
-        currentLevel = bases.GetChild(lvl - 1).gameObject;
+        currentLevel = bases.GetChild(0).GetChild(lvl - 1).gameObject;
         transform.SetParent(currentLevel.transform);
         transform.SetAsLastSibling();
         currentLevel.transform.FindChild("BillObject").gameObject.SetActive(false);
