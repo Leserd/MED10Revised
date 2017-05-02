@@ -9,7 +9,7 @@ public class LevelCompleteText : MonoBehaviour {
 
     [SerializeField]
     private Sprite WonImage;
-    private float _timeSinceStart, _timeEnded;
+    private float _timeSinceStart = 0, _timeEnded = 0;
     private bool _pressedFinish, _levelCompleteRollDown = true;
 
 

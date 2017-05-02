@@ -10,6 +10,10 @@ public class PretendData : MonoBehaviour {
 
     private static PretendData _instance;
 
+    public void ReplaceData(InputData[] newData)
+    {
+        _data = newData;
+    }
 
     public InputData[] Data
     {
