@@ -8,7 +8,7 @@ public class PretendData : MonoBehaviour {
     [SerializeField]
     private InputData[] _data;
 
-    private static PretendData _instance;
+    private static PretendData _instance = null;
 
     public void ReplaceData(InputData[] newData)
     {
@@ -20,7 +20,7 @@ public class PretendData : MonoBehaviour {
         get
         {
             return _data.OrderBy(c => int.Parse(c.BSDataAmount)).ToArray();
-            // return sort(_data);
+
         }
     }
 
@@ -43,7 +43,8 @@ public class PretendData : MonoBehaviour {
                 _instance = FindObjectOfType(typeof(PretendData)) as PretendData;
                 if (!_instance)
                 {
-                    var go = Resources.LoadAll("InputDataActive", typeof(GameObject))[0] as GameObject; 
+                    var go = Instantiate(Resources.LoadAll("InputDataActive", typeof(GameObject))[0] as GameObject);
+                    //var go = Resources.LoadAll("InputDataActive", typeof(GameObject))[0] as GameObject; 
                     DontDestroyOnLoad(go);
                     _instance = go.GetComponent<PretendData>();
                 }

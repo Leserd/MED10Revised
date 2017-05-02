@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class loadCSVtoInputdata : MonoBehaviour {
+public class loadCSVToInputdata : MonoBehaviour {
 
     private void Awake()
     {
-        var fileLoad = Resources.LoadAll("ReadActiveCSV")[0] as TextAsset;
-        var csvToSorted = CSVReader.Read(fileLoad);
+        try
+        {
+            var fileLoad = Resources.LoadAll("ReadActiveCSV")[0] as TextAsset;
+            var csvToSorted = CSVReader.Read(fileLoad);
 
-        ReplaceFakeInput(csvToSorted);
+            ReplaceFakeInput(csvToSorted);
+        }
+        catch 
+        {
 
+            Debug.Log("No csv file placed in LoadCSV/Resources/ReadActiveCSV");
+        }
 
     }
 
@@ -30,9 +37,10 @@ public class loadCSVtoInputdata : MonoBehaviour {
             data.Add(entry);
         }
         PretendData.Instance.ReplaceData(data.ToArray());
+        Debug.Log("read inputdata from CSV file and replaced old data");
 
 
-        
+
     }
     private List<int> ReturnPaymentMonths(string firstOccurance, string numberOfOccurences)
     {
@@ -44,6 +52,7 @@ public class loadCSVtoInputdata : MonoBehaviour {
                 return new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
             case 4:
                 var list = new List<int>();
+                firstOccur -= 1;
                 for (int i = 0; i < 4; i++)
                 {
                     list.Add(firstOccur);
@@ -51,10 +60,11 @@ public class loadCSVtoInputdata : MonoBehaviour {
                 }
                 return list;
             case 2:
+                firstOccur -= 1;
 
-                return new List<int> { firstOccur, firstOccur + 6 };
+                return new List<int> { firstOccur, firstOccur + 6};
             case 1:
-                return new List<int> { firstOccur };
+                return new List<int> { firstOccur -1};
 
             default:
                 return null;
