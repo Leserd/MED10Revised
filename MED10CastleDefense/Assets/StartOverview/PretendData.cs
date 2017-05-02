@@ -8,6 +8,8 @@ public class PretendData : MonoBehaviour {
     [SerializeField]
     private InputData[] _data;
 
+    private static PretendData _instance;
+
 
     public InputData[] Data
     {
@@ -18,12 +20,6 @@ public class PretendData : MonoBehaviour {
         }
     }
 
-    private InputData[] sort(InputData[] unsorted)
-    {
-        InputData[] sorted = unsorted.OrderBy(c => -int.Parse(c.BSDataAmount)).ToArray();
-        return sorted;
-    }
-    private static PretendData _instance;
     public List<InputData> GetListData
     {
         get
@@ -33,6 +29,7 @@ public class PretendData : MonoBehaviour {
             return list;
         }
     }
+
     public static PretendData Instance
     {
         get
@@ -52,12 +49,16 @@ public class PretendData : MonoBehaviour {
         }
     }
 
-
+    private InputData[] sort(InputData[] unsorted)
+    {
+        InputData[] sorted = unsorted.OrderBy(c => -int.Parse(c.BSDataAmount)).ToArray();
+        return sorted;
+    }
 }
+
 [System.Serializable]
 public class InputData
 {
-
     public string BSDataName;
     public string BSDataAmount;
     public string BSDataAmountMonthly;
