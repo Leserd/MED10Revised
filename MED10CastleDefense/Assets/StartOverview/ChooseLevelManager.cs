@@ -77,7 +77,7 @@ public class ChooseLevelManager : MonoBehaviour {
         basesToSpawn = PretendData.Instance.Data.Length;
 
         FillCastleParent();
-        //FillCastleParent(PretendData.Instance.Data.Length); //TODO: make FillCastleParent take int as amount of levels to instantiate. Call InitializeCastleParentPosition(amount) in the beginning to make size of parent
+        
         _levels = castleParent.GetComponentsInChildren<Button>();
         InteractableLevels();
         AddListeners();
