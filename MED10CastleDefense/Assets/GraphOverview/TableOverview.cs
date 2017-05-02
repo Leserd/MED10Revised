@@ -13,7 +13,8 @@ public class TableOverview : MonoBehaviour {
     private List<TableOverviewRow> bills = new List<TableOverviewRow>();
     int testNum = 0;
     private bool _isTableFilled = false;
-    
+    public Image linePrefab;
+    private Image _topLine, _botLine;
 
 
 
@@ -68,11 +69,15 @@ public class TableOverview : MonoBehaviour {
     private void CreateTableOverview()
     {
         //print("CreatingTableOverview");
+        _botLine = Instantiate(linePrefab, _billParent.transform, false);
+   
         InputData[] sortedList = sort(PretendData.Instance.Data);
         foreach (InputData bill in sortedList)
         {
             CreateNewRow(bill);
         }
+
+        _topLine = Instantiate(linePrefab, _billParent.transform, false);
     }
 
 
