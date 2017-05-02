@@ -36,7 +36,7 @@ public class BarButtons : MonoBehaviour {
             legendButtons.LegendBackground.color = colors[bill.ID];
             legendButtons.LegendForeground.color = colors[bill.ID];
             legendButtons.LegendText.text = bill.BSDataName;
-            legendButtons.LegendText.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().rect.width, legendButtons.LegendText.GetComponent<RectTransform>().rect.height);
+           // legendButtons.LegendText.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().rect.width, legendButtons.LegendText.GetComponent<RectTransform>().rect.height);
 
 
              legendButtons.GetComponentInChildren<Button>().onClick.AddListener(() => ButtonPress(bill.ID, legendButtons.transform.GetSiblingIndex()));
