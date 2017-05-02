@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SpriteManager : MonoBehaviour {
 
     [SerializeField]
-    private Sprite _upgradeSprite, _nonInteractable, _unlockSprite, _lockedSprite;
+    private Sprite _upgradeSprite = null, _nonInteractable = null, _unlockSprite = null, _lockedSprite = null;
 
 
     public void Upgrade()

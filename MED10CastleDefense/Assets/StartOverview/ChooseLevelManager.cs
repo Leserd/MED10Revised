@@ -11,7 +11,7 @@ public class ChooseLevelManager : MonoBehaviour {
     private Button[] _levels;
 
     [SerializeField]
-    private GameObject SelectedLevelIcon, BillObject, LevelCastle;
+    private GameObject SelectedLevelIcon = null, BillObject = null, LevelCastle = null;
     [SerializeField]
     private Sprite FinishedLevel;
     private static bool _showIntroHint = true;
