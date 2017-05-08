@@ -254,7 +254,7 @@ public class ChooseLevelManager : MonoBehaviour {
         GameObject newLvl = Instantiate(LevelCastle, castleParent, false);
         if(index >= StateManager.Instance.LevelsAvailable)
             newLvl.transform.GetChild(0).GetComponent<Text>().text = index.ToString();
-        newLvl.name = "Level" + index.ToString();
+        newLvl.name = index.ToString();
 
         if(_scrollRect.enabled )
             castleParent.sizeDelta += new Vector2(newLvl.GetComponent<RectTransform>().rect.width + 90, 0);
@@ -265,7 +265,7 @@ public class ChooseLevelManager : MonoBehaviour {
     private void ButtonPress(string NameButton)
     {
         int number;
-        int.TryParse(NameButton.Substring(NameButton.Length - 1, 1),out  number);
+        int.TryParse(NameButton, out  number);
 
         var data = PretendData.Instance.Data[number-1];
         var instance = StateManager.Instance;
@@ -304,7 +304,7 @@ public class ChooseLevelManager : MonoBehaviour {
                 bill[0].text = PretendData.Instance.Data[i].BSDataName;
                 if(bill[0].text.Length > 25)
                 {
-                    bill[0].text = bill[0].text.Substring(0, 25);
+                    bill[0].text = bill[0].text.Substring(0, 26);
                 }
                 bill[1].text = PretendData.Instance.Data[i].BSDataAmount + " kr";
 
