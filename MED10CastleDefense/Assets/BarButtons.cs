@@ -14,7 +14,7 @@ public class BarButtons : MonoBehaviour {
     private List<InputData> _currentData = new List<InputData>();
     private List<InputData> _allData = new List<InputData>();
     private List<BillLegendButton> _legendButtons = new List<BillLegendButton>();
-
+    private VerticalLayoutGroup vlg;
 
 
     public void InstantiateButtons(InputData[] data, BarChart chart, MediumLine mediumLine)
@@ -28,6 +28,12 @@ public class BarButtons : MonoBehaviour {
         _allData.AddRange(sorted);
         _currentData.AddRange(sorted);
 
+        vlg = GetComponent<VerticalLayoutGroup>();
+        if (sorted.Count() > 11)
+        {
+            vlg.padding.top = 50;
+            vlg.spacing = 62;
+        }
 
         foreach (var bill in sorted)
         {
