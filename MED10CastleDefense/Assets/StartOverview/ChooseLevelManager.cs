@@ -302,6 +302,10 @@ public class ChooseLevelManager : MonoBehaviour {
                 billImage2.name = "BillObject";
                 var bill = billImage2.GetComponentsInChildren<Text>();
                 bill[0].text = PretendData.Instance.Data[i].BSDataName;
+                if(bill[0].text.Length > 25)
+                {
+                    bill[0].text = bill[0].text.Substring(0, 25);
+                }
                 bill[1].text = PretendData.Instance.Data[i].BSDataAmount + " kr";
 
             }
