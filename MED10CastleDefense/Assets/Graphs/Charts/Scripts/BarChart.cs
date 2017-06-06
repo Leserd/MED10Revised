@@ -41,21 +41,28 @@ public class BarChart : MonoBehaviour
     {
         List<List<InputData>> monthsData = new List<List<InputData>>();
         InputData[] sorted1 = bills.OrderBy(c => -int.Parse(c.BSDataAmountMonthly)).ToArray();
-
-        InputData[] sorted = sorted1.OrderBy(c => -c.BSDataPaymentMonths.Count).ToArray();
-
-
-        for (int i = 0; i < 12; i++)
+        try
         {
-            var currentMonthData = new List<InputData>();
-            for (int j = 0; j < sorted.Length; j++)
+            InputData[] sorted = sorted1.OrderBy(c => -c.BSDataPaymentMonths.Count).ToArray();
+
+
+            for (int i = 0; i < 12; i++)
             {
-                if (sorted[j].BSDataPaymentMonths.Contains(i))
+                var currentMonthData = new List<InputData>();
+                for (int j = 0; j < sorted.Length; j++)
                 {
-                    currentMonthData.Add(sorted[j]);
+                    if (sorted[j].BSDataPaymentMonths.Contains(i))
+                    {
+                        currentMonthData.Add(sorted[j]);
+                    }
                 }
+                monthsData.Add(currentMonthData);
             }
-            monthsData.Add(currentMonthData);
+            return monthsData;
+        }
+        catch (Exception error)
+        {
+            Debug.Log(error);
         }
         return monthsData;
     }

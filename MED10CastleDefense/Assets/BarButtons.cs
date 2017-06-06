@@ -89,10 +89,19 @@ public class BarButtons : MonoBehaviour {
 
     private InputData[] sort(InputData[] unsorted)
     {
-        InputData[] sorted1 = unsorted.OrderBy(c => -int.Parse(c.BSDataAmountMonthly)).ToArray();
+        try
+        {
+            InputData[] sorted1 = unsorted.OrderBy(c => -int.Parse(c.BSDataAmountMonthly)).ToArray();
 
-        InputData[] sorted = sorted1.OrderBy(c => -c.BSDataPaymentMonths.Count).ToArray();
-        return sorted;
+            InputData[] sorted = sorted1.OrderBy(c => -c.BSDataPaymentMonths.Count).ToArray();
+            return sorted;
+        }
+        catch (System.Exception error)
+        {
+            return unsorted;
+            Debug.Log(error);
+        }
+
     }
 
 
