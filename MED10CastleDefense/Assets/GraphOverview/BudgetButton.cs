@@ -57,6 +57,10 @@ public class BudgetButton : MonoBehaviour {
         BudgetUpdate();
         EventManager.StartListening("SelectedLevel", BudgetUpdate);
         EventManager.StartListening("EnableBudgetOverview", EnableBudget);
+        if (PretendData.Instance.Data.Length < StateManager.Instance.LevelsAvailable)
+        {
+            EnableBudget();
+        }
 
         if (StateManager.Instance.LevelsAvailable == PretendData.Instance.Data.Length + 1 && StateManager.Instance.NewLevelComplete == true)
         {
@@ -66,7 +70,7 @@ public class BudgetButton : MonoBehaviour {
 
 
 
-    private void EnableBudget()
+     void EnableBudget()
     {
         totalBudget.onClick.AddListener(() => ToggleDisplay());
         totalBudget.enabled = true;
@@ -74,7 +78,7 @@ public class BudgetButton : MonoBehaviour {
 
 
 
-    void BudgetUpdate()
+    public void BudgetUpdate()
     {
         totalBudgetTexts[0].text = Mathf.RoundToInt((float)StateManager.Instance.YearlyExpense / 12).ToString() + " kr";
         totalBudgetTexts[1].text = StateManager.Instance.YearlyExpense.ToString() + " kr";

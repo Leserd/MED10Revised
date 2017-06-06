@@ -104,6 +104,10 @@ public class StateManager : MonoBehaviour {
                     _maxLevel = 1;
                 }                
             }
+            else
+            {
+                _maxLevel = value;
+            }
         }
     }
     public int SelectedLevel
