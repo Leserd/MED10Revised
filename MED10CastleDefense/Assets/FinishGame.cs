@@ -18,6 +18,8 @@ public class FinishGame : MonoBehaviour {
             {
                 total += int.Parse(item.BSDataAmount);
             }
+            stateMan.YearlyExpense = -stateMan.YearlyExpense;
+
             stateMan.YearlyExpense = total;
             FindObjectOfType<BudgetButton>().BudgetUpdate();
             stateMan.LevelsAvailable = dataLength + 1;
